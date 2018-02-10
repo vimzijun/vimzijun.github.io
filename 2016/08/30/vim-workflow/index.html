@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.4" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.0.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="vim,vim-intro,vim-workflow," />
+
+
+<meta name="description" content="这一篇，我们要补充一些简单操作，然后说说如何在 vim 中做到 DRY (don’t repeat yourself)。首先，我们先介绍一下如何向 vim 寻求 帮助。 vim 帮助文档在命令行中输入 help 即可进入帮助目录：  如果有 “明确” 的问题，比如某个键的功能是什么，或者想看某个概念的详细说明，也可以直接在命令行里查询相关文档，比如：  如果忘记了 j 这个键是干嘛的，可以通过 :">
+<meta name="keywords" content="vim,vim-intro,vim-workflow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim 入坑指南（四）— 文本处理流程">
+<meta property="og:url" content="http://yoursite.com/2016/08/30/vim-workflow/index.html">
+<meta property="og:site_name" content="V 字君的 Vimpress">
+<meta property="og:description" content="这一篇，我们要补充一些简单操作，然后说说如何在 vim 中做到 DRY (don’t repeat yourself)。首先，我们先介绍一下如何向 vim 寻求 帮助。 vim 帮助文档在命令行中输入 help 即可进入帮助目录：  如果有 “明确” 的问题，比如某个键的功能是什么，或者想看某个概念的详细说明，也可以直接在命令行里查询相关文档，比如：  如果忘记了 j 这个键是干嘛的，可以通过 :">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2016/08/30/vim-workflow/help.gif">
+<meta property="og:image" content="http://yoursite.com/2016/08/30/vim-workflow/test.gif">
+<meta property="og:image" content="http://yoursite.com/2016/08/30/vim-workflow/ntest.gif">
+<meta property="og:image" content="http://yoursite.com/2016/08/30/vim-workflow/testN.gif">
+<meta property="og:image" content="http://yoursite.com/2016/08/30/vim-workflow/%3E%3E.gif">
+<meta property="og:image" content="http://yoursite.com/2016/08/30/vim-workflow/2j..gif">
+<meta property="og:image" content="http://yoursite.com/2016/08/30/vim-workflow/vimpress.gif">
+<meta property="og:image" content="http://yoursite.com/2016/08/30/vim-workflow/vim-rocks.gif">
+<meta property="og:image" content="http://yoursite.com/2016/08/30/vim-workflow/n..gif">
+<meta property="og:image" content="http://yoursite.com/2016/08/30/vim-workflow/record.gif">
+<meta property="og:image" content="http://yoursite.com/2016/08/30/vim-workflow/marco.gif">
+<meta property="og:image" content="http://yoursite.com/2016/08/30/vim-workflow/snip.gif">
+<meta property="og:updated_time" content="2017-08-04T01:42:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vim 入坑指南（四）— 文本处理流程">
+<meta name="twitter:description" content="这一篇，我们要补充一些简单操作，然后说说如何在 vim 中做到 DRY (don’t repeat yourself)。首先，我们先介绍一下如何向 vim 寻求 帮助。 vim 帮助文档在命令行中输入 help 即可进入帮助目录：  如果有 “明确” 的问题，比如某个键的功能是什么，或者想看某个概念的详细说明，也可以直接在命令行里查询相关文档，比如：  如果忘记了 j 这个键是干嘛的，可以通过 :">
+<meta name="twitter:image" content="http://yoursite.com/2016/08/30/vim-workflow/help.gif">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/30/vim-workflow/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>vim 入坑指南（四）— 文本处理流程 | V 字君的 Vimpress</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-80286208-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-80286208-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">V 字君的 Vimpress</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Everything I learned about Vim</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            首页</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            关于</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            标签</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            分类</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            归档</a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/30/vim-workflow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="VZJ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="V 字君的 Vimpress">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vim 入坑指南（四）— 文本处理流程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-30T22:00:00-04:00">2016-08-30</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/vim-intro/" itemprop="url" rel="index"><span itemprop="name">vim-intro</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这一篇，我们要补充一些简单操作，然后说说如何在 vim 中做到 DRY (don’t repeat yourself)。首先，我们先介绍一下如何向 vim 寻求 <strong>帮助</strong>。</p>
+<h3 id="vim-帮助文档"><a href="#vim-帮助文档" class="headerlink" title="vim 帮助文档"></a>vim 帮助文档</h3><p>在命令行中输入 <code>help</code> 即可进入帮助目录：</p>
+<img src="/2016/08/30/vim-workflow/help.gif">
+<p>如果有 “明确” 的问题，比如某个键的功能是什么，或者想看某个概念的详细说明，也可以直接在命令行里查询相关文档，比如：</p>
+<ol>
+<li>如果忘记了 <code>j</code> 这个键是干嘛的，可以通过 <code>:help j</code> 查询</li>
+<li>如果忘记了 <strong>模式</strong> 这个概念，可以通过<code>:help vim-modes</code> 查询</li>
+</ol>
+<p>我们也可以查询之前提到的 operator 和 motion，还有 text-objects：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">:help operator</div><div class="line">:help motion</div><div class="line">:help text-objects</div></pre></td></tr></table></figure>
+<p>另外，我也会在<a href="/keywords/">关键词</a> 里放上相关的 <strong>帮助</strong> 命令以供查询。</p>
+<a id="more"></a>
+<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><p>在 vim 中搜索文本十分容易，直接按下 <code>/</code> 键后输入要找的文本就好了。比如我想在当前文本搜索 <code>test</code> 的这个词，按下 <code>/test</code> ：</p>
+<img src="/2016/08/30/vim-workflow/test.gif">
+<p>假设文本中有多个 <code>test</code>，</p>
+<ul>
+<li>按下 <code>n</code> (next) 会移动到下一个 <code>test</code>：<img src="/2016/08/30/vim-workflow/ntest.gif"></li>
+<li>反之则用 <code>N</code>：<img src="/2016/08/30/vim-workflow/testN.gif">
+</li>
+</ul>
+<h3 id="撤销和重做"><a href="#撤销和重做" class="headerlink" title="撤销和重做"></a>撤销和重做</h3><p>在 vim 中，按下 <code>u</code> (undo) 是 <strong>撤销</strong> 而 <code>Ctrl + r</code> 是重做。这一对操作比较容易，一试便知。</p>
+<h3 id="滚动文本"><a href="#滚动文本" class="headerlink" title="滚动文本"></a>滚动文本</h3><p>较常用的一对操作是 <code>Ctrl + d</code> 是向下 (down) 滚动文本，而 <code>Ctrl + u</code> 是向上 (up) 滚动文本。</p>
+<h3 id="Don’t-Repeat-Yourself-Let-vim-repeat-it-for-you"><a href="#Don’t-Repeat-Yourself-Let-vim-repeat-it-for-you" class="headerlink" title="Don’t Repeat Yourself. Let vim repeat it for you"></a>Don’t Repeat Yourself. Let vim repeat it for you</h3><p>vim 之所以好用，很大部分原因在于它能够替你去做 “重复功”，而且简单得有点粗暴，就一个键：<code>.</code> （好吧，非常粗暴）。话不多说，直接来演示一下。</p>
+<p>假设我有四行 Python 代码，很明显，其中有两行需要缩进：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> <span class="string">"vimpress"</span> <span class="keyword">in</span> [<span class="string">"vimpress"</span>, <span class="string">"rocks!"</span>]:</div><div class="line"><span class="keyword">print</span> <span class="string">"vim rocks!"</span></div><div class="line"><span class="keyword">else</span>:</div><div class="line"><span class="keyword">print</span> <span class="string">"vim rocks anyway!"</span></div></pre></td></tr></table></figure>
+<p>于是，我们会把光标移至第一个 <code>print</code> 处，然后按下 <code>&gt;&gt;</code>:<br>  <img src="/2016/08/30/vim-workflow/%3E%3E.gif"></p>
+<p>在这之后，我们可以很熟练的（通过 <code>2j</code>）把光标向下移动两行，然后按一下这个神奇的键：<code>.</code><br>  <img src="/2016/08/30/vim-workflow/2j..gif"></p>
+<p>很快，不是么？我们不仅节省了一次按键（<code>&gt;&gt;</code> 要按两次，而 <code>.</code> 就一次），而且也保护了手骨的健康（除非你输入 <code>&gt;</code> 是用两只手的）。当然，这个例子还不是很明显，再提供一个难一点的例子。</p>
+<p>假设我想把 HTML 中所有 <code>class=&quot;vimpress&quot;</code> 的标签：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"vimpress"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>some stuff<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>都变成这样</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"vimpress"</span>&gt;</span> Vim Rocks <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>很容易，就这么几步：</p>
+<ol>
+<li>搜索 <code>vimpress</code><img src="/2016/08/30/vim-workflow/vimpress.gif"></li>
+<li>找到标签后，通过 <strong>文本对象</strong> 更改标签，<code>cit</code> (change inner tag)，输入替换内容<img src="/2016/08/30/vim-workflow/vim-rocks.gif"></li>
+<li>通过 <code>n</code> 移动到下一个标签，然后重复 <code>.</code><img src="/2016/08/30/vim-workflow/n..gif">
+</li>
+</ol>
+<h3 id="Macro-宏"><a href="#Macro-宏" class="headerlink" title="Macro 宏"></a>Macro 宏</h3><p>vim 也自带有宏录制的功能，对于大量重复的操作，可以利用这个功能把一系列动作记下来，然后让 vim 去重复执行。录制 Macro 十分简单，按下 <code>q</code> 后跟任何以字母就可以了，比如 <code>qa</code>。<code>qa</code> 代表把之后的动作录制成 Marco 然后标记成 <code>a</code>。也就是说你可以同时录制很多 Macro，<code>qa</code>, <code>qb</code>, <code>qc</code> …</p>
+<p>好了，直接上例子，假设我有如下一段 <code>vimrc</code>，我想把每一行首个词都变成 test。由于首词长短不一，参差不齐，不能用 <code>visual-block</code> 解决。这种情况下，录制一个 Macro 就可以了。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> <span class="keyword">number</span></div><div class="line"><span class="keyword">set</span> relativenumber</div><div class="line"><span class="keyword">set</span> smartcase</div><div class="line"><span class="keyword">set</span> autoread</div><div class="line"><span class="keyword">map</span> <span class="keyword">j</span> gj</div><div class="line"><span class="keyword">map</span> <span class="keyword">k</span> gk</div><div class="line"><span class="keyword">nnoremap</span> <span class="symbol">&lt;c-h&gt;</span> g0</div><div class="line"><span class="keyword">nnoremap</span> <span class="symbol">&lt;c-l&gt;</span> g$</div><div class="line"><span class="keyword">nmap</span> <span class="symbol">&lt;F2&gt;</span> :<span class="keyword">set</span> nowrap! <span class="symbol">&lt;cr&gt;</span></div><div class="line"><span class="keyword">nmap</span> <span class="symbol">&lt;c-s&gt;</span> :w!<span class="symbol">&lt;cr&gt;</span></div><div class="line"><span class="keyword">nmap</span> <span class="symbol">&lt;leader&gt;</span><span class="keyword">w</span> :w!<span class="symbol">&lt;cr&gt;</span></div></pre></td></tr></table></figure>
+<p>假设光标在首行第一个词 set 处，按下 <code>qa</code> 开始记录：<code>cw</code> (change word) 然后输入 test，回到 <code>normal mode</code> 后移光标至下一行行首，再按下 <code>q</code>，录制结束。<br><img src="/2016/08/30/vim-workflow/record.gif"></p>
+<p>接下来我们想让 vim 替我们执行 10 遍，按下 <code>10@a</code> (10 Macro a) 就好了。<br><img src="/2016/08/30/vim-workflow/marco.gif"></p>
+<h3 id="Snippets-模板"><a href="#Snippets-模板" class="headerlink" title="Snippets 模板"></a>Snippets 模板</h3><p>Snippets 的作用就是利用提前写好的模板来加速我们的文字输入。如果你经常要输入同一段文本，那么你应该考虑把它做成一段 snippet，下次使用时直接调出。比如，经常要在代码作业前加上个人信息什么的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Homework: XXX</span></div><div class="line"><span class="comment">// Author: my name</span></div><div class="line"><span class="comment">// Description: XXX</span></div></pre></td></tr></table></figure>
+<img src="/2016/08/30/vim-workflow/snip.gif">
+<p>如果要使用 Snippet 的话，我们就要借助插件了（终于要说到插件了）。vim 有许多 Snippet 插件可以选择，目前 V 字君使用的是 <code>Ultisnips</code>，之后我单独拿一篇出来讲这个插件（不出意外的话，每个插件都会是单独一篇）。在这里我们就是简单展示一下。</p>
+<p>简单来说，灵活运用 <code>.</code>，Macro，以及 Snippet 会让你的效率会越来越高，而且你投入的时间越多（尤其是 Snippet），回报也会越大。</p>
+<h3 id="终于要说到插件了"><a href="#终于要说到插件了" class="headerlink" title="终于要说到插件了"></a>终于要说到插件了</h3><p>好了，这一篇就这说这么多。目前为止，基本的 vim 操作都略有涉及，完整的处理流程也基本介绍完了。下一篇，我们要开始介绍 vim 的设置 （即 vimrc 里放什么），以及介绍第一个插件：<code>vim-plug</code>。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="VZJ wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的二维码，订阅 V 字君的微信公众号。</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vim/" rel="tag"># vim</a>
+          
+            <a href="/tags/vim-intro/" rel="tag"># vim-intro</a>
+          
+            <a href="/tags/vim-workflow/" rel="tag"># vim-workflow</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/06/vim-motion/" rel="next" title="vim 入坑指南（三）— motion 进阶">
+                <i class="fa fa-chevron-left"></i> vim 入坑指南（三）— motion 进阶
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/21/vim-plug/" rel="prev" title="vim 入坑指南（五）插件 Vim-Plug">
+                vim 入坑指南（五）插件 Vim-Plug <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="VZJ" />
+            
+              <p class="site-author-name" itemprop="name">VZJ</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/yufanlu" target="_blank" title="GitHub"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#vim-帮助文档"><span class="nav-number">1.</span> <span class="nav-text">vim 帮助文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索"><span class="nav-number">2.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#撤销和重做"><span class="nav-number">3.</span> <span class="nav-text">撤销和重做</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#滚动文本"><span class="nav-number">4.</span> <span class="nav-text">滚动文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Don’t-Repeat-Yourself-Let-vim-repeat-it-for-you"><span class="nav-number">5.</span> <span class="nav-text">Don’t Repeat Yourself. Let vim repeat it for you</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Macro-宏"><span class="nav-number">6.</span> <span class="nav-text">Macro 宏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Snippets-模板"><span class="nav-number">7.</span> <span class="nav-text">Snippets 模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#终于要说到插件了"><span class="nav-number">8.</span> <span class="nav-text">终于要说到插件了</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VZJ</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a> v6.0.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.4"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

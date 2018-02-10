@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.4" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.0.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="vim,vim-intro,colorscheme,vimrc," />
+
+
+<meta name="description" content="时隔这么久，终于有时间来写下一篇了！以后咱们尽量 “少量多餐”，多写点篇。如果你都一路看到了这篇，就说明你已经在 “坑” 里了，所以咱们摘掉 “入坑指南” 几个字，开始谈谈 vim 的一些 “表面工程”: colorscheme。 无论你使用的是什么开发软件，应该都能找到更改 colorscheme 或者是 “配色方案” 的设置。对于长期对着屏幕码代码的人来说，选择不易造成眼睛疲劳，看着也不错的配">
+<meta name="keywords" content="vim,vim-intro,colorscheme,vimrc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vim 的 colorscheme">
+<meta property="og:url" content="http://yoursite.com/2017/02/12/color-scheme/index.html">
+<meta property="og:site_name" content="V 字君的 Vimpress">
+<meta property="og:description" content="时隔这么久，终于有时间来写下一篇了！以后咱们尽量 “少量多餐”，多写点篇。如果你都一路看到了这篇，就说明你已经在 “坑” 里了，所以咱们摘掉 “入坑指南” 几个字，开始谈谈 vim 的一些 “表面工程”: colorscheme。 无论你使用的是什么开发软件，应该都能找到更改 colorscheme 或者是 “配色方案” 的设置。对于长期对着屏幕码代码的人来说，选择不易造成眼睛疲劳，看着也不错的配">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2017/02/12/color-scheme/base16.png">
+<meta property="og:image" content="http://yoursite.com/2017/02/12/color-scheme/gotham-repo.png">
+<meta property="og:image" content="http://yoursite.com/2017/02/12/color-scheme/change-colorscheme.gif">
+<meta property="og:updated_time" content="2017-08-04T01:42:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vim 的 colorscheme">
+<meta name="twitter:description" content="时隔这么久，终于有时间来写下一篇了！以后咱们尽量 “少量多餐”，多写点篇。如果你都一路看到了这篇，就说明你已经在 “坑” 里了，所以咱们摘掉 “入坑指南” 几个字，开始谈谈 vim 的一些 “表面工程”: colorscheme。 无论你使用的是什么开发软件，应该都能找到更改 colorscheme 或者是 “配色方案” 的设置。对于长期对着屏幕码代码的人来说，选择不易造成眼睛疲劳，看着也不错的配">
+<meta name="twitter:image" content="http://yoursite.com/2017/02/12/color-scheme/base16.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/02/12/color-scheme/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>Vim 的 colorscheme | V 字君的 Vimpress</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-80286208-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-80286208-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">V 字君的 Vimpress</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Everything I learned about Vim</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            首页</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            关于</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            标签</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            分类</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            归档</a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/12/color-scheme/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="VZJ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="V 字君的 Vimpress">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vim 的 colorscheme</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-12T11:40:04-05:00">2017-02-12</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/colorscheme/" itemprop="url" rel="index"><span itemprop="name">colorscheme</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>时隔这么久，终于有时间来写下一篇了！以后咱们尽量 “少量多餐”，多写点篇。如果你都一路看到了这篇，就说明你已经在 “坑” 里了，所以咱们摘掉 “入坑指南” 几个字，开始谈谈 vim 的一些 “表面工程”: <code>colorscheme</code>。</p>
+<p>无论你使用的是什么开发软件，应该都能找到更改 <code>colorscheme</code> 或者是 “配色方案” 的设置。对于长期对着屏幕码代码的人来说，选择不易造成眼睛疲劳，看着也不错的配色（比如大伙熟知的 monokai 或者是 solarized）是件不小的事儿。其实选择什么样的 <code>colorscheme</code> 全靠个人喜好，咱们这篇主要是讲去哪里找，以及如何快速更改 <code>colorscheme</code>。</p>
+<h2 id="colorscheme-base16-和-vim-gotham"><a href="#colorscheme-base16-和-vim-gotham" class="headerlink" title="colorscheme: base16 和 vim-gotham"></a>colorscheme: base16 和 vim-gotham</h2><p>有了前面咱们提过的插件 <code>vim-plug</code>，安装任何一个 <code>colorscheme</code> 都很容易。目前 V 字君使用的是 <code>base16-vim</code>，安装以及相关设定如下：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">" vim-plug 设置</span></div><div class="line">Plug <span class="string">'chriskempson/base16-vim'</span></div><div class="line"></div><div class="line"><span class="comment">" 使用 256 颜色库</span></div><div class="line"><span class="keyword">let</span> base16colorspace=<span class="number">256</span></div><div class="line"><span class="comment">" 使用 base16 中 base16-oceanicnext</span></div><div class="line"><span class="keyword">colorscheme</span> base16-oceanicnext</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<img src="/2017/02/12/color-scheme/base16.png">
+<p>重新进入 vim 之后，新的 <code>colorscheme</code> 就启用了。当然，你也可以同时安装多个 <code>colorscheme</code>，随时切换。比如我晚上写 code 时会使用配色更深，看着不刺眼的 <code>vim-gothman</code> （而且，这个配图也太帅了）</p>
+<img src="/2017/02/12/color-scheme/gotham-repo.png">
+<p><code>vim-gotham</code> 的相关设定如下：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">" vim-plug 设置</span></div><div class="line">Plug <span class="string">'whatyouhide/vim-gotham'</span></div><div class="line"></div><div class="line"><span class="comment">" 使用 gotham 配色</span></div><div class="line"><span class="keyword">colorscheme</span> gotham</div></pre></td></tr></table></figure>
+<p>如果你安装了多个 <code>colorscheme</code> （vim 也自带了很多），互相切换起来也很容易。比如，如果我们想切换成 <code>vim-gotham</code>，只需要在命令行中输入这样一行就可以了</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">colorscheme</span> gotham</div></pre></td></tr></table></figure>
+<img src="/2017/02/12/color-scheme/change-colorscheme.gif">
+<h2 id="一些推荐和相关资源"><a href="#一些推荐和相关资源" class="headerlink" title="一些推荐和相关资源"></a>一些推荐和相关资源</h2><ul>
+<li>著名的 <code>solarized</code>: <code>altercation/vim-colors-solarized</code></li>
+<li>大伙都在用的 <code>molokai</code>: <code>tomasr/molokai</code></li>
+<li>更多的配色大伙儿可以去 类似 <code>vimawesome.com</code> 或者是 <code>vimcolors.com</code> 的网站上找一找 （声明：V 字君和这些网站或者是 repo 的作者没有任何关系，不是托儿）</li>
+</ul>
+<p>就这么多，下一篇准备介绍插件 <code>vim-airline</code>，我又要继续去写作业了。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="VZJ wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的二维码，订阅 V 字君的微信公众号。</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vim/" rel="tag"># vim</a>
+          
+            <a href="/tags/vim-intro/" rel="tag"># vim-intro</a>
+          
+            <a href="/tags/colorscheme/" rel="tag"># colorscheme</a>
+          
+            <a href="/tags/vimrc/" rel="tag"># vimrc</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/30/ultisnip/" rel="next" title="vim 入坑指南（六）插件 UltiSnips">
+                <i class="fa fa-chevron-left"></i> vim 入坑指南（六）插件 UltiSnips
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/22/keyboard-shortcuts/" rel="prev" title="为什么你需要在意快捷键">
+                为什么你需要在意快捷键 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="VZJ" />
+            
+              <p class="site-author-name" itemprop="name">VZJ</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/yufanlu" target="_blank" title="GitHub"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#colorscheme-base16-和-vim-gotham"><span class="nav-number">1.</span> <span class="nav-text">colorscheme: base16 和 vim-gotham</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些推荐和相关资源"><span class="nav-number">2.</span> <span class="nav-text">一些推荐和相关资源</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VZJ</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a> v6.0.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.4"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

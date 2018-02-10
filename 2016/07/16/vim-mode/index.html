@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.4" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.0.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="vim,vim-intro,vim-mode," />
+
+
+<meta name="description" content="如果你还没有 vim，那么可以先看看上一篇里的相关说明，里面也提到了几个 vimrc 的基本设置。这一篇，咱们说说 vim 之所以高效的原因。 在任何与文本处理相关的任务里，无论是编程，写论文，或是准备 PPT，都会涉及到以下这四个操作：  移动光标 输入 删除 替换（删除 + 输入）  而 vim 之所以高效就是因为它通过几个模式，把四个操作都做到了极致。举几个简单的例子，假设，我们有 9 行文">
+<meta name="keywords" content="vim,vim-intro,vim-mode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim 入坑指南（二）— vim 的模式">
+<meta property="og:url" content="http://yoursite.com/2016/07/16/vim-mode/index.html">
+<meta property="og:site_name" content="V 字君的 Vimpress">
+<meta property="og:description" content="如果你还没有 vim，那么可以先看看上一篇里的相关说明，里面也提到了几个 vimrc 的基本设置。这一篇，咱们说说 vim 之所以高效的原因。 在任何与文本处理相关的任务里，无论是编程，写论文，或是准备 PPT，都会涉及到以下这四个操作：  移动光标 输入 删除 替换（删除 + 输入）  而 vim 之所以高效就是因为它通过几个模式，把四个操作都做到了极致。举几个简单的例子，假设，我们有 9 行文">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2016/07/16/vim-mode/join_lines.gif">
+<meta property="og:image" content="http://yoursite.com/2016/07/16/vim-mode/vb_change.gif">
+<meta property="og:image" content="http://yoursite.com/2016/07/16/vim-mode/d5d.gif">
+<meta property="og:image" content="http://yoursite.com/2016/07/16/vim-mode/move_line_1.gif">
+<meta property="og:image" content="http://yoursite.com/2016/07/16/vim-mode/move_line_2.gif">
+<meta property="og:image" content="http://yoursite.com/2016/07/16/vim-mode/stripwhitespace.gif">
+<meta property="og:image" content="http://yoursite.com/2016/07/16/vim-mode/hjkl.jpg">
+<meta property="og:image" content="http://yoursite.com/2016/07/16/vim-mode/2w.gif">
+<meta property="og:image" content="http://yoursite.com/2016/07/16/vim-mode/3j.gif">
+<meta property="og:image" content="http://yoursite.com/2016/07/16/vim-mode/c2w.gif">
+<meta property="og:image" content="http://yoursite.com/2016/07/16/vim-mode/dj.gif">
+<meta property="og:image" content="http://yoursite.com/2016/07/16/vim-mode/dd.gif">
+<meta property="og:image" content="http://yoursite.com/2016/07/16/vim-mode/c2c.gif">
+<meta property="og:image" content="http://yoursite.com/2016/07/16/vim-mode/%3E3%3E.gif">
+<meta property="og:image" content="http://yoursite.com/2016/07/16/vim-mode/vim-cheatsheet.gif">
+<meta property="og:updated_time" content="2016-10-13T03:43:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vim 入坑指南（二）— vim 的模式">
+<meta name="twitter:description" content="如果你还没有 vim，那么可以先看看上一篇里的相关说明，里面也提到了几个 vimrc 的基本设置。这一篇，咱们说说 vim 之所以高效的原因。 在任何与文本处理相关的任务里，无论是编程，写论文，或是准备 PPT，都会涉及到以下这四个操作：  移动光标 输入 删除 替换（删除 + 输入）  而 vim 之所以高效就是因为它通过几个模式，把四个操作都做到了极致。举几个简单的例子，假设，我们有 9 行文">
+<meta name="twitter:image" content="http://yoursite.com/2016/07/16/vim-mode/join_lines.gif">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/16/vim-mode/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>vim 入坑指南（二）— vim 的模式 | V 字君的 Vimpress</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-80286208-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-80286208-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">V 字君的 Vimpress</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Everything I learned about Vim</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            首页</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            关于</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            标签</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            分类</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            归档</a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/16/vim-mode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="VZJ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="V 字君的 Vimpress">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vim 入坑指南（二）— vim 的模式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-16T23:08:34-04:00">2016-07-16</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/vim-intro/" itemprop="url" rel="index"><span itemprop="name">vim-intro</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>如果你还没有 vim，那么可以先看看<a href="/2016/07/13/vim-setup/" title="上一篇">上一篇</a>里的相关说明，里面也提到了几个 vimrc 的基本设置。这一篇，咱们说说 vim 之所以高效的原因。 在任何与文本处理相关的任务里，无论是编程，写论文，或是准备 PPT，都会涉及到以下这四个操作：</p>
+<ol>
+<li>移动光标</li>
+<li>输入</li>
+<li>删除</li>
+<li>替换（删除 + 输入）</li>
+</ol>
+<p>而 vim 之所以高效就是因为它通过几个模式，把四个操作都做到了极致。举几个简单的例子，假设，我们有 9 行文字，我可以如下几个简单的操作 (所有的演示我没有做任何处理，也没有用任何插件，vim 的神速可见一斑) ：</p>
+<a id="more"></a>
+<ol>
+<li><p>把 9 行文字合成一段</p>
+ <img src="/2016/07/16/vim-mode/join_lines.gif">
+</li>
+<li><p>把每行的开头都统一改成别的内容</p>
+ <img src="/2016/07/16/vim-mode/vb_change.gif">
+</li>
+<li><p>删除前 5 行</p>
+ <img src="/2016/07/16/vim-mode/d5d.gif">
+</li>
+<li><p>或者把第 9 行挪到第 1 行 （有两种办法）</p>
+ <img src="/2016/07/16/vim-mode/move_line_1.gif">
+ <img src="/2016/07/16/vim-mode/move_line_2.gif">
+</li>
+</ol>
+<p>卖完了关子，我们说点有用的。先复述一下 vim 的几个模式，然后说说在 vim 中如何移动光标，最后提供一个简单的 vim 操作公式。</p>
+<h3 id="vim-的几个模式"><a href="#vim-的几个模式" class="headerlink" title="vim 的几个模式"></a>vim 的几个模式</h3><ul>
+<li><p><strong>普通模式 (Normal Mode)</strong></p>
+<p>不出意外的话，我们使用 vim 时大部分时间都会停留在普通模式下。移动光标和对文本处理（并进入相关模式）都是从普通模式发起的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">按 i 键 --&gt; 进入输入模式</div><div class="line">按 v 键 --&gt; 进入可视模式</div><div class="line">按 : 键 --&gt; 进入命令行</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>输入模式 (Insert Mode)</strong></p>
+<p>在输入模式下，我们直接对文本进行输入，以及简单的删除处理。抽象点说，光标的移动和文字处理都是单向线性的，文本输入的效率取决于你打键盘的速度。当然，如果我们有了插件，两个字：<strong>如飞</strong>。不过先别急，之后慢慢讲。</p>
+</li>
+<li><p><strong>可视模式 (Visual Mode)</strong></p>
+<p>可视模式实现的功能就和用鼠标选中文字差不多。选中的部分会被高亮，然后对其进行处理。比如：删除，更换大小写，排列等等。</p>
+</li>
+<li><p><strong>命令行 (Command Line)</strong></p>
+<p>在普通模式和可视模式下按冒号键（:） 都能进入命令行（严格的来说，这并不算是一个模式）。许多复杂的操作其实都可通过一个简单的命令来完成。在命令行中，我们可以执行 vim 自带的命令，也可以执行自定义的命令。比如，我可以很简单的把文本中所有行末的 “空格”（显示为红色）都去掉。<code>StripWhitespace</code> 是通过插件 <code>vim-better-whitespace</code> 实现/提供的。</p>
+<img src="/2016/07/16/vim-mode/stripwhitespace.gif">
+</li>
+</ul>
+<h3 id="vim-操作基础：如何移动光标"><a href="#vim-操作基础：如何移动光标" class="headerlink" title="vim 操作基础：如何移动光标"></a>vim 操作基础：如何移动光标</h3><p><strong>移动光标</strong> 可以说是四个操作里最重要的一个，因为 <strong>删除</strong>， <strong>输入</strong> 和 <strong>替换</strong>   这三个操作都是以光标所在位置为基础做的。可以说，高效的文本处理大多依赖于光标移动的效率，而如何高效的把光标移动到 “目标” 处是一个不小的学问，</p>
+<p>一般来说，我们通常采用的方式是用鼠标点。这么做并不是最高效的，因为类似这样的一个操作涉及到：使用鼠标以及移动手两个无关文字处理的动作。 这两个动作不仅中断了键盘的 “输出”，同时也会打断思路，最终降低了文本处理的效率。所以解决方案也很容易：不要用鼠标，尽量别（大范围的）移动手。</p>
+<p>vim 的 <strong>普通模式 (Normal Mode)</strong> 完美解决了这一问题。在这个模式下，我们使用 <code>h j k l</code> （来代替 ← ↓ ↑ → 箭头键），<code>w</code>, <code>b</code> 等键来移动光标。这么做可以保持双手处于的基本键位 (Home Row) 处，从而保证了键盘的高效 “输出”。说句题外话，vim 之所以使用 <code>h j k l</code>的原因是因为当年创建 vi<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> 时所用的电脑的键盘就是这么设计的（原 po <a href="http://www.catonmat.net/blog/why-vim-uses-hjkl-as-arrow-keys/" target="_blank" rel="noopener">链接在此</a>)。另外，可能用 <code>~</code> 代表 <code>HOME</code> 也是同一个原因吧。</p>
+<img src="/2016/07/16/vim-mode/hjkl.jpg">
+<p>说完了影响效率的外在因素，现在说说如何更快速的移动光标，毕竟一字节一个字节的挪是低效的。为了简明，咱们先列一个公式，然后慢慢解释（其中括号代表可加可不加）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[数字] + 移动光标</div></pre></td></tr></table></figure>
+<p>我们已经熟知的移动光标的方法有 <code>h j k l</code>，<code>w</code>，<code>b</code>，而数字则代表按同一方法移动光标的次数，这是个单位和数量的关系。举几个例子：</p>
+<ul>
+<li><code>2w</code> 表示向前移动两个词<img src="/2016/07/16/vim-mode/2w.gif"></li>
+<li><code>3j</code> 表示向下移动三行<img src="/2016/07/16/vim-mode/3j.gif">
+</li>
+</ul>
+<p>我们把这个公式总结为 motion，即</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">motion = [数字] + 移动光标</div></pre></td></tr></table></figure>
+<p>写到这里咱们只介绍了一个操作：移动光标，以后会涉及到更多的快速高效移动光标的内容。有了对 motion 的基本了解， <strong>删除</strong> 和 <strong>替换</strong> 就很容易了。因为它们都和刚才提到的 motion 有更为密切的联系，只需把之前的公式稍作变形即可。</p>
+<h3 id="vim-操作基础：输入"><a href="#vim-操作基础：输入" class="headerlink" title="vim 操作基础：输入"></a>vim 操作基础：输入</h3><p><strong>输入</strong> 其实简单明了，即进入 <strong>输入模式</strong> 后敲键盘就可以了。咱们先假装忽略掉输入模式下的种种高效手段，之后单谈。</p>
+<h3 id="vim-操作基础：如何删除和替换"><a href="#vim-操作基础：如何删除和替换" class="headerlink" title="vim 操作基础：如何删除和替换"></a>vim 操作基础：如何删除和替换</h3><p>删除 (delete) 和 替换 (change) 都是在 <strong>普通模式</strong> 下比较常用的两个操作。在 vim 里，<code>d</code> 代表删除，<code>c</code> 则代表替换（并进入输入模式）。而删除或替换的对象则由之前的 motion 决定。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">删除/替换 + motion</div></pre></td></tr></table></figure>
+<p>组合在一起，就很实用啦，比如</p>
+<ul>
+<li><code>c2w</code> 代表更改两词，并进入输入模式。<img src="/2016/07/16/vim-mode/c2w.gif"></li>
+<li><code>dj</code> 删除光标向下一步之间的所有内容，即 <code>j</code> 跨过的内容。<img src="/2016/07/16/vim-mode/dj.gif">
+</li>
+</ul>
+<p>其实类似 <code>d</code> 和 <code>c</code> 的操作还有不少，比如：</p>
+<ul>
+<li><code>&gt;</code> 右缩进</li>
+<li><code>&lt;</code> 左缩进</li>
+<li><code>y</code> 复制</li>
+<li><code>gu</code> 变换为小写</li>
+<li><code>gU</code> 变换为大写</li>
+</ul>
+<p>它们统称为 operator，所以我们的公式就变成了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[数字] + operator + motion</div></pre></td></tr></table></figure></p>
+<p>在这里，数字依旧代表重复的次数。如果我们考虑以下这两个操作： <code>d2w</code> 和 <code>2dw</code>。 它们所达成的效果是一样的，但是实质原理略有不同。前者是 “删除两词”，后者是 “删一词重复两遍”。 如果你真的理解了，那么 <code>2d2w</code> 和什么一致的呢?  （答案见注解<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>）</p>
+<p>这里出现了一个问题：没有以 “行” 为单位的 motion。如果我想删除 <code>d</code> 两行文字的话，按下 <code>d2j</code> 是做不到的，我们只能删除光标在 <code>2j</code> 位移之间的文字。这情况下，公式有个小小的变形。</p>
+<h3 id="以-“行”-为单位的-operator-操作"><a href="#以-“行”-为单位的-operator-操作" class="headerlink" title="以 “行” 为单位的 operator 操作"></a>以 “行” 为单位的 operator 操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">operator + [数字] + operator (前后均为同一个 operator）</div></pre></td></tr></table></figure>
+<p>举几个例子：</p>
+<ul>
+<li><p><code>dd</code> 删除光标所在行</p>
+<img src="/2016/07/16/vim-mode/dd.gif">
+</li>
+<li><p><code>c2c</code> 更改光标向下 2 行（含所在行），并进入输入模式</p>
+<img src="/2016/07/16/vim-mode/c2c.gif">
+</li>
+<li><p><code>&gt;3&gt;</code> 向右缩进光标向下 3 行（含所在行）</p>
+<img src="/2016/07/16/vim-mode/%3E3%3E.gif">
+</li>
+</ul>
+<h3 id="几个常用-motion-补充"><a href="#几个常用-motion-补充" class="headerlink" title="几个常用 motion 补充"></a>几个常用 motion 补充</h3><p>其实许多 <strong>operator</strong> 和 <strong>motion</strong> 都是十分简单直接的，比如 <code>w</code> 代表 <code>word</code>，<code>b</code> 代表 <code>back</code>。习惯后应用起来也是得心应手，能做到手速赶上思维的状态，一想到 <code>delete 2 words</code> 手上自然而然的就按出 <code>d2w</code> 了，这也是为什么 V 字君更推荐直接读原版 <code>vimtutor</code> 的原因。除了刚才提到的，咱们再列举一些常用的 <strong>motion</strong>，更多的之后都会慢慢涉及到：</p>
+<table>
+<thead>
+<tr>
+<th>motion</th>
+<th>意思</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>e</td>
+<td>移光标至词末</td>
+</tr>
+<tr>
+<td>$</td>
+<td>移光标至行末</td>
+</tr>
+<tr>
+<td>0</td>
+<td>移光标至行首</td>
+</tr>
+<tr>
+<td>^</td>
+<td>移光标至本行首个非空格的字节</td>
+</tr>
+<tr>
+<td>gg</td>
+<td>移光标至整个文本的首行首个非空格字节</td>
+</tr>
+<tr>
+<td>G</td>
+<td>移光标至整个文本最后一行首个非空格字节</td>
+</tr>
+<tr>
+<td>%</td>
+<td>移光标至匹配括号的另一端</td>
+</tr>
+</tbody>
+</table>
+<p>这些都只是一部分，有的内容也需要一定时间记忆。最好的办法就是准备个小抄，使用 vim 的时候没事看一眼就可以了。当然，这小抄也是可用插件的，比如我用了个名为 <code>vim-cheat40</code> 的插件，忘了什么就直接唤出（右侧新增的窗口），于是再也不愁找不到小抄的问题啦。</p>
+<img src="/2016/07/16/vim-mode/vim-cheatsheet.gif">
+<p>好啦，这一篇就说这么多啦。这一篇太抽象了，还要列举一些更复杂的例子，然后介绍一下什么是 <strong>文本对象</strong>。另外，在<a href="/keywords/">关键词</a> 里，我也放了相关的演示图（我会尽量赶上文章进度的）。</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">vi 是 vim 的前身，vim 的全称则是 Vi IMproved。</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><code>d4w</code></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="VZJ wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的二维码，订阅 V 字君的微信公众号。</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vim/" rel="tag"># vim</a>
+          
+            <a href="/tags/vim-intro/" rel="tag"># vim-intro</a>
+          
+            <a href="/tags/vim-mode/" rel="tag"># vim-mode</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/13/vim-setup/" rel="next" title="vim 入坑指南（一）— 安装和定位vimrc">
+                <i class="fa fa-chevron-left"></i> vim 入坑指南（一）— 安装和定位vimrc
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/06/vim-motion/" rel="prev" title="vim 入坑指南（三）— motion 进阶">
+                vim 入坑指南（三）— motion 进阶 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="VZJ" />
+            
+              <p class="site-author-name" itemprop="name">VZJ</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/yufanlu" target="_blank" title="GitHub"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#vim-的几个模式"><span class="nav-number">1.</span> <span class="nav-text">vim 的几个模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim-操作基础：如何移动光标"><span class="nav-number">2.</span> <span class="nav-text">vim 操作基础：如何移动光标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim-操作基础：输入"><span class="nav-number">3.</span> <span class="nav-text">vim 操作基础：输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim-操作基础：如何删除和替换"><span class="nav-number">4.</span> <span class="nav-text">vim 操作基础：如何删除和替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以-“行”-为单位的-operator-操作"><span class="nav-number">5.</span> <span class="nav-text">以 “行” 为单位的 operator 操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几个常用-motion-补充"><span class="nav-number">6.</span> <span class="nav-text">几个常用 motion 补充</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VZJ</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a> v6.0.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.4"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

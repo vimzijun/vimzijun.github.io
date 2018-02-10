@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.4" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.0.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="vim,vim-intro,vimrc,vim-plug," />
+
+
+<meta name="description" content="在了解了基本流程之后，我们终于可以说说第一个插件了。不过在开篇之前，我们要跑一个题，谈谈 git，然后谈谈 vimrc 里放什么，最后说一下 vim-plug。 Git这个应该是一个比较常见的工具了，如果你有所了解，可直接跳过，完全无碍。如果你之前没用过，接下来咱们就说说 Git 是做什么的。只是简单介绍一下，不是教程。 简单来说， Git 就是程序员的时光机，或者说存档读取器，有点像 Mac 里">
+<meta name="keywords" content="vim,vim-intro,vimrc,vim-plug">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim 入坑指南（五）插件 Vim-Plug">
+<meta property="og:url" content="http://yoursite.com/2016/09/21/vim-plug/index.html">
+<meta property="og:site_name" content="V 字君的 Vimpress">
+<meta property="og:description" content="在了解了基本流程之后，我们终于可以说说第一个插件了。不过在开篇之前，我们要跑一个题，谈谈 git，然后谈谈 vimrc 里放什么，最后说一下 vim-plug。 Git这个应该是一个比较常见的工具了，如果你有所了解，可直接跳过，完全无碍。如果你之前没用过，接下来咱们就说说 Git 是做什么的。只是简单介绍一下，不是教程。 简单来说， Git 就是程序员的时光机，或者说存档读取器，有点像 Mac 里">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2016/09/21/vim-plug/showcmd.png">
+<meta property="og:image" content="http://yoursite.com/2016/09/21/vim-plug/showmatch.gif">
+<meta property="og:image" content="http://yoursite.com/2016/09/21/vim-plug/ctrlax.gif">
+<meta property="og:image" content="http://yoursite.com/2016/09/21/vim-plug/backspace.gif">
+<meta property="og:image" content="http://yoursite.com/2016/09/21/vim-plug/installer.gif">
+<meta property="og:image" content="http://yoursite.com/2016/09/21/vim-plug/installation.png">
+<meta property="og:image" content="http://yoursite.com/2016/09/21/vim-plug/vim-airline.png">
+<meta property="og:updated_time" content="2016-10-13T03:51:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vim 入坑指南（五）插件 Vim-Plug">
+<meta name="twitter:description" content="在了解了基本流程之后，我们终于可以说说第一个插件了。不过在开篇之前，我们要跑一个题，谈谈 git，然后谈谈 vimrc 里放什么，最后说一下 vim-plug。 Git这个应该是一个比较常见的工具了，如果你有所了解，可直接跳过，完全无碍。如果你之前没用过，接下来咱们就说说 Git 是做什么的。只是简单介绍一下，不是教程。 简单来说， Git 就是程序员的时光机，或者说存档读取器，有点像 Mac 里">
+<meta name="twitter:image" content="http://yoursite.com/2016/09/21/vim-plug/showcmd.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/21/vim-plug/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>vim 入坑指南（五）插件 Vim-Plug | V 字君的 Vimpress</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-80286208-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-80286208-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">V 字君的 Vimpress</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Everything I learned about Vim</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            首页</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            关于</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            标签</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            分类</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            归档</a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/21/vim-plug/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="VZJ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="V 字君的 Vimpress">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vim 入坑指南（五）插件 Vim-Plug</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-21T16:42:51-04:00">2016-09-21</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/vim-intro/" itemprop="url" rel="index"><span itemprop="name">vim-intro</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在了解了基本流程之后，我们终于可以说说第一个插件了。不过在开篇之前，我们要跑一个题，谈谈 git，然后谈谈 vimrc 里放什么，最后说一下 vim-plug。</p>
+<h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>这个应该是一个比较常见的工具了，如果你有所了解，可直接跳过，完全无碍。如果你之前没用过，接下来咱们就说说 Git 是做什么的。只是简单介绍一下，不是教程。</p>
+<p>简单来说， Git 就是程序员的时光机，或者说存档读取器，有点像 Mac 里的 Time Machine ( Windows 上我不知道是啥诶）。大量的软件开发项目都用了 Git 作为它们的版本控制器，比如 Github 和 Bitbucket 上的众多开源项目。</p>
+<p>由于我们使用的许多插件都是来自 Github 上的开源项目，为了紧跟项目的开发进度，我们自然也需要安装一下 Git。如果你用的是 Mac，那么又厉害拉，Mac 天生也自带 Git （也可以用 Homebrew 下安装的 Git）。如果你用的是 Windows，那么可以去 Git 官网 (<a href="https://git-scm.com" target="_blank" rel="noopener">https://git-scm.com</a>) 下载。</p>
+<p>在等待部分小伙伴们下 Git 的同时，我们来说一下 vimrc 究竟放什么。</p>
+<h3 id="vimrc-里放什么"><a href="#vimrc-里放什么" class="headerlink" title="vimrc 里放什么"></a>vimrc 里放什么</h3><p>我们对 vim 的调试和定制基本都会放在 vimrc 里。如果你忘了 vimrc 在哪，它可能会在（没有的话就新建一个）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mac/unix: ~/.vimrc</div><div class="line">windows:  $HOME/_vimrc</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>关于 vimrc，还要说一个重要的原则： <strong>千万别放你不明白的设置进去</strong>。就好比你做菜的时候放了完全之前万千没听说过的调料（甚至可能不是调料…）。总之，遇到任何问题，可以随时问问 vim （参照上一篇）。</p>
+<p>言归正传，目前为止，咱们只说了如下几个 vimrc 里的设置：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> nocompatible</div><div class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></div><div class="line"><span class="keyword">set</span> <span class="keyword">number</span></div><div class="line"><span class="keyword">set</span> relativenumber</div><div class="line"><span class="keyword">set</span> wrap</div><div class="line"><span class="keyword">set</span> ruler</div><div class="line"><span class="keyword">set</span> incsearch</div></pre></td></tr></table></figure>
+<p>大致划分的话，我们通过 vimrc 告诉 vim 如下几类信息：</p>
+<ol>
+<li>插件</li>
+<li>界面设置</li>
+<li>操作定义</li>
+</ol>
+<p>这只是为了说明方便做的划分，其实倘若按功能分类的话会更细。不急不急，以后再提。我们这里先跳过插件，因为插件部分在后面 vim-plug 会细说。我们直接从第二个开始说。</p>
+<h4 id="界面设置"><a href="#界面设置" class="headerlink" title="界面设置"></a>界面设置</h4><p>这个部分的设置比较简单，这几个基本设置是已经介绍过了的。之后等我们提及别的插件时（如 vim-airline，vim-gotham 等等），会再添加更多的设置。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></div><div class="line"><span class="keyword">set</span> <span class="keyword">number</span></div><div class="line"><span class="keyword">set</span> relativenumber</div><div class="line"><span class="keyword">set</span> wrap</div><div class="line"><span class="keyword">set</span> ruler</div><div class="line"><span class="keyword">set</span> incsearch</div></pre></td></tr></table></figure>
+<p>这里，我们可以补充几个设置，如果你觉得有用的话，可以加上:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> showcmd  （在右下角）显示现有的命令</div></pre></td></tr></table></figure>
+<img src="/2016/09/21/vim-plug/showcmd.png">
+<p>比如，我现在输入了 <code>c2</code>，右下角便会有及时的显示。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> showmatch  输入时显示相对应的括号</div></pre></td></tr></table></figure>
+<img src="/2016/09/21/vim-plug/showmatch.gif">
+<p>这个设置有时候有帮助，不过会减慢输入的效率，所以我目前是关掉的 <code>set noshowmatch</code>。</p>
+<h4 id="操作定义"><a href="#操作定义" class="headerlink" title="操作定义"></a>操作定义</h4><p>这个部分里，我们设定 vim 的行为，可以是 vim 自带的操作，也可是自定义的，当然也包括调用插件定义的操作。</p>
+<p>其中比较重要的一项就是设定 <code>&lt;leader&gt;</code> key。在 vim 里，有许多快捷键都是又 <code>&lt;leader&gt;</code> key 发起的，不少 vim 的插件也如此。所以我们要把 <code>&lt;leader&gt;</code> key 设置得离手指越近越好，vim 的自带设定是 <code>\</code> ，不少人使用的是空格键 <code>&lt;space&gt;</code>,我用的则是逗号 <code>,</code>。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> mapleader = <span class="string">","</span>     <span class="comment">" let 语句</span></div><div class="line"><span class="keyword">let</span> <span class="variable">g:mapleader</span> = <span class="string">","</span>   <span class="comment">" 设置 vim 参数</span></div></pre></td></tr></table></figure>
+<p>再比如，vim 里有一趁手的功能是使用 <code>ctrl + a</code> 和 <code>ctrl + x</code> 来增减数字。由于这么按着太别扭，我定义了如下两个快捷键</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">map</span> <span class="symbol">&lt;c-j&gt;</span> <span class="symbol">&lt;c-x&gt;</span>   <span class="comment">" map 语句</span></div><div class="line"><span class="keyword">map</span> <span class="symbol">&lt;c-k&gt;</span> <span class="symbol">&lt;c-a&gt;</span>   <span class="comment">" 设置键盘映射</span></div></pre></td></tr></table></figure>
+<p>这里的 <code>&lt;c-?&gt;</code> 就是 <code>ctrl + ？</code> 的意思，而 <code>map</code> 则代表映像。有了这两行，我按下 <code>ctrl + j</code> 就等于我按下了 <code>ctrl + x</code> （<code>ctrl + k</code> 也是同理），而且这个功能也是可以运用我们的操作公式的。比如，<code>5&lt;c-j&gt;</code> 会减 5，<code>15&lt;c-k&gt;</code> 会加 15.</p>
+<img src="/2016/09/21/vim-plug/ctrlax.gif">
+<p>另外还有几个有关 vim 里搜所文本的设置，大伙可以自己查查，然后看看需不需要。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> ignorecase</div><div class="line"><span class="keyword">set</span> smartcase</div><div class="line"><span class="keyword">set</span> hlsearch</div></pre></td></tr></table></figure>
+<p>如果你想让删除键绕过行首，行内缩进继续删除的话（如图），可以加上这个设置</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> backspace=endofline,start,<span class="built_in">indent</span></div></pre></td></tr></table></figure>
+<img src="/2016/09/21/vim-plug/backspace.gif">
+<p>如果你想在 vim 中使用鼠标（点击），可以用过这个设置实现</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> mouse=<span class="keyword">a</span>  <span class="comment">" a 代表所有模式</span></div></pre></td></tr></table></figure>
+<p>这个部分，之后我们会加越来越多的东西。好啦，我们来讲讲这第一个插件 vim-plug。</p>
+<h3 id="vim-plug"><a href="#vim-plug" class="headerlink" title="vim-plug"></a>vim-plug</h3><p>vim-plug 是一个 vim 的插件管理插件，通过运用 Git 来实现插件的更新以及相关的管理任务，包括锁定或者回滚插件版本，按需使用插件（而不是一股脑都用），以及插件更新的后续处理。放一个官方的动图，演示一下</p>
+<img src="/2016/09/21/vim-plug/installer.gif">
+<p>看上去还是十分酷炫的，类似的插件也有很多，比如 neobundle, vundle，它们做的都大致相同，用哪个都好。</p>
+<p>安装过程也十分简单，可直接参照官网的说明即可，地址如下：<a href="https://github.com/junegunn/vim-plug" target="_blank" rel="noopener">https://github.com/junegunn/vim-plug</a> ，具体是这个部分。</p>
+<img src="/2016/09/21/vim-plug/installation.png">
+<p>你也可以点击 <code>Download plug.vim</code> 的链接，然后把它直接放进如下的文件夹里</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Mac: ~/.vim/autoload</div><div class="line">Windows: ~\vimfiles\autoload</div></pre></td></tr></table></figure>
+<p>安装完成后，我们就可以想按什么插件就按什么插件了，如果你用的是 Windows， 那么就把 <code>&#39;~/.vim/plugged&#39;</code> 换成 <code>&#39;~\vimfiles\autoload</code>就好啦。</p>
+<p>假如你选定了一个插件，比如 vim-airline</p>
+<img src="/2016/09/21/vim-plug/vim-airline.png">
+<p>那么直接在 vim-plug 的定义范围内加上</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Plug <span class="string">'vim-airline/vim-airline'</span></div></pre></td></tr></table></figure>
+<p>所以目前 vimrc 是这个样子的</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> nocompatible</div><div class="line"></div><div class="line"><span class="comment">" vim-plug</span></div><div class="line"><span class="keyword">call</span> plug#begin(<span class="string">'~/.vim/plugged'</span>)</div><div class="line"></div><div class="line">Plug <span class="string">'vim-airline/vim-airline'</span></div><div class="line"></div><div class="line"><span class="keyword">call</span> plug#end()</div><div class="line"></div><div class="line"><span class="comment">" 界面设置</span></div><div class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></div><div class="line"><span class="keyword">set</span> <span class="keyword">number</span></div><div class="line"><span class="keyword">set</span> relativenumber</div><div class="line"><span class="comment">" ...</span></div><div class="line"></div><div class="line"><span class="comment">" 操作定义</span></div><div class="line"><span class="comment">" ...</span></div></pre></td></tr></table></figure>
+<p>重新开启 vim，然后在命令行中运行 <code>:PluginInstall</code> 就可以安装插件 vim-airline 了。更多的插件管理功能在插件的说明文件里都有介绍，以后我们在介绍别的插件时，也会提到。</p>
+<p>好啦，这一篇就先说这么多。下一篇具体说什么还没有想好，因为明天还有一门考试…</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="VZJ wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的二维码，订阅 V 字君的微信公众号。</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vim/" rel="tag"># vim</a>
+          
+            <a href="/tags/vim-intro/" rel="tag"># vim-intro</a>
+          
+            <a href="/tags/vimrc/" rel="tag"># vimrc</a>
+          
+            <a href="/tags/vim-plug/" rel="tag"># vim-plug</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/30/vim-workflow/" rel="next" title="vim 入坑指南（四）— 文本处理流程">
+                <i class="fa fa-chevron-left"></i> vim 入坑指南（四）— 文本处理流程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/30/ultisnip/" rel="prev" title="vim 入坑指南（六）插件 UltiSnips">
+                vim 入坑指南（六）插件 UltiSnips <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="VZJ" />
+            
+              <p class="site-author-name" itemprop="name">VZJ</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/yufanlu" target="_blank" title="GitHub"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git"><span class="nav-number">1.</span> <span class="nav-text">Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vimrc-里放什么"><span class="nav-number">2.</span> <span class="nav-text">vimrc 里放什么</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#界面设置"><span class="nav-number">2.1.</span> <span class="nav-text">界面设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作定义"><span class="nav-number">2.2.</span> <span class="nav-text">操作定义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim-plug"><span class="nav-number">3.</span> <span class="nav-text">vim-plug</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VZJ</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a> v6.0.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.4"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

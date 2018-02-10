@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.4" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.0.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="vim,vim-intro," />
+
+
+<meta name="description" content="废话不多说，直接说有用的，咱们先解决怎么把 vim 搞到手。 安装如果你有 Mac 的话，那么厉害啦，Mac 天生自带 vim。但是一般用Homebrew1 下安装的 vim 会比较好。至于为什么， 以后会在介绍与 vim 相关配置时提到。如果没试过 Homebrew 可以试试，不用也无碍，直接跳过这一段就好啦。1brew install vim Ubuntu 上也同样简单，1sudo apt-g">
+<meta name="keywords" content="vim,vim-intro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim 入坑指南（一）— 安装和定位vimrc">
+<meta property="og:url" content="http://yoursite.com/2016/07/13/vim-setup/index.html">
+<meta property="og:site_name" content="V 字君的 Vimpress">
+<meta property="og:description" content="废话不多说，直接说有用的，咱们先解决怎么把 vim 搞到手。 安装如果你有 Mac 的话，那么厉害啦，Mac 天生自带 vim。但是一般用Homebrew1 下安装的 vim 会比较好。至于为什么， 以后会在介绍与 vim 相关配置时提到。如果没试过 Homebrew 可以试试，不用也无碍，直接跳过这一段就好啦。1brew install vim Ubuntu 上也同样简单，1sudo apt-g">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2016/07/13/vim-setup/vimtutor.png">
+<meta property="og:image" content="http://yoursite.com/2016/07/13/vim-setup/set_nu.gif">
+<meta property="og:image" content="http://yoursite.com/2016/07/13/vim-setup/syntax_on.gif">
+<meta property="og:image" content="http://yoursite.com/2016/07/13/vim-setup/set_rnu.gif">
+<meta property="og:image" content="http://yoursite.com/2016/07/13/vim-setup/vimtex_showcase.gif">
+<meta property="og:updated_time" content="2016-10-13T03:43:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vim 入坑指南（一）— 安装和定位vimrc">
+<meta name="twitter:description" content="废话不多说，直接说有用的，咱们先解决怎么把 vim 搞到手。 安装如果你有 Mac 的话，那么厉害啦，Mac 天生自带 vim。但是一般用Homebrew1 下安装的 vim 会比较好。至于为什么， 以后会在介绍与 vim 相关配置时提到。如果没试过 Homebrew 可以试试，不用也无碍，直接跳过这一段就好啦。1brew install vim Ubuntu 上也同样简单，1sudo apt-g">
+<meta name="twitter:image" content="http://yoursite.com/2016/07/13/vim-setup/vimtutor.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/13/vim-setup/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>vim 入坑指南（一）— 安装和定位vimrc | V 字君的 Vimpress</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-80286208-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-80286208-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">V 字君的 Vimpress</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Everything I learned about Vim</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            首页</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            关于</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            标签</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            分类</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            归档</a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/13/vim-setup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="VZJ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="V 字君的 Vimpress">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vim 入坑指南（一）— 安装和定位vimrc</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-13T00:21:25-04:00">2016-07-13</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/vim-intro/" itemprop="url" rel="index"><span itemprop="name">vim-intro</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>废话不多说，直接说有用的，咱们先解决怎么把 vim 搞到手。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>如果你有 Mac 的话，那么厉害啦，Mac 天生自带 vim。但是一般用<a href="http://brew.sh" target="_blank" rel="noopener">Homebrew</a><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> 下安装的 vim 会比较好。至于为什么， 以后会在介绍与 vim 相关配置时提到。如果没试过 Homebrew 可以试试，不用也无碍，直接跳过这一段就好啦。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install vim</div></pre></td></tr></table></figure></p>
+<p>Ubuntu 上也同样简单，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install vim</div></pre></td></tr></table></figure></p>
+<p>如果你用的是 Windows，那么可能会有点麻烦（而且许多相关的调试都会变得很麻烦，更重要的是… V 字君没有 Windows…）。嗯，很麻烦… 不过一切都是可能的。比如，著名 vim 插件 <a href="https://github.com/Valloric/YouCompleteMe#windows" target="_blank" rel="noopener">YouCompleteMe</a> 的官方说明里提供了这么一个<a href="https://bintray.com/micbou/generic/vim" target="_blank" rel="noopener">链接</a>。</p>
+<a id="more"></a>
+<h3 id="可能是-vim-最好的入门材料：vimtutor"><a href="#可能是-vim-最好的入门材料：vimtutor" class="headerlink" title="可能是 vim 最好的入门材料：vimtutor"></a>可能是 vim 最好的入门材料：vimtutor</h3><img src="/2016/07/13/vim-setup/vimtutor.png">
+<p>vim 还是提供了一个简易的入门材料的。尽管 V 字君之前提到 vim 的官方材料可能有的太简单了，但是对于学习和熟悉 vim 来说则是最好的材料。如果你有（并且知道）terminal 的话，直接敲入（如果你用的是 windows，那么你应该能在 vim 的安装目录中找到）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vimtutor</div></pre></td></tr></table></figure>
+<p>这样就能看到官方的入门手册了，从头看/试/玩到尾也花不了多长时间。通了这一关，vim 就算是上手了。一开始肯定会很不习惯的，因为就像我<a href="/2016/07/11/vim-intro/" title="在上一篇提到">在上一篇提到</a>的那样，vim 和其他文本编辑器的逻辑就不一样。刚上手的感觉甚至就像重新学打字一样。不过要知道，这个入门材料是上手的唯一一道坎儿，过了这个坎儿，一马平川。</p>
+<h3 id="上手时需要关注什么"><a href="#上手时需要关注什么" class="headerlink" title="上手时需要关注什么"></a>上手时需要关注什么</h3><p>vimtutor 讲解了很多基本操作，每个小节都有给读者实际操作的例子，通俗易懂。在这期间，只需要多关注这几个点就好了：</p>
+<ol>
+<li><p>如何在几种模式之间切换：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">normal mode ----- 按 i   -----&gt; insert mode</div><div class="line">normal mode ----- 按 v   -----&gt; visual mode</div><div class="line">insert mode ----- 按 esc -----&gt; normal mode</div><div class="line">visual mode ----- 按 esc -----&gt; normal mode</div><div class="line">normal mode ----- 按 :   -----&gt; 进入命令行</div></pre></td></tr></table></figure>
+</li>
+<li><p>如何退出 vim （不知道为什么有个“有人关机是因为不知怎么退出 vim 的笑话”）</p>
+<ul>
+<li>如果没有做任何更改，在命令行里直接打入 <code>q</code> 然后回车就好了</li>
+<li>如果 vim 提示有内容增减，<ul>
+<li>选择保存更改，<code>wq</code> 然后回车</li>
+<li>选择不保存，<code>q!</code> 然后回车</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>多练习，多鼓励自己。习惯绝不是一天养成的，有用的东西大多往往都需要一定时间的投入（反向未必）。</p>
+</li>
+<li>如果许多事情搞不明白，不要太在意，后面就能融会贯通了。</li>
+<li>如果有啥想提前了解的，看看 V字君的 Vimpress 这里有没有。</li>
+<li>（推荐）推荐不看翻译版，直接看英文版本的 vimtutor。</li>
+</ol>
+<h3 id="怎么把-vim-变得（更）好看-顺手点儿"><a href="#怎么把-vim-变得（更）好看-顺手点儿" class="headerlink" title="怎么把 vim 变得（更）好看/顺手点儿"></a>怎么把 vim 变得（更）好看/顺手点儿</h3><p>有了一定了解之后，咱们再来说说怎么把 vim 变得好看点，变得更顺手。这就要提到个东西：vimrc， 准确的来说是 .vimrc (Windows 上是_vimrc)。我们所有对 vim 的调试和定制基本都会放在这个文件里。在这，咱们要讲两件事：怎么找到 vimrc 和怎么对 vim 做最基本的界面设置。</p>
+<h4 id="vimrc-在哪"><a href="#vimrc-在哪" class="headerlink" title="vimrc 在哪"></a>vimrc 在哪</h4><p>一般来说, vimrc 会在这个地方（没有的话就新建一个）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mac/unix: ~/.vimrc</div><div class="line">windows:  $HOME/_vimrc</div></pre></td></tr></table></figure>
+<h4 id="一些基本设置"><a href="#一些基本设置" class="headerlink" title="一些基本设置"></a>一些基本设置</h4><p>就很基本的来说，咱们可以先作如下几个设置，看看都有什么效果：</p>
+<ol>
+<li><p>显示行数</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> <span class="keyword">number</span></div></pre></td></tr></table></figure>
+<img src="/2016/07/13/vim-setup/set_nu.gif"></li>
+<li><p>启用语法高亮</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></div></pre></td></tr></table></figure>
+<img src="/2016/07/13/vim-setup/syntax_on.gif">
+</li>
+<li><p>启用相对行号</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> relativenumber</div></pre></td></tr></table></figure>
+<img src="/2016/07/13/vim-setup/set_rnu.gif">
+</li>
+<li><p>设置不兼容 vi<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> nocompatible</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>为了不重复，咱们就把以上这四个设置都放进 vimrc 里，这样 vim 会在启动时自动执行其中的命令。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> nocompatible</div><div class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></div><div class="line"><span class="keyword">set</span> <span class="keyword">number</span></div><div class="line"><span class="keyword">set</span> relativenumber</div></pre></td></tr></table></figure>
+<p>一步步来，最终 vim 可以变成这个样子：</p>
+<img src="/2016/07/13/vim-setup/vimtex_showcase.gif" title="vim + LaTex">
+<p>如果你感兴趣，还有这么几个设置你可试试：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> wrap</div><div class="line"><span class="keyword">set</span> ruler</div><div class="line"><span class="keyword">set</span> incsearch</div></pre></td></tr></table></figure>
+<p>好啦，这篇就先写这么多，在列举更多 vimrc 的设置之前，咱们还要先细说下 vim 的几个模式。</p>
+<h3 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h3><ol>
+<li>vimtutor</li>
+<li><a href="http://www.openvim.com" target="_blank" rel="noopener">Interactive Vim tutorial</a></li>
+</ol>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">Homebrew 是个 Mac 上命令行软件安装及管理工具</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">vi 算是 vim 的前身，大多数情况下我们选择不启用 vi 的功能。</span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="VZJ wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的二维码，订阅 V 字君的微信公众号。</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vim/" rel="tag"># vim</a>
+          
+            <a href="/tags/vim-intro/" rel="tag"># vim-intro</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/11/vim-intro/" rel="next" title="vim 入坑指南（零）— 序言">
+                <i class="fa fa-chevron-left"></i> vim 入坑指南（零）— 序言
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/16/vim-mode/" rel="prev" title="vim 入坑指南（二）— vim 的模式">
+                vim 入坑指南（二）— vim 的模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="VZJ" />
+            
+              <p class="site-author-name" itemprop="name">VZJ</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/yufanlu" target="_blank" title="GitHub"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可能是-vim-最好的入门材料：vimtutor"><span class="nav-number">2.</span> <span class="nav-text">可能是 vim 最好的入门材料：vimtutor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上手时需要关注什么"><span class="nav-number">3.</span> <span class="nav-text">上手时需要关注什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么把-vim-变得（更）好看-顺手点儿"><span class="nav-number">4.</span> <span class="nav-text">怎么把 vim 变得（更）好看/顺手点儿</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vimrc-在哪"><span class="nav-number">4.1.</span> <span class="nav-text">vimrc 在哪</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一些基本设置"><span class="nav-number">4.2.</span> <span class="nav-text">一些基本设置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关阅读"><span class="nav-number">5.</span> <span class="nav-text">相关阅读</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VZJ</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a> v6.0.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.4"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
