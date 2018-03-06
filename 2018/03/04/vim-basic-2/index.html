@@ -124,7 +124,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/03/04/vim-basic-2/append-2.gif">
 <meta property="og:image" content="http://yoursite.com/2018/03/04/vim-basic-2/line-below.gif">
 <meta property="og:image" content="http://yoursite.com/2018/03/04/vim-basic-2/line-above.gif">
-<meta property="og:updated_time" content="2018-03-06T02:31:09.000Z">
+<meta property="og:updated_time" content="2018-03-06T03:10:31.439Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vim 基础：简单的文字编辑 (2)">
 <meta name="twitter:description" content="自上一篇说了怎么退出之后，我们可以说说怎么进入插入模式，再怎么从插入模式回到普通模式。 老样子，咱们打开 vim 之后，直接输入 :set nocompatible，进入真正的 vim。  就如上次所说，只要左下角没有什么状态显示，我们就是在普通模式里的。只要按下 i，我们就进入插入模式 (insert mode) 了 。而字母 i 就是 insert 的首字母。  在插入模式里，这键盘就是正常的">
@@ -417,23 +417,23 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">this is insert mode</div><div class="line">(5)</div><div class="line">everything(1)(2)is normal now(3)</div><div class="line">(4)</div></pre></td></tr></table></figure>
 <p>这里要注意的一个地方是，(1) 和 (2) 其实是不一样的。(1) 的位置直接在 everything 最后一个字母 g 之后，而 (2) 则是在空格的位置。废话少说，直接上动图：</p>
 <ul>
-<li>移动去 (1)，直接按下 i（意思为 insert），直接进入插入模式。</li>
+<li>移动去 (1)，直接按下 <code>i</code>（意思为 insert），直接进入插入模式。</li>
 </ul>
 <img src="/2018/03/04/vim-basic-2/insert-1.gif">
 <ul>
-<li>移动去 (2)，按下 a （意思为 append），光标会在现有位置的后一个位置进入插入模式。</li>
+<li>移动去 (2)，按下 <code>a</code> （意思为 append），光标会在现有位置的后一个位置进入插入模式。</li>
 </ul>
 <img src="/2018/03/04/vim-basic-2/append-1.gif">
 <ul>
-<li>移动去 (3)，按下 A （意思为 APPEND，注意语气不一样），光标将直接在行末进入插入模式。</li>
+<li>移动去 (3)，按下 <code>A</code> （意思为 APPEND，注意语气不一样），光标将直接在行末进入插入模式。</li>
 </ul>
 <img src="/2018/03/04/vim-basic-2/append-2.gif">
 <ul>
-<li>要移动去 (4) 的话，按下 o （意思为 open a new line?），光标在下一行进入插入模式。</li>
+<li>要移动去 (4) 的话，按下 <code>o</code> （意思为 open a new line?），光标在下一行进入插入模式。</li>
 </ul>
 <img src="/2018/03/04/vim-basic-2/line-below.gif">
 <ul>
-<li>要移动去 (5)，按下 O （OPEN A NEW LINE??，语气依旧不一样），光标在上一行进入插入模式。</li>
+<li>要移动去 (5)，按下 <code>O</code> （OPEN A NEW LINE??，语气依旧不一样），光标在上一行进入插入模式。</li>
 </ul>
 <img src="/2018/03/04/vim-basic-2/line-above.gif">
 <p>是不是一下感觉惊呆了… vim 竟然会根据不同插入地点提供不同的按键。这就是存在<strong>多个模式</strong>的好处。因为我们在普通模式，根据需要，我们可以选择用不同的姿势进入插入模式。实际上，还有更多……</p>
