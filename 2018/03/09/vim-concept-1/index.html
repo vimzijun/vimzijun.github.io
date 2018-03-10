@@ -104,32 +104,28 @@
 
 
   
-  <meta name="keywords" content="vim,vim-intro,colorscheme,vimrc," />
+  <meta name="keywords" content="vim,vim-concept," />
 
 
-<meta name="description" content="时隔这么久，终于有时间来写下一篇了！以后咱们尽量 “少量多餐”，多写点篇。如果你都一路看到了这篇，就说明你已经在 “坑” 里了，所以咱们摘掉 “入坑指南” 几个字，开始谈谈 vim 的一些 “表面工程”: colorscheme。 无论你使用的是什么开发软件，应该都能找到更改 colorscheme 或者是 “配色方案” 的设置。对于长期对着屏幕码代码的人来说，选择不易造成眼睛疲劳，看着也不错的配">
-<meta name="keywords" content="vim,vim-intro,colorscheme,vimrc">
+<meta name="description" content="我们先来想想文本本身。对于文本，基本上，我们就做两件事：  内容处理 文本排版  很多常用的很多工具其实是把这两个功能合二为一的，比如 Word， PowerPoint，Excel。而编程本身其实并不那么涉及到排版，所以你见不到什么人用 Word 去编程，而是用 文本编辑器，比如   Atom Sublime text Vim Emacs Notepad++ Visual Studio Code">
+<meta name="keywords" content="vim,vim-concept">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vim 的 colorscheme">
-<meta property="og:url" content="http://yoursite.com/2017/02/12/color-scheme/index.html">
+<meta property="og:title" content="vim 理论 (1)：模式">
+<meta property="og:url" content="http://yoursite.com/2018/03/09/vim-concept-1/index.html">
 <meta property="og:site_name" content="V 字君的 Vimpress">
-<meta property="og:description" content="时隔这么久，终于有时间来写下一篇了！以后咱们尽量 “少量多餐”，多写点篇。如果你都一路看到了这篇，就说明你已经在 “坑” 里了，所以咱们摘掉 “入坑指南” 几个字，开始谈谈 vim 的一些 “表面工程”: colorscheme。 无论你使用的是什么开发软件，应该都能找到更改 colorscheme 或者是 “配色方案” 的设置。对于长期对着屏幕码代码的人来说，选择不易造成眼睛疲劳，看着也不错的配">
+<meta property="og:description" content="我们先来想想文本本身。对于文本，基本上，我们就做两件事：  内容处理 文本排版  很多常用的很多工具其实是把这两个功能合二为一的，比如 Word， PowerPoint，Excel。而编程本身其实并不那么涉及到排版，所以你见不到什么人用 Word 去编程，而是用 文本编辑器，比如   Atom Sublime text Vim Emacs Notepad++ Visual Studio Code">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2017/02/12/color-scheme/base16.png">
-<meta property="og:image" content="http://yoursite.com/2017/02/12/color-scheme/gotham-repo.png">
-<meta property="og:image" content="http://yoursite.com/2017/02/12/color-scheme/change-colorscheme.gif">
-<meta property="og:updated_time" content="2017-08-04T01:42:32.000Z">
+<meta property="og:updated_time" content="2018-03-10T05:04:28.345Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vim 的 colorscheme">
-<meta name="twitter:description" content="时隔这么久，终于有时间来写下一篇了！以后咱们尽量 “少量多餐”，多写点篇。如果你都一路看到了这篇，就说明你已经在 “坑” 里了，所以咱们摘掉 “入坑指南” 几个字，开始谈谈 vim 的一些 “表面工程”: colorscheme。 无论你使用的是什么开发软件，应该都能找到更改 colorscheme 或者是 “配色方案” 的设置。对于长期对着屏幕码代码的人来说，选择不易造成眼睛疲劳，看着也不错的配">
-<meta name="twitter:image" content="http://yoursite.com/2017/02/12/color-scheme/base16.png">
+<meta name="twitter:title" content="vim 理论 (1)：模式">
+<meta name="twitter:description" content="我们先来想想文本本身。对于文本，基本上，我们就做两件事：  内容处理 文本排版  很多常用的很多工具其实是把这两个功能合二为一的，比如 Word， PowerPoint，Excel。而编程本身其实并不那么涉及到排版，所以你见不到什么人用 Word 去编程，而是用 文本编辑器，比如   Atom Sublime text Vim Emacs Notepad++ Visual Studio Code">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/02/12/color-scheme/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/09/vim-concept-1/"/>
 
 
 
@@ -138,7 +134,7 @@
     sidebar: "",
   };
 </script>
-  <title>Vim 的 colorscheme | V 字君的 Vimpress</title>
+  <title>vim 理论 (1)：模式 | V 字君的 Vimpress</title>
   
 
 
@@ -300,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/12/color-scheme/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/09/vim-concept-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="VZJ">
@@ -317,7 +313,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Vim 的 colorscheme</h1>
+          <h1 class="post-title" itemprop="name headline">vim 理论 (1)：模式</h1>
         
 
         <div class="post-meta">
@@ -329,7 +325,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-12T11:40:04-05:00">2017-02-12</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-09T00:00:00-05:00">2018-03-09</time>
             
 
             
@@ -357,7 +353,7 @@
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/colorscheme/" itemprop="url" rel="index"><span itemprop="name">colorscheme</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/vim-concept/" itemprop="url" rel="index"><span itemprop="name">vim-concept</span></a></span>
 
                 
                 
@@ -391,25 +387,54 @@
       
 
       
-        <p>时隔这么久，终于有时间来写下一篇了！以后咱们尽量 “少量多餐”，多写点篇。如果你都一路看到了这篇，就说明你已经在 “坑” 里了，所以咱们摘掉 “入坑指南” 几个字，开始谈谈 vim 的一些 “表面工程”: <code>colorscheme</code>。</p>
-<p>无论你使用的是什么开发软件，应该都能找到更改 <code>colorscheme</code> 或者是 “配色方案” 的设置。对于长期对着屏幕码代码的人来说，选择不易造成眼睛疲劳，看着也不错的配色（比如大伙熟知的 monokai 或者是 solarized）是件不小的事儿。其实选择什么样的 <code>colorscheme</code> 全靠个人喜好，咱们这篇主要是讲去哪里找，以及如何快速更改 <code>colorscheme</code>。</p>
-<h2 id="colorscheme-base16-和-vim-gotham"><a href="#colorscheme-base16-和-vim-gotham" class="headerlink" title="colorscheme: base16 和 vim-gotham"></a>colorscheme: base16 和 vim-gotham</h2><p>有了前面咱们提过的插件 <code>vim-plug</code>，安装任何一个 <code>colorscheme</code> 都很容易。目前 V 字君使用的是 <code>base16-vim</code>，安装以及相关设定如下：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">" vim-plug 设置</span></div><div class="line">Plug <span class="string">'chriskempson/base16-vim'</span></div><div class="line"></div><div class="line"><span class="comment">" 使用 256 颜色库</span></div><div class="line"><span class="keyword">let</span> base16colorspace=<span class="number">256</span></div><div class="line"><span class="comment">" 使用 base16 中 base16-oceanicnext</span></div><div class="line"><span class="keyword">colorscheme</span> base16-oceanicnext</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<img src="/2017/02/12/color-scheme/base16.png">
-<p>重新进入 vim 之后，新的 <code>colorscheme</code> 就启用了。当然，你也可以同时安装多个 <code>colorscheme</code>，随时切换。比如我晚上写 code 时会使用配色更深，看着不刺眼的 <code>vim-gothman</code> （而且，这个配图也太帅了）</p>
-<img src="/2017/02/12/color-scheme/gotham-repo.png">
-<p><code>vim-gotham</code> 的相关设定如下：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">" vim-plug 设置</span></div><div class="line">Plug <span class="string">'whatyouhide/vim-gotham'</span></div><div class="line"></div><div class="line"><span class="comment">" 使用 gotham 配色</span></div><div class="line"><span class="keyword">colorscheme</span> gotham</div></pre></td></tr></table></figure>
-<p>如果你安装了多个 <code>colorscheme</code> （vim 也自带了很多），互相切换起来也很容易。比如，如果我们想切换成 <code>vim-gotham</code>，只需要在命令行中输入这样一行就可以了</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">colorscheme</span> gotham</div></pre></td></tr></table></figure>
-<img src="/2017/02/12/color-scheme/change-colorscheme.gif">
-<h2 id="一些推荐和相关资源"><a href="#一些推荐和相关资源" class="headerlink" title="一些推荐和相关资源"></a>一些推荐和相关资源</h2><ul>
-<li>著名的 <code>solarized</code>: <code>altercation/vim-colors-solarized</code></li>
-<li>大伙都在用的 <code>molokai</code>: <code>tomasr/molokai</code></li>
-<li>更多的配色大伙儿可以去 类似 <code>vimawesome.com</code> 或者是 <code>vimcolors.com</code> 的网站上找一找 （声明：V 字君和这些网站或者是 repo 的作者没有任何关系，不是托儿）</li>
+        <p>我们先来想想<strong>文本</strong>本身。对于文本，基本上，我们就做两件事：</p>
+<ol>
+<li><strong>内容处理</strong></li>
+<li><strong>文本排版</strong></li>
+</ol>
+<p>很多常用的很多工具其实是把这两个功能合二为一的，比如 Word， PowerPoint，Excel。而编程本身其实并不那么涉及到排版，所以你见不到什么人用 Word 去编程，而是用 <strong>文本编辑器</strong>，比如 </p>
+<ul>
+<li>Atom</li>
+<li>Sublime text</li>
+<li>Vim</li>
+<li>Emacs</li>
+<li>Notepad++</li>
+<li>Visual Studio Code …</li>
 </ul>
-<p>就这么多，下一篇准备介绍插件 <code>vim-airline</code>，我又要继续去写作业了。</p>
+<p>以命令行（command line） 和终端（terminal）为主的文本编辑器其实对普通用户都不是很友好。但你不是普通人啊，你决定学习 vim，除去图形界面的干扰，把注意力放在最关键的地方：</p>
+<blockquote>
+<p>文本</p>
+</blockquote>
+<p>因为只有缩短文本编辑的时间，你才能用更多的时间思考，在灵感消失之前，把它转换成代码。而且，你能因此发现另一个世界</p>
+<blockquote>
+<p>命令行（command line）的世界</p>
+</blockquote>
+<p>举个栗子，假设你想在一群文件夹中的某一类文件搜索某个的特定的词（比如所有在 sql 文件搜索 vimrocks 这个词），如果你知道什么是 <code>grep</code>，那么轻轻松松搞定。不知道也没办法… 而且我也不知道 <code>grep</code> 以外的办法，如果 Windows 上没有，我就去下一个<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</p>
+<p>而 vim 就是一个活在终端里的文字编辑器，虽然没有华丽的图形界面（也就是一两个插件的事儿），但这样 1) 能让你更注重文本， 2) 同时也让你有了调用所有命令行的能力。所有东西都各司其职，专注做一件事。合在一起的话：</p>
+<blockquote>
+<p>效率如飞</p>
+</blockquote>
+<p>其实这也就是 Unix哲学 （Unix philosophy）</p>
+<blockquote>
+<p>Do one thing, and do it well.</p>
+</blockquote>
+<p>而这也是 vim 的秉持的哲学和主要逻辑，把不同类型的操作分隔开，互不影响的同时，做好每一个操作。</p>
+<h1 id="vim-的逻辑"><a href="#vim-的逻辑" class="headerlink" title="vim 的逻辑"></a>vim 的逻辑</h1><p>对于任何一个文本编辑器来说，都要解决一个问题：如何利用键盘上有限的键，完成更多的功能以及更高效的输出。无论是哪一个文本编辑器，键盘总是比鼠标要高效的，所以我一直都很在意并关注快捷键。</p>
+<p>最简单的一个例子就是<strong>复制</strong>和<strong>粘贴</strong>：<code>cmd/ctrl + c</code> 和 <code>cmd/ctrl + v</code>。基本上大部分的文本编辑器都采用的是这样的方式。V 字君把他们都划分为 <strong>Emacs 的方式</strong></p>
+<h2 id="Emacs-的方式：按住-Ctrl-Alt-Meta-等键来提供更多的功能"><a href="#Emacs-的方式：按住-Ctrl-Alt-Meta-等键来提供更多的功能" class="headerlink" title="Emacs 的方式：按住 Ctrl, Alt/Meta 等键来提供更多的功能"></a>Emacs 的方式：按住 Ctrl, Alt/Meta 等键来提供更多的功能</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ctrl + b 向后移动光标 backward</div><div class="line">ctrl + f 向前移动光标 forward</div><div class="line">ctrl + n 向下移动光标 next (line)</div><div class="line">ctrl + p 向上移动光标 previous (line)</div></pre></td></tr></table></figure>
+<p>有的时候一层快捷键不够使，那就要两层，或者是三层。比如，emacs orgmode 里，如果我想要预览 LaTex 数学公式的话，需要按下：<code>ctrl + c</code>, <code>ctrl + x</code>, <code>ctrl + l</code>。其实，V 字君也是超级钟爱 orgmode 的。如果当年上大学时我会用 orgmode，天知道我能省下多少时间。不过那些都是后话了，因为当时已经使用 <code>Vim + LaTex</code> 几年了，也不需要换了。</p>
+<h2 id="Vim-的方式-提供几个不同的模式-不同模式下，同个键有不同的功能"><a href="#Vim-的方式-提供几个不同的模式-不同模式下，同个键有不同的功能" class="headerlink" title="Vim 的方式: 提供几个不同的模式, 不同模式下，同个键有不同的功能"></a>Vim 的方式: 提供几个不同的模式, 不同模式下，同个键有不同的功能</h2><p>而 vim 采用的方式则完全不同，与其让你别扭的按住 ctrl 键一直不放，干脆提供多种模式，就好比画家的画笔和画刀，每种模式做不同的事情。</p>
+<ul>
+<li>普通模式 (normal mode)</li>
+<li>输入模式 (insert mode)</li>
+<li>可视模式 (visual mode)</li>
+<li>替换模式 (replace mode)</li>
+<li>选择模式 (select mode)</li>
+</ul>
+<p>在普通模式更多是用来移动光标（以后咱们专门讲怎们快速移动光标），处理文本的（剪切，删除），和调用命令的，可以说是 Vim 的核心模式。可视模式的话更多是处理文本的辅助模式，有很多时候还是需要高亮已选文本的。替换模式和选择模式则偶尔出现，至少平时用的不多。而且，不同的模式下，同样的快捷键也可以后不同的功能。</p>
+<p>可以说，Vim 用了多维度的方式解决了 <strong>用有限键盘作更多的事情</strong>，并且同时还做到 <strong>高效</strong> 和 <strong>高度可定制性</strong> (highly configurable)。</p>
+<p>如果你对这些模式或者设置快捷键感兴趣，详情可见 Vim 自带的帮助文件。啥？？？好像我还是没讲怎么用自带的帮助文件，下回呗～～ 我记得上上一回说是下下回写，那咱就下下回写。虽然这一回不是上一回说的下一回要写的内容吧。</p>
+<p>2018.03 于多伦多<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">一般的 git for windows 都会有的</span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div></p>
 
       
     </div>
@@ -440,11 +465,7 @@
           
             <a href="/tags/vim/" rel="tag"># vim</a>
           
-            <a href="/tags/vim-intro/" rel="tag"># vim-intro</a>
-          
-            <a href="/tags/colorscheme/" rel="tag"># colorscheme</a>
-          
-            <a href="/tags/vimrc/" rel="tag"># vimrc</a>
+            <a href="/tags/vim-concept/" rel="tag"># vim-concept</a>
           
         </div>
       
@@ -457,8 +478,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/30/ultisnip/" rel="next" title="vim 入坑指南（六）插件 UltiSnips">
-                <i class="fa fa-chevron-left"></i> vim 入坑指南（六）插件 UltiSnips
+              <a href="/2018/03/08/vim-basic-3/" rel="next" title="vim 基础：简单的文字编辑 (2)">
+                <i class="fa fa-chevron-left"></i> vim 基础：简单的文字编辑 (2)
               </a>
             
           </div>
@@ -467,8 +488,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/22/keyboard-shortcuts/" rel="prev" title="为什么你需要在意快捷键">
-                为什么你需要在意快捷键 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/10/vim-concept-2/" rel="prev" title="vim 基础：基本概念 (2)">
+                vim 基础：基本概念 (2) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -660,7 +681,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#colorscheme-base16-和-vim-gotham"><span class="nav-number">1.</span> <span class="nav-text">colorscheme: base16 和 vim-gotham</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些推荐和相关资源"><span class="nav-number">2.</span> <span class="nav-text">一些推荐和相关资源</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vim-的逻辑"><span class="nav-number">1.</span> <span class="nav-text">vim 的逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Emacs-的方式：按住-Ctrl-Alt-Meta-等键来提供更多的功能"><span class="nav-number">1.1.</span> <span class="nav-text">Emacs 的方式：按住 Ctrl, Alt/Meta 等键来提供更多的功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vim-的方式-提供几个不同的模式-不同模式下，同个键有不同的功能"><span class="nav-number">1.2.</span> <span class="nav-text">Vim 的方式: 提供几个不同的模式, 不同模式下，同个键有不同的功能</span></a></li></ol></li></ol></div>
             
 
           </div>
