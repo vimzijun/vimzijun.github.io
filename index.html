@@ -292,6 +292,167 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/04/vim-basic-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="VZJ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="V 字君的 Vimpress">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/04/vim-basic-3/" itemprop="url">vim 基础：简单的文字编辑 (3)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-04T00:00:00-04:00">2018-04-04</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/vim-basic/" itemprop="url" rel="index"><span itemprop="name">vim-basic</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在这篇开始之前，咱们先说个别的。在上一篇简单的文字编辑(2)里咱们说了：</p>
+<blockquote>
+<p><code>i</code>, <code>a</code>, <code>A</code>, <code>o</code>, <code>O</code></p>
+</blockquote>
+<p>你有没有觉得既然按小写 <code>i</code> 能进入插入模式，那大写的 <code>I</code> 是不是也可以？必须的（好奇的话可以试试，非常好用）！！ 其实 vim 里很多东西都是大小写一块配套的，简直是越想越觉得设计者脑洞大。</p>
+<p>好啦，咱们接着上一篇的内容说，除了 <code>i/I</code>, <code>a/A</code>, <code>o/O</code>之外，其实还有不少进入插入模式的办法。这一篇咱们说一些别的进入插入模式的办法。而且还是一箭双雕，</p>
+<blockquote>
+<p>删除 + 进入插入模式</p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/04/vim-basic-3/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/15/vim-tool-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -540,8 +701,7 @@
 
       
         
-          
-            <p>我们先来想想<strong>文本</strong>本身。对于文本，基本上，我们就做两件事：</p>
+          <p>我们先来想想<strong>文本</strong>本身。对于文本，基本上，我们就做两件事：</p>
 <ol>
 <li><strong>内容处理</strong></li>
 <li><strong>文本排版</strong></li>
@@ -563,191 +723,9 @@
 <blockquote>
 <p>命令行（command line）的世界</p>
 </blockquote>
-<p>举个栗子，假设你想在一群文件夹中的某一类文件搜索某个的特定的词（比如所有在 sql 文件搜索 vimrocks 这个词），如果你知道什么是 <code>grep</code>，那么轻轻松松搞定。不知道也没办法… 而且我也不知道 <code>grep</code> 以外的办法，如果 Windows 上没有，我就去下一个<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</p>
-<p>而 vim 就是一个活在终端里的文字编辑器，虽然没有华丽的图形界面（也就是一两个插件的事儿），但这样 1) 能让你更注重文本， 2) 同时也让你有了调用所有命令行的能力。所有东西都各司其职，专注做一件事。合在一起的话：</p>
-<blockquote>
-<p>效率如飞</p>
-</blockquote>
-<p>其实这也就是 Unix哲学 （Unix philosophy）</p>
-<blockquote>
-<p>Do one thing, and do it well.</p>
-</blockquote>
-<p>而这也是 vim 的秉持的哲学和主要逻辑，把不同类型的操作分隔开，互不影响的同时，做好每一个操作。</p>
-<h1 id="vim-的逻辑"><a href="#vim-的逻辑" class="headerlink" title="vim 的逻辑"></a>vim 的逻辑</h1><p>对于任何一个文本编辑器来说，都要解决一个问题：如何利用键盘上有限的键，完成更多的功能以及更高效的输出。无论是哪一个文本编辑器，键盘总是比鼠标要高效的，所以我一直都很在意并关注快捷键。</p>
-<p>最简单的一个例子就是<strong>复制</strong>和<strong>粘贴</strong>：<code>cmd/ctrl + c</code> 和 <code>cmd/ctrl + v</code>。基本上大部分的文本编辑器都采用的是这样的方式。V 字君把他们都划分为 <strong>Emacs 的方式</strong></p>
-<h2 id="Emacs-的方式：按住-Ctrl-Alt-Meta-等键来提供更多的功能"><a href="#Emacs-的方式：按住-Ctrl-Alt-Meta-等键来提供更多的功能" class="headerlink" title="Emacs 的方式：按住 Ctrl, Alt/Meta 等键来提供更多的功能"></a>Emacs 的方式：按住 Ctrl, Alt/Meta 等键来提供更多的功能</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ctrl + b 向后移动光标 backward</div><div class="line">ctrl + f 向前移动光标 forward</div><div class="line">ctrl + n 向下移动光标 next (line)</div><div class="line">ctrl + p 向上移动光标 previous (line)</div></pre></td></tr></table></figure>
-<p>有的时候一层快捷键不够使，那就要两层，或者是三层。比如，emacs orgmode 里，如果我想要预览 LaTex 数学公式的话，需要按下：<code>ctrl + c</code>, <code>ctrl + x</code>, <code>ctrl + l</code>。其实，V 字君也是超级钟爱 orgmode 的。如果当年上大学时我会用 orgmode，天知道我能省下多少时间。不过那些都是后话了，因为当时已经使用 <code>Vim + LaTex</code> 几年了，也不需要换了。</p>
-<h2 id="Vim-的方式-提供几个不同的模式-不同模式下，同个键有不同的功能"><a href="#Vim-的方式-提供几个不同的模式-不同模式下，同个键有不同的功能" class="headerlink" title="Vim 的方式: 提供几个不同的模式, 不同模式下，同个键有不同的功能"></a>Vim 的方式: 提供几个不同的模式, 不同模式下，同个键有不同的功能</h2><p>而 vim 采用的方式则完全不同，与其让你别扭的按住 ctrl 键一直不放，干脆提供多种模式，就好比画家的画笔和画刀，每种模式做不同的事情。</p>
-<ul>
-<li>普通模式 (normal mode)</li>
-<li>输入模式 (insert mode)</li>
-<li>可视模式 (visual mode)</li>
-<li>替换模式 (replace mode)</li>
-<li>选择模式 (select mode)</li>
-</ul>
-<img src="/2018/03/09/vim-concept-1/help-mode.png">
-<p>在普通模式更多是用来移动光标（以后咱们专门讲怎们快速移动光标），处理文本的（剪切，删除），和调用命令的，可以说是 Vim 的核心模式。可视模式的话更多是处理文本的辅助模式，有很多时候还是需要高亮已选文本的。替换模式和选择模式则偶尔出现，至少平时用的不多。而且，不同的模式下，同样的快捷键也可以后不同的功能。</p>
-<p>可以说，Vim 用了多维度的方式解决了 <strong>用有限键盘作更多的事情</strong>，并且同时还做到 <strong>高效</strong> 和 <strong>高度可定制性</strong> (highly configurable)。</p>
-<p>如果你对这些模式或者设置快捷键感兴趣，详情可见 Vim 自带的帮助文件。</p>
-<img src="/2018/03/09/vim-concept-1/help-map.png">
-<p>啥？？？好像我还是没讲怎么用自带的帮助文件，下回呗～～ 我记得上上一回说是下回写，那咱就下下回写。虽然这一回不是上一回说的下一回要写的内容吧。</p>
-<p>2018.03 于多伦多<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">一般的 git for windows 都会有的</span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/08/vim-basic-3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="VZJ">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="V 字君的 Vimpress">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/08/vim-basic-3/" itemprop="url">vim 基础：简单的文字编辑 (3)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-08T22:14:12-05:00">2018-03-08</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/vim-basic/" itemprop="url" rel="index"><span itemprop="name">vim-basic</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>在这篇开始之前，咱们先说个别的。在上一篇简单的文字编辑(2)里咱们说了：</p>
-<blockquote>
-<p><code>i</code>, <code>a</code>, <code>A</code>, <code>o</code>, <code>O</code></p>
-</blockquote>
-<p>你有没有觉得既然按小写 <code>i</code> 能进入插入模式，那大写的 <code>I</code> 是不是也可以？必须的（好奇的话可以试试，非常好用）！！ 其实 vim 里很多东西都是大小写一块配套的，简直是越想越觉得设计者脑洞大。</p>
-<p>好啦，咱们接着上一篇的内容说，除了 <code>i/I</code>, <code>a/A</code>, <code>o/O</code>之外，其实还有不少进入插入模式的办法。这一篇咱们说一些</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/08/vim-basic-3/#more" rel="contents">
+            <a class="btn" href="/2018/03/09/vim-concept-1/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
