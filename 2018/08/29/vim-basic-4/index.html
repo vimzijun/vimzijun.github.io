@@ -122,7 +122,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/29/vim-basic-4/df0.gif">
 <meta property="og:image" content="http://yoursite.com/2018/08/29/vim-basic-4/cf0.gif">
 <meta property="og:image" content="http://yoursite.com/2018/08/29/vim-basic-4/python2.gif">
-<meta property="og:updated_time" content="2018-08-30T02:12:16.356Z">
+<meta property="og:updated_time" content="2018-08-30T02:12:34.512Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vim 基础：简单的文字编辑 (4)">
 <meta name="twitter:description" content="motion 是个十分有用并且核心的概念，我们如何快速移动光标，甚至在不同文件之间迅速切换就靠它了。在这之后，咱们再介绍一个兄弟概念 operator。在这一篇之后，基本就可以达到流畅 vim 编辑，妥妥的。咱们先来一个举个栗子介绍一下 operator 和 motion 这哥俩加在一块有多爽。 举个栗子如果现在光标在图下这个位置，我们想把从光标向右到括号的内容都删掉  也就是删掉 , c=0 这">
@@ -447,7 +447,7 @@
 <li><code>e/E</code> 移光标至词末</li>
 </ol>
 <h2 id="按文本对象移动-object-text-object-motion"><a href="#按文本对象移动-object-text-object-motion" class="headerlink" title="按文本对象移动 (object/text-object motion)"></a>按文本对象移动 (object/text-object motion)</h2><p>这个部分也是 vim 的一个核心概念，为了不跑题太远，咱们再单开一篇细说。目前就把 <strong>文本对象</strong> 理解成是 vim 描述文本的一种方式就好。</p>
-<h2 id="vim-的动词：operator"><a href="#vim-的动词：operator" class="headerlink" title="vim 的动词：operator"></a>vim 的动词：operator</h2><p>如果说刚才咱们列举的 <code>motion</code> 可以视为 <strong>名词</strong> 的话，那么 <code>operator</code> 就是 vim 中的 <strong>动词</strong> 了。如果说：<code>f0</code> 是把光标向右挪，挪至找到 0 为止。那么 <code>df0</code> 就是 <strong>删除</strong> 从光标现有位置到向右找到 0 为止的所有内容。</p>
+<h1 id="vim-的动词：operator"><a href="#vim-的动词：operator" class="headerlink" title="vim 的动词：operator"></a>vim 的动词：operator</h1><p>如果说刚才咱们列举的 <code>motion</code> 可以视为 <strong>名词</strong> 的话，那么 <code>operator</code> 就是 vim 中的 <strong>动词</strong> 了。如果说：<code>f0</code> 是把光标向右挪，挪至找到 0 为止。那么 <code>df0</code> 就是 <strong>删除</strong> 从光标现有位置到向右找到 0 为止的所有内容。</p>
 <img src="/2018/08/29/vim-basic-4/df0.gif">
 <p>如果说我们在同样的位置按下 <code>cf0</code> 的话，那就是删除 <code>, c=0</code> 并且进入 <strong>输入模式</strong> (Insert Mode)。</p>
 <img src="/2018/08/29/vim-basic-4/cf0.gif">
@@ -715,7 +715,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#举个栗子"><span class="nav-number">1.</span> <span class="nav-text">举个栗子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#光标哪里去"><span class="nav-number">2.</span> <span class="nav-text">光标哪里去</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#横向移动-left-right-motion"><span class="nav-number">2.1.</span> <span class="nav-text">横向移动 (left-right motion)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#纵向移动-up-down-motion"><span class="nav-number">2.2.</span> <span class="nav-text">纵向移动 (up-down motion)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按词移动-word-motion"><span class="nav-number">2.3.</span> <span class="nav-text">按词移动 (word motion)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按文本对象移动-object-text-object-motion"><span class="nav-number">2.4.</span> <span class="nav-text">按文本对象移动 (object/text-object motion)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vim-的动词：operator"><span class="nav-number">2.5.</span> <span class="nav-text">vim 的动词：operator</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#举个栗子"><span class="nav-number">1.</span> <span class="nav-text">举个栗子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#光标哪里去"><span class="nav-number">2.</span> <span class="nav-text">光标哪里去</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#横向移动-left-right-motion"><span class="nav-number">2.1.</span> <span class="nav-text">横向移动 (left-right motion)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#纵向移动-up-down-motion"><span class="nav-number">2.2.</span> <span class="nav-text">纵向移动 (up-down motion)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按词移动-word-motion"><span class="nav-number">2.3.</span> <span class="nav-text">按词移动 (word motion)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按文本对象移动-object-text-object-motion"><span class="nav-number">2.4.</span> <span class="nav-text">按文本对象移动 (object/text-object motion)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vim-的动词：operator"><span class="nav-number">3.</span> <span class="nav-text">vim 的动词：operator</span></a></li></ol></div>
             
 
           </div>
