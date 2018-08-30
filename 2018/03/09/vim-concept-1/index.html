@@ -125,6 +125,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="V 字君的 Vimpress" type="application/atom+xml" />
+
 
 
 
@@ -425,7 +427,7 @@
 <p>而这也是 vim 的秉持的哲学和主要逻辑，把不同类型的操作分隔开，互不影响的同时，做好每一个操作。</p>
 <h1 id="vim-的逻辑"><a href="#vim-的逻辑" class="headerlink" title="vim 的逻辑"></a>vim 的逻辑</h1><p>对于任何一个文本编辑器来说，都要解决一个问题：如何利用键盘上有限的键，完成更多的功能以及更高效的输出。无论是哪一个文本编辑器，键盘总是比鼠标要高效的，所以我一直都很在意并关注快捷键。</p>
 <p>最简单的一个例子就是<strong>复制</strong>和<strong>粘贴</strong>：<code>cmd/ctrl + c</code> 和 <code>cmd/ctrl + v</code>。基本上大部分的文本编辑器都采用的是这样的方式。V 字君把他们都划分为 <strong>Emacs 的方式</strong></p>
-<h2 id="Emacs-的方式：按住-Ctrl-Alt-Meta-等键来提供更多的功能"><a href="#Emacs-的方式：按住-Ctrl-Alt-Meta-等键来提供更多的功能" class="headerlink" title="Emacs 的方式：按住 Ctrl, Alt/Meta 等键来提供更多的功能"></a>Emacs 的方式：按住 Ctrl, Alt/Meta 等键来提供更多的功能</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ctrl + b 向后移动光标 backward</div><div class="line">ctrl + f 向前移动光标 forward</div><div class="line">ctrl + n 向下移动光标 next (line)</div><div class="line">ctrl + p 向上移动光标 previous (line)</div></pre></td></tr></table></figure>
+<h2 id="Emacs-的方式：按住-Ctrl-Alt-Meta-等键来提供更多的功能"><a href="#Emacs-的方式：按住-Ctrl-Alt-Meta-等键来提供更多的功能" class="headerlink" title="Emacs 的方式：按住 Ctrl, Alt/Meta 等键来提供更多的功能"></a>Emacs 的方式：按住 Ctrl, Alt/Meta 等键来提供更多的功能</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ctrl + b 向后移动光标 backward</span><br><span class="line">ctrl + f 向前移动光标 forward</span><br><span class="line">ctrl + n 向下移动光标 next (line)</span><br><span class="line">ctrl + p 向上移动光标 previous (line)</span><br></pre></td></tr></table></figure>
 <p>有的时候一层快捷键不够使，那就要两层，或者是三层。比如，emacs orgmode 里，如果我想要预览 LaTex 数学公式的话，需要按下：<code>ctrl + c</code>, <code>ctrl + x</code>, <code>ctrl + l</code>。其实，V 字君也是超级钟爱 orgmode 的。如果当年上大学时我会用 orgmode，天知道我能省下多少时间。不过那些都是后话了，因为当时已经使用 <code>Vim + LaTex</code> 几年了，也不需要换了。</p>
 <h2 id="Vim-的方式-提供几个不同的模式-不同模式下，同个键有不同的功能"><a href="#Vim-的方式-提供几个不同的模式-不同模式下，同个键有不同的功能" class="headerlink" title="Vim 的方式: 提供几个不同的模式, 不同模式下，同个键有不同的功能"></a>Vim 的方式: 提供几个不同的模式, 不同模式下，同个键有不同的功能</h2><p>而 vim 采用的方式则完全不同，与其让你别扭的按住 ctrl 键一直不放，干脆提供多种模式，就好比画家的画笔和画刀，每种模式做不同的事情。</p>
 <ul>
@@ -575,7 +577,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -655,6 +657,13 @@
             </nav>
           
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           

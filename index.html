@@ -117,6 +117,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="V 字君的 Vimpress" type="application/atom+xml" />
+
 
 
 
@@ -276,6 +278,175 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/29/vim-basic-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="VZJ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="V 字君的 Vimpress">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/29/vim-basic-4/" itemprop="url">vim 基础：简单的文字编辑 (4)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-29T00:00:00-04:00">2018-08-29</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/vim-basic/" itemprop="url" rel="index"><span itemprop="name">vim-basic</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><code>motion</code> 是个十分有用并且核心的概念，我们如何快速移动光标，甚至在不同文件之间迅速切换就靠它了。在这之后，咱们再介绍一个兄弟概念 <code>operator</code>。在这一篇之后，基本就可以达到流畅 vim 编辑，妥妥的。咱们先来一个举个栗子介绍一下 <code>operator</code> 和 <code>motion</code> 这哥俩加在一块有多爽。</p>
+<h1 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h1><p>如果现在光标在图下这个位置，我们想把从光标向右到括号的内容都删掉</p>
+<img src="/2018/08/29/vim-basic-4/demo_1.png">
+<p>也就是删掉 <code>, c=0</code> 这段代码，应该怎么做呢？很容易，我们就直接告诉 vim</p>
+<blockquote>
+<p>删掉从光标到 0 的内容</p>
+</blockquote>
+<p>就好了。而把这句话 “翻译” 成 vim 能懂得操作也很容易：</p>
+<blockquote>
+<p><code>df0</code></p>
+</blockquote>
+<p>嗯，按下这三个键就搞定了。也就是说，刚才那句话可以和这三个键对应：</p>
+<blockquote>
+<p>删掉 （<code>d for delete</code>）从光标到 0 (<code>f0</code>) 的内容</p>
+</blockquote>
+<img src="/2018/08/29/vim-basic-4/df0.gif">
+<p>现在让我们来仔细拆分一下刚才究竟都发生了啥…首先我们说怎么通过 <code>motion</code> 来移动光标。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/29/vim-basic-4/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1220,7 +1391,7 @@
 <li>（花时间）总结反思。</li>
 </ol>
 <h2 id="Problem-Solving-的思维代码"><a href="#Problem-Solving-的思维代码" class="headerlink" title="Problem Solving 的思维代码"></a>Problem Solving 的思维代码</h2><p>如果你喜欢编程，那就干脆把刚才的过程写成这段 “思维代码” <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">problem_solving</span><span class="params">(problem)</span>:</span></div><div class="line">    optimal_solution = <span class="keyword">None</span></div><div class="line">    possible_solutions = research_and_find_solution(problem)</div><div class="line">    <span class="keyword">for</span> solution <span class="keyword">in</span> possible_solutions:</div><div class="line">        optimal_solution = better_solution(solution, optimal_solution)</div><div class="line">    <span class="keyword">return</span> optimal_solution</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">problem_solving</span><span class="params">(problem)</span>:</span></span><br><span class="line">    optimal_solution = <span class="keyword">None</span></span><br><span class="line">    possible_solutions = research_and_find_solution(problem)</span><br><span class="line">    <span class="keyword">for</span> solution <span class="keyword">in</span> possible_solutions:</span><br><span class="line">        optimal_solution = better_solution(solution, optimal_solution)</span><br><span class="line">    <span class="keyword">return</span> optimal_solution</span><br></pre></td></tr></table></figure>
 <p>这段思维代码虽然过于简单，但也有很多可展来讨论的部分，也有很多可以拓展的部分（比如，可以把问题分类，或者存下每次的最佳解，称之为 knowledge，等等等等，一瞬间想到好多)，咱们以后慢慢再拓展也不迟。</p>
 <p>说了这么说，那……这一切和 vim 有毛关系啊……</p>
           <!--noindex-->
@@ -1533,7 +1704,7 @@
           <p>时隔这么久，终于有时间来写下一篇了！以后咱们尽量 “少量多餐”，多写点篇。如果你都一路看到了这篇，就说明你已经在 “坑” 里了，所以咱们摘掉 “入坑指南” 几个字，开始谈谈 vim 的一些 “表面工程”: <code>colorscheme</code>。</p>
 <p>无论你使用的是什么开发软件，应该都能找到更改 <code>colorscheme</code> 或者是 “配色方案” 的设置。对于长期对着屏幕码代码的人来说，选择不易造成眼睛疲劳，看着也不错的配色（比如大伙熟知的 monokai 或者是 solarized）是件不小的事儿。其实选择什么样的 <code>colorscheme</code> 全靠个人喜好，咱们这篇主要是讲去哪里找，以及如何快速更改 <code>colorscheme</code>。</p>
 <h2 id="colorscheme-base16-和-vim-gotham"><a href="#colorscheme-base16-和-vim-gotham" class="headerlink" title="colorscheme: base16 和 vim-gotham"></a>colorscheme: base16 和 vim-gotham</h2><p>有了前面咱们提过的插件 <code>vim-plug</code>，安装任何一个 <code>colorscheme</code> 都很容易。目前 V 字君使用的是 <code>base16-vim</code>，安装以及相关设定如下：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">" vim-plug 设置</span></div><div class="line">Plug <span class="string">'chriskempson/base16-vim'</span></div><div class="line"></div><div class="line"><span class="comment">" 使用 256 颜色库</span></div><div class="line"><span class="keyword">let</span> base16colorspace=<span class="number">256</span></div><div class="line"><span class="comment">" 使用 base16 中 base16-oceanicnext</span></div><div class="line"><span class="keyword">colorscheme</span> base16-oceanicnext</div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">" vim-plug 设置</span></span><br><span class="line">Plug <span class="string">'chriskempson/base16-vim'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" 使用 256 颜色库</span></span><br><span class="line"><span class="keyword">let</span> base16colorspace=<span class="number">256</span></span><br><span class="line"><span class="comment">" 使用 base16 中 base16-oceanicnext</span></span><br><span class="line"><span class="keyword">colorscheme</span> base16-oceanicnext</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/02/12/color-scheme/#more" rel="contents">
@@ -1732,165 +1903,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/21/vim-plug/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="VZJ">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="V 字君的 Vimpress">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/09/21/vim-plug/" itemprop="url">vim 入坑指南（五）插件 Vim-Plug</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-21T16:42:51-04:00">2016-09-21</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/vim-intro/" itemprop="url" rel="index"><span itemprop="name">vim-intro</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>在了解了基本流程之后，我们终于可以说说第一个插件了。不过在开篇之前，我们要跑一个题，谈谈 git，然后谈谈 vimrc 里放什么，最后说一下 vim-plug。</p>
-<h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>这个应该是一个比较常见的工具了，如果你有所了解，可直接跳过，完全无碍。如果你之前没用过，接下来咱们就说说 Git 是做什么的。只是简单介绍一下，不是教程。</p>
-<p>简单来说， Git 就是程序员的时光机，或者说存档读取器，有点像 Mac 里的 Time Machine ( Windows 上我不知道是啥诶）。大量的软件开发项目都用了 Git 作为它们的版本控制器，比如 Github 和 Bitbucket 上的众多开源项目。</p>
-<p>由于我们使用的许多插件都是来自 Github 上的开源项目，为了紧跟项目的开发进度，我们自然也需要安装一下 Git。如果你用的是 Mac，那么又厉害拉，Mac 天生也自带 Git （也可以用 Homebrew 下安装的 Git）。如果你用的是 Windows，那么可以去 Git 官网 (<a href="https://git-scm.com" target="_blank" rel="noopener">https://git-scm.com</a>) 下载。</p>
-<p>在等待部分小伙伴们下 Git 的同时，我们来说一下 vimrc 究竟放什么。</p>
-<h3 id="vimrc-里放什么"><a href="#vimrc-里放什么" class="headerlink" title="vimrc 里放什么"></a>vimrc 里放什么</h3><p>我们对 vim 的调试和定制基本都会放在 vimrc 里。如果你忘了 vimrc 在哪，它可能会在（没有的话就新建一个）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mac/unix: ~/.vimrc</div><div class="line">windows:  $HOME/_vimrc</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/09/21/vim-plug/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1942,7 +1954,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2022,6 +2034,13 @@
             </nav>
           
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           

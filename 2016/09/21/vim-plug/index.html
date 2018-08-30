@@ -130,6 +130,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="V 字君的 Vimpress" type="application/atom+xml" />
+
 
 
 
@@ -401,11 +403,11 @@
 <p>由于我们使用的许多插件都是来自 Github 上的开源项目，为了紧跟项目的开发进度，我们自然也需要安装一下 Git。如果你用的是 Mac，那么又厉害拉，Mac 天生也自带 Git （也可以用 Homebrew 下安装的 Git）。如果你用的是 Windows，那么可以去 Git 官网 (<a href="https://git-scm.com" target="_blank" rel="noopener">https://git-scm.com</a>) 下载。</p>
 <p>在等待部分小伙伴们下 Git 的同时，我们来说一下 vimrc 究竟放什么。</p>
 <h3 id="vimrc-里放什么"><a href="#vimrc-里放什么" class="headerlink" title="vimrc 里放什么"></a>vimrc 里放什么</h3><p>我们对 vim 的调试和定制基本都会放在 vimrc 里。如果你忘了 vimrc 在哪，它可能会在（没有的话就新建一个）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mac/unix: ~/.vimrc</div><div class="line">windows:  $HOME/_vimrc</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mac/unix: ~/.vimrc</span><br><span class="line">windows:  $HOME/_vimrc</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>关于 vimrc，还要说一个重要的原则： <strong>千万别放你不明白的设置进去</strong>。就好比你做菜的时候放了完全之前万千没听说过的调料（甚至可能不是调料…）。总之，遇到任何问题，可以随时问问 vim （参照上一篇）。</p>
 <p>言归正传，目前为止，咱们只说了如下几个 vimrc 里的设置：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> nocompatible</div><div class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></div><div class="line"><span class="keyword">set</span> <span class="keyword">number</span></div><div class="line"><span class="keyword">set</span> relativenumber</div><div class="line"><span class="keyword">set</span> wrap</div><div class="line"><span class="keyword">set</span> ruler</div><div class="line"><span class="keyword">set</span> incsearch</div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> nocompatible</span><br><span class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">number</span></span><br><span class="line"><span class="keyword">set</span> relativenumber</span><br><span class="line"><span class="keyword">set</span> wrap</span><br><span class="line"><span class="keyword">set</span> ruler</span><br><span class="line"><span class="keyword">set</span> incsearch</span><br></pre></td></tr></table></figure>
 <p>大致划分的话，我们通过 vimrc 告诉 vim 如下几类信息：</p>
 <ol>
 <li>插件</li>
@@ -414,28 +416,28 @@
 </ol>
 <p>这只是为了说明方便做的划分，其实倘若按功能分类的话会更细。不急不急，以后再提。我们这里先跳过插件，因为插件部分在后面 vim-plug 会细说。我们直接从第二个开始说。</p>
 <h4 id="界面设置"><a href="#界面设置" class="headerlink" title="界面设置"></a>界面设置</h4><p>这个部分的设置比较简单，这几个基本设置是已经介绍过了的。之后等我们提及别的插件时（如 vim-airline，vim-gotham 等等），会再添加更多的设置。</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></div><div class="line"><span class="keyword">set</span> <span class="keyword">number</span></div><div class="line"><span class="keyword">set</span> relativenumber</div><div class="line"><span class="keyword">set</span> wrap</div><div class="line"><span class="keyword">set</span> ruler</div><div class="line"><span class="keyword">set</span> incsearch</div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">number</span></span><br><span class="line"><span class="keyword">set</span> relativenumber</span><br><span class="line"><span class="keyword">set</span> wrap</span><br><span class="line"><span class="keyword">set</span> ruler</span><br><span class="line"><span class="keyword">set</span> incsearch</span><br></pre></td></tr></table></figure>
 <p>这里，我们可以补充几个设置，如果你觉得有用的话，可以加上:</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> showcmd  （在右下角）显示现有的命令</div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> showcmd  （在右下角）显示现有的命令</span><br></pre></td></tr></table></figure>
 <img src="/2016/09/21/vim-plug/showcmd.png">
 <p>比如，我现在输入了 <code>c2</code>，右下角便会有及时的显示。</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> showmatch  输入时显示相对应的括号</div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> showmatch  输入时显示相对应的括号</span><br></pre></td></tr></table></figure>
 <img src="/2016/09/21/vim-plug/showmatch.gif">
 <p>这个设置有时候有帮助，不过会减慢输入的效率，所以我目前是关掉的 <code>set noshowmatch</code>。</p>
 <h4 id="操作定义"><a href="#操作定义" class="headerlink" title="操作定义"></a>操作定义</h4><p>这个部分里，我们设定 vim 的行为，可以是 vim 自带的操作，也可是自定义的，当然也包括调用插件定义的操作。</p>
 <p>其中比较重要的一项就是设定 <code>&lt;leader&gt;</code> key。在 vim 里，有许多快捷键都是又 <code>&lt;leader&gt;</code> key 发起的，不少 vim 的插件也如此。所以我们要把 <code>&lt;leader&gt;</code> key 设置得离手指越近越好，vim 的自带设定是 <code>\</code> ，不少人使用的是空格键 <code>&lt;space&gt;</code>,我用的则是逗号 <code>,</code>。</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> mapleader = <span class="string">","</span>     <span class="comment">" let 语句</span></div><div class="line"><span class="keyword">let</span> <span class="variable">g:mapleader</span> = <span class="string">","</span>   <span class="comment">" 设置 vim 参数</span></div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> mapleader = <span class="string">","</span>     <span class="comment">" let 语句</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:mapleader</span> = <span class="string">","</span>   <span class="comment">" 设置 vim 参数</span></span><br></pre></td></tr></table></figure>
 <p>再比如，vim 里有一趁手的功能是使用 <code>ctrl + a</code> 和 <code>ctrl + x</code> 来增减数字。由于这么按着太别扭，我定义了如下两个快捷键</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">map</span> <span class="symbol">&lt;c-j&gt;</span> <span class="symbol">&lt;c-x&gt;</span>   <span class="comment">" map 语句</span></div><div class="line"><span class="keyword">map</span> <span class="symbol">&lt;c-k&gt;</span> <span class="symbol">&lt;c-a&gt;</span>   <span class="comment">" 设置键盘映射</span></div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">map</span> <span class="symbol">&lt;c-j&gt;</span> <span class="symbol">&lt;c-x&gt;</span>   <span class="comment">" map 语句</span></span><br><span class="line"><span class="keyword">map</span> <span class="symbol">&lt;c-k&gt;</span> <span class="symbol">&lt;c-a&gt;</span>   <span class="comment">" 设置键盘映射</span></span><br></pre></td></tr></table></figure>
 <p>这里的 <code>&lt;c-?&gt;</code> 就是 <code>ctrl + ？</code> 的意思，而 <code>map</code> 则代表映像。有了这两行，我按下 <code>ctrl + j</code> 就等于我按下了 <code>ctrl + x</code> （<code>ctrl + k</code> 也是同理），而且这个功能也是可以运用我们的操作公式的。比如，<code>5&lt;c-j&gt;</code> 会减 5，<code>15&lt;c-k&gt;</code> 会加 15.</p>
 <img src="/2016/09/21/vim-plug/ctrlax.gif">
 <p>另外还有几个有关 vim 里搜所文本的设置，大伙可以自己查查，然后看看需不需要。</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> ignorecase</div><div class="line"><span class="keyword">set</span> smartcase</div><div class="line"><span class="keyword">set</span> hlsearch</div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> ignorecase</span><br><span class="line"><span class="keyword">set</span> smartcase</span><br><span class="line"><span class="keyword">set</span> hlsearch</span><br></pre></td></tr></table></figure>
 <p>如果你想让删除键绕过行首，行内缩进继续删除的话（如图），可以加上这个设置</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> backspace=endofline,start,<span class="built_in">indent</span></div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> backspace=endofline,start,<span class="built_in">indent</span></span><br></pre></td></tr></table></figure>
 <img src="/2016/09/21/vim-plug/backspace.gif">
 <p>如果你想在 vim 中使用鼠标（点击），可以用过这个设置实现</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> mouse=<span class="keyword">a</span>  <span class="comment">" a 代表所有模式</span></div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> mouse=<span class="keyword">a</span>  <span class="comment">" a 代表所有模式</span></span><br></pre></td></tr></table></figure>
 <p>这个部分，之后我们会加越来越多的东西。好啦，我们来讲讲这第一个插件 vim-plug。</p>
 <h3 id="vim-plug"><a href="#vim-plug" class="headerlink" title="vim-plug"></a>vim-plug</h3><p>vim-plug 是一个 vim 的插件管理插件，通过运用 Git 来实现插件的更新以及相关的管理任务，包括锁定或者回滚插件版本，按需使用插件（而不是一股脑都用），以及插件更新的后续处理。放一个官方的动图，演示一下</p>
 <img src="/2016/09/21/vim-plug/installer.gif">
@@ -443,14 +445,14 @@
 <p>安装过程也十分简单，可直接参照官网的说明即可，地址如下：<a href="https://github.com/junegunn/vim-plug" target="_blank" rel="noopener">https://github.com/junegunn/vim-plug</a> ，具体是这个部分。</p>
 <img src="/2016/09/21/vim-plug/installation.png">
 <p>你也可以点击 <code>Download plug.vim</code> 的链接，然后把它直接放进如下的文件夹里</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Mac: ~/.vim/autoload</div><div class="line">Windows: ~\vimfiles\autoload</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Mac: ~/.vim/autoload</span><br><span class="line">Windows: ~\vimfiles\autoload</span><br></pre></td></tr></table></figure>
 <p>安装完成后，我们就可以想按什么插件就按什么插件了，如果你用的是 Windows， 那么就把 <code>&#39;~/.vim/plugged&#39;</code> 换成 <code>&#39;~\vimfiles\autoload</code>就好啦。</p>
 <p>假如你选定了一个插件，比如 vim-airline</p>
 <img src="/2016/09/21/vim-plug/vim-airline.png">
 <p>那么直接在 vim-plug 的定义范围内加上</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Plug <span class="string">'vim-airline/vim-airline'</span></div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Plug <span class="string">'vim-airline/vim-airline'</span></span><br></pre></td></tr></table></figure>
 <p>所以目前 vimrc 是这个样子的</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> nocompatible</div><div class="line"></div><div class="line"><span class="comment">" vim-plug</span></div><div class="line"><span class="keyword">call</span> plug#begin(<span class="string">'~/.vim/plugged'</span>)</div><div class="line"></div><div class="line">Plug <span class="string">'vim-airline/vim-airline'</span></div><div class="line"></div><div class="line"><span class="keyword">call</span> plug#end()</div><div class="line"></div><div class="line"><span class="comment">" 界面设置</span></div><div class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></div><div class="line"><span class="keyword">set</span> <span class="keyword">number</span></div><div class="line"><span class="keyword">set</span> relativenumber</div><div class="line"><span class="comment">" ...</span></div><div class="line"></div><div class="line"><span class="comment">" 操作定义</span></div><div class="line"><span class="comment">" ...</span></div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> nocompatible</span><br><span class="line"></span><br><span class="line"><span class="comment">" vim-plug</span></span><br><span class="line"><span class="keyword">call</span> plug#begin(<span class="string">'~/.vim/plugged'</span>)</span><br><span class="line"></span><br><span class="line">Plug <span class="string">'vim-airline/vim-airline'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">call</span> plug#end()</span><br><span class="line"></span><br><span class="line"><span class="comment">" 界面设置</span></span><br><span class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">number</span></span><br><span class="line"><span class="keyword">set</span> relativenumber</span><br><span class="line"><span class="comment">" ...</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" 操作定义</span></span><br><span class="line"><span class="comment">" ...</span></span><br></pre></td></tr></table></figure>
 <p>重新开启 vim，然后在命令行中运行 <code>:PluginInstall</code> 就可以安装插件 vim-airline 了。更多的插件管理功能在插件的说明文件里都有介绍，以后我们在介绍别的插件时，也会提到。</p>
 <p>好啦，这一篇就先说这么多。下一篇具体说什么还没有想好，因为明天还有一门考试…</p>
 
@@ -590,7 +592,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -670,6 +672,13 @@
             </nav>
           
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           

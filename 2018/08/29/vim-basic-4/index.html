@@ -104,25 +104,29 @@
 
 
   
-  <meta name="keywords" content="vim,vim-intro," />
+  <meta name="keywords" content="vim,vim-basic," />
 
 
-<meta name="description" content="与其像众多 “vim 入门” 文章那样上来就直奔主题，给你看许多截图和代码，这第一篇咱就先提一些“没用的”。说说 vim 是个什么样的文字编辑器，它的逻辑是什么。 一些假设和说明在准备入坑之前，先容 V字君列几条准备入坑的前提：  假设你有一点点的编程知识背景  如果你刚刚入门编程，那么 V字君觉得你应该更关注编程本身，而非编辑器。使用 Sublime Text 类似的编辑器可能会更适合你。当然，">
-<meta name="keywords" content="vim,vim-intro">
+<meta name="description" content="motion 是个十分有用并且核心的概念，我们如何快速移动光标，甚至在不同文件之间迅速切换就靠它了。在这之后，咱们再介绍一个兄弟概念 operator。在这一篇之后，基本就可以达到流畅 vim 编辑，妥妥的。咱们先来一个举个栗子介绍一下 operator 和 motion 这哥俩加在一块有多爽。 举个栗子如果现在光标在图下这个位置，我们想把从光标向右到括号的内容都删掉  也就是删掉 , c=0 这">
+<meta name="keywords" content="vim,vim-basic">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vim 入坑指南（零）— 序言">
-<meta property="og:url" content="http://yoursite.com/2016/07/11/vim-intro/index.html">
+<meta property="og:title" content="vim 基础：简单的文字编辑 (4)">
+<meta property="og:url" content="http://yoursite.com/2018/08/29/vim-basic-4/index.html">
 <meta property="og:site_name" content="V 字君的 Vimpress">
-<meta property="og:description" content="与其像众多 “vim 入门” 文章那样上来就直奔主题，给你看许多截图和代码，这第一篇咱就先提一些“没用的”。说说 vim 是个什么样的文字编辑器，它的逻辑是什么。 一些假设和说明在准备入坑之前，先容 V字君列几条准备入坑的前提：  假设你有一点点的编程知识背景  如果你刚刚入门编程，那么 V字君觉得你应该更关注编程本身，而非编辑器。使用 Sublime Text 类似的编辑器可能会更适合你。当然，">
+<meta property="og:description" content="motion 是个十分有用并且核心的概念，我们如何快速移动光标，甚至在不同文件之间迅速切换就靠它了。在这之后，咱们再介绍一个兄弟概念 operator。在这一篇之后，基本就可以达到流畅 vim 编辑，妥妥的。咱们先来一个举个栗子介绍一下 operator 和 motion 这哥俩加在一块有多爽。 举个栗子如果现在光标在图下这个位置，我们想把从光标向右到括号的内容都删掉  也就是删掉 , c=0 这">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2016/07/11/vim-intro/vim_startup.png">
-<meta property="og:image" content="http://yoursite.com/2016/07/11/vim-intro/vim_normal_w.gif">
-<meta property="og:image" content="http://yoursite.com/2016/07/11/vim-intro/vim_normal_b.gif">
-<meta property="og:updated_time" content="2016-10-13T03:43:57.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/08/29/vim-basic-4/demo_1.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/29/vim-basic-4/df0.gif">
+<meta property="og:image" content="http://yoursite.com/2018/08/29/vim-basic-4/find_0.gif">
+<meta property="og:image" content="http://yoursite.com/2018/08/29/vim-basic-4/till.gif">
+<meta property="og:image" content="http://yoursite.com/2018/08/29/vim-basic-4/df0.gif">
+<meta property="og:image" content="http://yoursite.com/2018/08/29/vim-basic-4/cf0.gif">
+<meta property="og:image" content="http://yoursite.com/2018/08/29/vim-basic-4/python2.gif">
+<meta property="og:updated_time" content="2018-08-30T02:06:22.104Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vim 入坑指南（零）— 序言">
-<meta name="twitter:description" content="与其像众多 “vim 入门” 文章那样上来就直奔主题，给你看许多截图和代码，这第一篇咱就先提一些“没用的”。说说 vim 是个什么样的文字编辑器，它的逻辑是什么。 一些假设和说明在准备入坑之前，先容 V字君列几条准备入坑的前提：  假设你有一点点的编程知识背景  如果你刚刚入门编程，那么 V字君觉得你应该更关注编程本身，而非编辑器。使用 Sublime Text 类似的编辑器可能会更适合你。当然，">
-<meta name="twitter:image" content="http://yoursite.com/2016/07/11/vim-intro/vim_startup.png">
+<meta name="twitter:title" content="vim 基础：简单的文字编辑 (4)">
+<meta name="twitter:description" content="motion 是个十分有用并且核心的概念，我们如何快速移动光标，甚至在不同文件之间迅速切换就靠它了。在这之后，咱们再介绍一个兄弟概念 operator。在这一篇之后，基本就可以达到流畅 vim 编辑，妥妥的。咱们先来一个举个栗子介绍一下 operator 和 motion 这哥俩加在一块有多爽。 举个栗子如果现在光标在图下这个位置，我们想把从光标向右到括号的内容都删掉  也就是删掉 , c=0 这">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/29/vim-basic-4/demo_1.png">
 
 
 
@@ -131,7 +135,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/07/11/vim-intro/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/29/vim-basic-4/"/>
 
 
 
@@ -140,7 +144,7 @@
     sidebar: "",
   };
 </script>
-  <title>vim 入坑指南（零）— 序言 | V 字君的 Vimpress</title>
+  <title>vim 基础：简单的文字编辑 (4) | V 字君的 Vimpress</title>
   
 
 
@@ -302,7 +306,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/11/vim-intro/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/29/vim-basic-4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="VZJ">
@@ -319,7 +323,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">vim 入坑指南（零）— 序言</h1>
+          <h1 class="post-title" itemprop="name headline">vim 基础：简单的文字编辑 (4)</h1>
         
 
         <div class="post-meta">
@@ -331,7 +335,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-11T23:55:29-04:00">2016-07-11</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-29T00:00:00-04:00">2018-08-29</time>
             
 
             
@@ -359,7 +363,7 @@
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/vim-intro/" itemprop="url" rel="index"><span itemprop="name">vim-intro</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/vim-basic/" itemprop="url" rel="index"><span itemprop="name">vim-basic</span></a></span>
 
                 
                 
@@ -393,63 +397,71 @@
       
 
       
-        <p>与其像众多 “vim 入门” 文章那样上来就直奔主题，给你看许多截图和代码，这第一篇咱就先提一些“没用的”。说说 vim 是个什么样的文字编辑器，它的逻辑是什么。</p>
-<h3 id="一些假设和说明"><a href="#一些假设和说明" class="headerlink" title="一些假设和说明"></a>一些假设和说明</h3><p>在准备入坑之前，先容 V字君列几条准备入坑的前提：</p>
-<ol>
-<li><p>假设你有一点点的编程知识背景</p>
-<p> 如果你刚刚入门编程，那么 V字君觉得你应该更关注编程本身，而非编辑器。使用 <a href="http://www.sublimetext.com" target="_blank" rel="noopener">Sublime Text</a> 类似的编辑器可能会更适合你。当然，如果你想上手编程的同时，就开始用 vim ，那么不妨试试 V 字君的这个“入坑”系列，希望能帮你省去不少麻烦。</p>
-</li>
-<li><p>假设你有一定时间</p>
-<p> 学习 vim 是需要一定时间的，想要上手便有超高的生产力（productivity）也比较困难。不过磨刀不误砍柴工，vim 如独孤九剑，一旦练成，便知世间除 vim 外再无趁手兵刃（当然是因人而异。对于我，的确如此）。</p>
-</li>
-</ol>
-<p>还有几条说明：</p>
-<ol>
-<li><p>V 字君一直用的 Mac，所以所有的文章都主要针对 Mac 上 vim 谈的。不过无论你用的是 Ubuntu 还是 Windows，很多内容基本都是通用。</p>
-</li>
-<li><p>就本文写作时，V 字君使用的 vim 版本是 7.4</p>
-</li>
-</ol>
+        <p><code>motion</code> 是个十分有用并且核心的概念，我们如何快速移动光标，甚至在不同文件之间迅速切换就靠它了。在这之后，咱们再介绍一个兄弟概念 <code>operator</code>。在这一篇之后，基本就可以达到流畅 vim 编辑，妥妥的。咱们先来一个举个栗子介绍一下 <code>operator</code> 和 <code>motion</code> 这哥俩加在一块有多爽。</p>
+<h1 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h1><p>如果现在光标在图下这个位置，我们想把从光标向右到括号的内容都删掉</p>
+<img src="/2018/08/29/vim-basic-4/demo_1.png">
+<p>也就是删掉 <code>, c=0</code> 这段代码，应该怎么做呢？很容易，我们就直接告诉 vim</p>
+<blockquote>
+<p>删掉从光标到 0 的内容</p>
+</blockquote>
+<p>就好了。而把这句话 “翻译” 成 vim 能懂得操作也很容易：</p>
+<blockquote>
+<p><code>df0</code></p>
+</blockquote>
+<p>嗯，按下这三个键就搞定了。也就是说，刚才那句话可以和这三个键对应：</p>
+<blockquote>
+<p>删掉 （<code>d for delete</code>）从光标到 0 (<code>f0</code>) 的内容</p>
+</blockquote>
+<img src="/2018/08/29/vim-basic-4/df0.gif">
+<p>现在让我们来仔细拆分一下刚才究竟都发生了啥…首先我们说怎么通过 <code>motion</code> 来移动光标。</p>
 <a id="more"></a>
-<img src="/2016/07/11/vim-intro/vim_startup.png">
-<hr>
-<h3 id="当我们谈及-vim-时，我们都说些什么"><a href="#当我们谈及-vim-时，我们都说些什么" class="headerlink" title="当我们谈及 vim 时，我们都说些什么"></a>当我们谈及 vim 时，我们都说些什么</h3><p>说完了前提，咱们先站在“坑外”观望一下，说说关于 vim 的几个说法，以及 vim 的逻辑是什么。</p>
-<h4 id="说法-1：vim-学习曲线很陡峭，上手不易"><a href="#说法-1：vim-学习曲线很陡峭，上手不易" class="headerlink" title="说法 1：vim 学习曲线很陡峭，上手不易"></a>说法 1：vim 学习曲线很陡峭，上手不易</h4><p>vim 其实很容易学的，很多人觉得难是因为：</p>
+<h1 id="光标哪里去"><a href="#光标哪里去" class="headerlink" title="光标哪里去"></a>光标哪里去</h1><p><code>motion</code> 又名 “光标哪里去”。vim 在 普通模式下 (normal mode) 下有很多不同的方式来移动光标，而这也是它强大高效的原因之一，比如：</p>
 <ol>
-<li>vim 的逻辑于其他的编辑器不同，而且需要养成相关的肌肉记忆</li>
-<li>官方自带的 “入门” 材料和实际应用存在一定差距，上手期间是在太煎熬</li>
-<li>“纯天然” 的 vim 所提供的功能并不多，而且配置太过繁琐，想把 vim 变成想要的模样太麻烦</li>
-<li>插件太多，各自的说明文件也并不易懂。</li>
+<li>横向移动 (left-right motion) </li>
+<li>纵向移动 (up-down motion) </li>
+<li>按词移动 (word motion) </li>
+<li>按文本移动 (object/text-object motion) </li>
 </ol>
-<p>仔细想想，其实这些都不是大事儿，因为有了 V 字君的 vim 入坑系列，一切就都好办啦。</p>
-<h4 id="说法-2：vim-不如-emacs-（或者-emacs-不如-vim）"><a href="#说法-2：vim-不如-emacs-（或者-emacs-不如-vim）" class="headerlink" title="说法 2：vim 不如 emacs （或者 emacs 不如 vim）"></a>说法 2：vim 不如 <a href="https://www.gnu.org/software/emacs/" target="_blank" rel="noopener">emacs</a> （或者 emacs 不如 vim）</h4><p>这个主要还是看个人，文本编辑器本来就是个工具，只要你投入足够多的时间，你可以把任何编辑器打造成独一无二的利器。 V 字君只是恰巧当年选择了 vim 而已。</p>
-<h4 id="说法-3：vim-太古董了，应该使用像-Sublime-Text-或者-Atom-那样的编辑器"><a href="#说法-3：vim-太古董了，应该使用像-Sublime-Text-或者-Atom-那样的编辑器" class="headerlink" title="说法 3：vim 太古董了，应该使用像 Sublime Text 或者 Atom 那样的编辑器"></a>说法 3：vim 太古董了，应该使用像 Sublime Text 或者 Atom 那样的编辑器</h4><p>就如前提所提到的那样，如果你刚刚入门编程，或者并没打算在编辑器上花太多功夫，那么 Sublime Text/Atom 自然是适合的，且它们的“天生”生产力也很高，比如 Sublime Text 的 multicursor 功能，简直是让人看呆眼（V 字君也是常年的 Sublime Text 用户）。</p>
-<hr>
-<h3 id="vim-的逻辑"><a href="#vim-的逻辑" class="headerlink" title="vim 的逻辑"></a>vim 的逻辑</h3><p>无论是哪一个文本编辑器，键盘总是比鼠标要高效的。别说文本编辑器了，那些用 Word (其实这也是个文本编辑器)，Excel 如飞的人也一定是掌握了很多快捷键的。对于任何一个文本编辑器来说，都要解决一个问题：<strong>如何利用键盘上有限的键，完成更多的功能以及更高效的输出</strong></p>
-<p>最简单的一个例子就是“复制”和“粘贴”：<code>cmd/ctrl + c</code> 和 <code>cmd/ctrl + v</code>。基本上大部分的文本编辑器都采用的是这样的方式。V 字君把他们都划分为“Emacs 的方式”</p>
-<h4 id="emacs-的方式：按住-Ctrl-Alt-Meta-等键来提供更多的功能"><a href="#emacs-的方式：按住-Ctrl-Alt-Meta-等键来提供更多的功能" class="headerlink" title="emacs 的方式：按住 Ctrl, Alt/Meta 等键来提供更多的功能"></a>emacs 的方式：按住 Ctrl, Alt/Meta 等键来提供更多的功能</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ctrl + b 向后移动光标 backward</span><br><span class="line">ctrl + f 向前移动光标 forward</span><br><span class="line">ctrl + n 向下移动光标 next (line)</span><br><span class="line">ctrl + p 向上移动光标 previous (line)</span><br></pre></td></tr></table></figure>
-<p>有的时候一层快捷键不够使，那就要两层，或者是三层。比如，emacs orgmode 里，如果我想要预览 LaTex 数学公式的话，需要按下：<code>ctrl + c, ctrl + x, ctrl + l</code>。</p>
-<p>千万别误会，V 字君也是超级钟爱 orgmode 的。如果当年上大学时我会用 orgmode，天知道我能省下多少时间。不过那些都是后话了，因为当时已经使用 vim + LaTex 几年了，也不需要换了。</p>
-<h4 id="vim-的方式-提供几个不同的模式-不同模式下，同个键有不同的功能"><a href="#vim-的方式-提供几个不同的模式-不同模式下，同个键有不同的功能" class="headerlink" title="vim 的方式: 提供几个不同的模式, 不同模式下，同个键有不同的功能"></a>vim 的方式: 提供几个不同的模式, 不同模式下，同个键有不同的功能</h4><p>vim 采用的方式则完全不同，与其让你别扭的按住 ctrl 键一直不放，干脆提供多种模式，就好比画家的画笔和画刀，每种模式做不同的事情。</p>
-<ul>
-<li>普通模式 (normal mode)</li>
-<li>输入模式 (insert mode)</li>
-<li>可视模式 (visual mode)</li>
-<li>替换模式 (replace mode)</li>
-<li>选择模式 (select mode)</li>
-</ul>
-<p>举个简单的例子, 在 <strong>输入模式</strong> 下，vim 就和其他的编辑器一样，输入什么，显示什么。而在 <strong>普通模式</strong> 下，同一个键则有不同的意义： 比如，w 键和 b 键在 <strong>普通模式</strong> 下其实使用来移动光标的。</p>
-<img src="/2016/07/11/vim-intro/vim_normal_w.gif" title="w 移动光标至下一个 word">
-<img src="/2016/07/11/vim-intro/vim_normal_b.gif" title="b 移动光标至前一个 word">
-<p>这么做有几个好处：</p>
+<h3 id="横向移动-left-right-motion"><a href="#横向移动-left-right-motion" class="headerlink" title="横向移动 (left-right motion)"></a>横向移动 (left-right motion)</h3><p>比如咱们栗子里的 <code>f</code> 就是 <code>left-right motion</code> 第一种。如果你打开 <a href="/2018/03/15/vim-tool-1/" title="vim 的帮助文档">vim 的帮助文档</a> ，你会发现它显示的是 <code>f{char}</code>，那意思就是 <code>f</code> 之后需要加一个字符，单单一个 <code>f</code> 不构成完整的 <code>motion</code>。</p>
+<p>好的，我们继续说。<code>f{char}</code> 的作用是把光标向右移动，直到遇到 <code>{char}</code> 为止（而 <code>F{char}</code> 则是把光标向左移动）。如果我们按下 <code>f0</code> 的话，那意思就是：把光标向右挪，挪至找到 0 为止：</p>
+<img src="/2018/08/29/vim-basic-4/find_0.gif">
+<p>同样的，<code>t{char}</code> （和 <code>T{char}</code>）也是类似的原理，但和 <code>f{char}</code> 相比有个小区别，如果我要把光标挪到同样的位置的话，需要按下 <code>t)</code>。</p>
+<img src="/2018/08/29/vim-basic-4/till.gif">
+<p>这里我们再列几个常用的横向移动办法：</p>
 <ol>
-<li>对“手”比较好：因为做一些简单的动作（比如：移动光标）时，真心不需要长时间按住 ctrl 键</li>
-<li>可以提供更多的功能：因为基本上每一个键都可以用来制定你想要的功能。 而且你也可以制定像 emacs 那样的快捷键（ctrl + …）</li>
-<li>vim 的文本对象：这个概念在以后要专门讲。但大致意思就是，在 vim 眼中，任何文本都是有“级别”的：字，行，段，同一的动作（action）可以应用到任何一“级别”。比如“删除”这个动作都是 d 这个键，你可以选择：</li>
+<li><code>h/l</code> 向左/右移动一个字符</li>
+<li><code>0</code> 移光标到行首</li>
+<li><code>$</code> 移光标到行末</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">删除一字 dw  --&gt; delete word</span><br><span class="line">删除一行 dd  --&gt; delete line</span><br><span class="line">删除一段 dp  --&gt; delete paragraph</span><br></pre></td></tr></table></figure>
-<p>基本上就是这些了。这些模式看起来多，其实常用的也就是三个，之后咱们慢慢展开。</p>
-<h3 id="观望结束"><a href="#观望结束" class="headerlink" title="观望结束"></a>观望结束</h3><p>好啦，就这些了。不过在咱们撸袖子准备入坑之前，咱们先得把 <a href="/2016/07/13/vim-setup/" title="vim 搞到手">vim 搞到手</a>。</p>
+<p>还有个神奇的 <code>^</code>，小伙们可以尝试一下。</p>
+<h3 id="纵向移动-up-down-motion"><a href="#纵向移动-up-down-motion" class="headerlink" title="纵向移动 (up-down motion)"></a>纵向移动 (up-down motion)</h3><ol>
+<li><code>j/k</code> 向上/下移动一行</li>
+<li><code>gg</code> 移光标至文件第一行</li>
+<li><code>G</code> 移光标至文件最后一行</li>
+<li><code>:{number}</code> 移光标至文件的第 <code>{number}</code> 行。比如 <code>:3</code> （然后按回车）就是去第三行。</li>
+</ol>
+<p>还有一对神奇的 <code>gj</code> 和 <code>gk</code> ，小伙们也可以尝试一下，如果有需要的话，它们和普通 <code>j/k</code> 的区别下次再说不迟。</p>
+<h3 id="按词移动-word-motion"><a href="#按词移动-word-motion" class="headerlink" title="按词移动 (word motion)"></a>按词移动 (word motion)</h3><ol>
+<li><code>w/W</code> 移光标至下一词</li>
+<li><code>b/B</code> 移光标至上一词</li>
+<li><code>e/E</code> 移光标至词末</li>
+</ol>
+<h3 id="按文本对象移动-object-text-object-motion"><a href="#按文本对象移动-object-text-object-motion" class="headerlink" title="按文本对象移动 (object/text-object motion)"></a>按文本对象移动 (object/text-object motion)</h3><p>这个部分也是 vim 的一个核心概念，为了不跑题太远，咱们再单开一篇细说。目前就把 <strong>文本对象</strong> 理解成是 vim 描述文本的一种方式就好。</p>
+<h2 id="vim-的动词：operator"><a href="#vim-的动词：operator" class="headerlink" title="vim 的动词：operator"></a>vim 的动词：operator</h2><p>如果说刚才咱们列举的 <code>motion</code> 可以视为 <strong>名词</strong> 的话，那么 <code>operator</code> 就是 vim 中的 <strong>动词</strong> 了。如果说：<code>f0</code> 是把光标向右挪，挪至找到 0 为止。那么 <code>df0</code> 就是 <strong>删除</strong> 从光标现有位置到向右找到 0 为止的所有内容。</p>
+<img src="/2018/08/29/vim-basic-4/df0.gif">
+<p>如果说我们在同样的位置按下 <code>cf0</code> 的话，那就是删除 <code>, c=0</code> 并且进入 <strong>输入模式</strong> (Insert Mode)。</p>
+<img src="/2018/08/29/vim-basic-4/cf0.gif">
+<p>除了常用的 <code>d</code> (delete) 和 <code>c</code> (change) 之外，还有以下几个常用的 “动词”：</p>
+<ol>
+<li><code>&gt;</code></li>
+<li><code>&lt;</code></li>
+<li><code>y</code></li>
+</ol>
+<p>我在 2016 年曾经写过一篇 <a href="/2016/08/06/vim-motion/" title="motion 进阶">motion 进阶</a>，虽然年头有点久了，而且当时写的也有点冗长，但是里面有不少使用 <code>motion</code> 的栗子。所以我也就偷偷懒，这里就不再重复啦。另外，细心的小伙伴肯定能发现：为啥这篇的演示图和 <a href="/2018/04/04/vim-basic-3/" title="之前那篇">之前那篇</a> 最后不一样…</p>
+<img src="/2018/08/29/vim-basic-4/python2.gif">
+<p>那是因为他们之间相差了不少插件，比如：<a href="https://github.com/vim-airline/vim-airline" target="_blank" rel="noopener">vim-airline</a>, <a href="https://github.com/chriskempson/base16-vim" target="_blank" rel="noopener">base16-vim</a>, <a href="https://github.com/SirVer/ultisnips" target="_blank" rel="noopener">ultisnips</a>…</p>
+<p>vim 的插件我之前写过了 <a href="/2016/09/21/vim-plug/" title="vim-plug">vim-plug</a> 和 , 剩下还有好多咱们慢慢来…</p>
+<p>我一个一个写…一定不拖更…</p>
 
       
     </div>
@@ -480,7 +492,7 @@
           
             <a href="/tags/vim/" rel="tag"># vim</a>
           
-            <a href="/tags/vim-intro/" rel="tag"># vim-intro</a>
+            <a href="/tags/vim-basic/" rel="tag"># vim-basic</a>
           
         </div>
       
@@ -493,15 +505,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/04/04/vim-basic-3/" rel="next" title="vim 基础：简单的文字编辑 (3)">
+                <i class="fa fa-chevron-left"></i> vim 基础：简单的文字编辑 (3)
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/13/vim-setup/" rel="prev" title="vim 入坑指南（一）— 安装和定位vimrc">
-                vim 入坑指南（一）— 安装和定位vimrc <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -703,7 +715,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一些假设和说明"><span class="nav-number">1.</span> <span class="nav-text">一些假设和说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#当我们谈及-vim-时，我们都说些什么"><span class="nav-number">2.</span> <span class="nav-text">当我们谈及 vim 时，我们都说些什么</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#说法-1：vim-学习曲线很陡峭，上手不易"><span class="nav-number">2.1.</span> <span class="nav-text">说法 1：vim 学习曲线很陡峭，上手不易</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#说法-2：vim-不如-emacs-（或者-emacs-不如-vim）"><span class="nav-number">2.2.</span> <span class="nav-text">说法 2：vim 不如 emacs （或者 emacs 不如 vim）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#说法-3：vim-太古董了，应该使用像-Sublime-Text-或者-Atom-那样的编辑器"><span class="nav-number">2.3.</span> <span class="nav-text">说法 3：vim 太古董了，应该使用像 Sublime Text 或者 Atom 那样的编辑器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim-的逻辑"><span class="nav-number">3.</span> <span class="nav-text">vim 的逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#emacs-的方式：按住-Ctrl-Alt-Meta-等键来提供更多的功能"><span class="nav-number">3.1.</span> <span class="nav-text">emacs 的方式：按住 Ctrl, Alt/Meta 等键来提供更多的功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vim-的方式-提供几个不同的模式-不同模式下，同个键有不同的功能"><span class="nav-number">3.2.</span> <span class="nav-text">vim 的方式: 提供几个不同的模式, 不同模式下，同个键有不同的功能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#观望结束"><span class="nav-number">4.</span> <span class="nav-text">观望结束</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#举个栗子"><span class="nav-number">1.</span> <span class="nav-text">举个栗子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#光标哪里去"><span class="nav-number">2.</span> <span class="nav-text">光标哪里去</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#横向移动-left-right-motion"><span class="nav-number">2.0.1.</span> <span class="nav-text">横向移动 (left-right motion)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#纵向移动-up-down-motion"><span class="nav-number">2.0.2.</span> <span class="nav-text">纵向移动 (up-down motion)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按词移动-word-motion"><span class="nav-number">2.0.3.</span> <span class="nav-text">按词移动 (word motion)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按文本对象移动-object-text-object-motion"><span class="nav-number">2.0.4.</span> <span class="nav-text">按文本对象移动 (object/text-object motion)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vim-的动词：operator"><span class="nav-number">2.1.</span> <span class="nav-text">vim 的动词：operator</span></a></li></ol></li></ol></div>
             
 
           </div>

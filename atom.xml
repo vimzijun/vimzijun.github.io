@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>V 字君的 Vimpress</title>
+  
+  <subtitle>Everything I learned about Vim</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2018-08-30T02:06:22.104Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>VZJ</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vim 基础：简单的文字编辑 (4)</title>
+    <link href="http://yoursite.com/2018/08/29/vim-basic-4/"/>
+    <id>http://yoursite.com/2018/08/29/vim-basic-4/</id>
+    <published>2018-08-29T04:00:00.000Z</published>
+    <updated>2018-08-30T02:06:22.104Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;code&gt;motion&lt;/code&gt; 是个十分有用并且核心的概念，我们如何快速移动光标，甚至在不同文件之间迅速切换就靠它了。在这之后，咱们再介绍一个兄弟概念 &lt;code&gt;operator&lt;/code&gt;。在这一篇之后，基本就可以达到流畅 vim 编辑，妥妥的。咱们先来一个举个栗子介绍一下 &lt;code&gt;operator&lt;/code&gt; 和 &lt;code&gt;motion&lt;/code&gt; 这哥俩加在一块有多爽。&lt;/p&gt;
+&lt;h1 id=&quot;举个栗子&quot;&gt;&lt;a href=&quot;#举个栗子&quot; class=&quot;headerlink&quot; title=&quot;举个栗子&quot;&gt;&lt;/a&gt;举个栗子&lt;/h1&gt;&lt;p&gt;如果现在光标在图下这个位置，我们想把从光标向右到括号的内容都删掉&lt;/p&gt;
+&lt;img src=&quot;/2018/08/29/vim-basic-4/demo_1.png&quot;&gt;
+&lt;p&gt;也就是删掉 &lt;code&gt;, c=0&lt;/code&gt; 这段代码，应该怎么做呢？很容易，我们就直接告诉 vim&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;删掉从光标到 0 的内容&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;就好了。而把这句话 “翻译” 成 vim 能懂得操作也很容易：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;df0&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;嗯，按下这三个键就搞定了。也就是说，刚才那句话可以和这三个键对应：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;删掉 （&lt;code&gt;d for delete&lt;/code&gt;）从光标到 0 (&lt;code&gt;f0&lt;/code&gt;) 的内容&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;img src=&quot;/2018/08/29/vim-basic-4/df0.gif&quot;&gt;
+&lt;p&gt;现在让我们来仔细拆分一下刚才究竟都发生了啥…首先我们说怎么通过 &lt;code&gt;motion&lt;/code&gt; 来移动光标。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="vim" scheme="http://yoursite.com/categories/vim/"/>
+    
+      <category term="vim-basic" scheme="http://yoursite.com/categories/vim/vim-basic/"/>
+    
+    
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
+      <category term="vim-basic" scheme="http://yoursite.com/tags/vim-basic/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vim 基础：简单的文字编辑 (3)</title>
+    <link href="http://yoursite.com/2018/04/04/vim-basic-3/"/>
+    <id>http://yoursite.com/2018/04/04/vim-basic-3/</id>
+    <published>2018-04-04T04:00:00.000Z</published>
+    <updated>2018-04-05T02:02:26.468Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在这篇开始之前，咱们先说个别的。在上一篇简单的文字编辑(2)里咱们说了：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;i&lt;/code&gt;, &lt;code&gt;a&lt;/code&gt;, &lt;code&gt;A&lt;/code&gt;, &lt;code&gt;o&lt;/code&gt;, &lt;code&gt;O&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;你有没有觉得既然按小写 &lt;code&gt;i&lt;/code&gt; 能进入插入模式，那大写的 &lt;code&gt;I&lt;/code&gt; 是不是也可以？必须的（好奇的话可以试试，非常好用）！！ 其实 vim 里很多东西都是大小写一块配套的，简直是越想越觉得设计者脑洞大。&lt;/p&gt;
+&lt;p&gt;好啦，咱们接着上一篇的内容说，除了 &lt;code&gt;i/I&lt;/code&gt;, &lt;code&gt;a/A&lt;/code&gt;, &lt;code&gt;o/O&lt;/code&gt;之外，其实还有不少进入插入模式的办法。这一篇咱们说一些别的进入插入模式的办法。而且还是一箭双雕，&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;删除 + 进入插入模式&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="vim" scheme="http://yoursite.com/categories/vim/"/>
+    
+      <category term="vim-basic" scheme="http://yoursite.com/categories/vim/vim-basic/"/>
+    
+    
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
+      <category term="vim-basic" scheme="http://yoursite.com/tags/vim-basic/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vim 工具：自带帮助系统</title>
+    <link href="http://yoursite.com/2018/03/15/vim-tool-1/"/>
+    <id>http://yoursite.com/2018/03/15/vim-tool-1/</id>
+    <published>2018-03-15T04:00:00.000Z</published>
+    <updated>2018-03-17T01:27:06.408Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;真的，说认真的，咱们这一篇说怎么用 vim 自带的帮助系统 (help system)。这一篇会比较短，简洁明了。&lt;/p&gt;
+&lt;img src=&quot;/2018/03/15/vim-tool-1/vim-help.png&quot;&gt;
+    
+    </summary>
+    
+      <category term="vim" scheme="http://yoursite.com/categories/vim/"/>
+    
+      <category term="vim-tool" scheme="http://yoursite.com/categories/vim/vim-tool/"/>
+    
+    
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
+      <category term="vim-tool" scheme="http://yoursite.com/tags/vim-tool/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vim 理论 (1)：模式</title>
+    <link href="http://yoursite.com/2018/03/09/vim-concept-1/"/>
+    <id>http://yoursite.com/2018/03/09/vim-concept-1/</id>
+    <published>2018-03-09T05:00:00.000Z</published>
+    <updated>2018-04-05T00:30:21.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我们先来想想&lt;strong&gt;文本&lt;/strong&gt;本身。对于文本，基本上，我们就做两件事：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;内容处理&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;文本排版&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;很多常用的很多工具其实是把这两个功能合二为一的，比如 Word， PowerPoint，Excel。而编程本身其实并不那么涉及到排版，所以你见不到什么人用 Word 去编程，而是用 &lt;strong&gt;文本编辑器&lt;/strong&gt;，比如 &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Atom&lt;/li&gt;
+&lt;li&gt;Sublime text&lt;/li&gt;
+&lt;li&gt;Vim&lt;/li&gt;
+&lt;li&gt;Emacs&lt;/li&gt;
+&lt;li&gt;Notepad++&lt;/li&gt;
+&lt;li&gt;Visual Studio Code …&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以命令行（command line） 和终端（terminal）为主的文本编辑器其实对普通用户都不是很友好。但你不是普通人啊，你决定学习 vim，除去图形界面的干扰，把注意力放在最关键的地方：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;文本&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;因为只有缩短文本编辑的时间，你才能用更多的时间思考，在灵感消失之前，把它转换成代码。而且，你能因此发现另一个世界&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;命令行（command line）的世界&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="vim" scheme="http://yoursite.com/categories/vim/"/>
+    
+      <category term="vim-concept" scheme="http://yoursite.com/categories/vim/vim-concept/"/>
+    
+    
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
+      <category term="vim-concept" scheme="http://yoursite.com/tags/vim-concept/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vim 基础：简单的文字编辑 (2)</title>
+    <link href="http://yoursite.com/2018/03/04/vim-basic-2/"/>
+    <id>http://yoursite.com/2018/03/04/vim-basic-2/</id>
+    <published>2018-03-04T05:00:00.000Z</published>
+    <updated>2018-03-06T03:10:31.439Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;自上一篇说了怎么退出之后，我们可以说说怎么进入&lt;strong&gt;插入模式&lt;/strong&gt;，再怎么从插入模式回到&lt;strong&gt;普通模式&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;老样子，咱们打开 vim 之后，直接输入 &lt;code&gt;:set nocompatible&lt;/code&gt;，进入真正的 vim。&lt;/p&gt;
+&lt;img src=&quot;/2018/03/04/vim-basic-2/vim-basic-1.gif&quot;&gt;
+&lt;p&gt;就如上次所说，只要左下角没有什么状态显示，我们就是在&lt;strong&gt;普通模式&lt;/strong&gt;里的。只要按下 &lt;code&gt;i&lt;/code&gt;，我们就进入插入模式 (insert mode) 了 。而字母 &lt;code&gt;i&lt;/code&gt; 就是 insert 的首字母。&lt;/p&gt;
+&lt;img src=&quot;/2018/03/04/vim-basic-2/enter-insert-mode.gif&quot;&gt;
+&lt;p&gt;在插入模式里，这键盘就是正常的键盘了，也就是说我们按下什么键，就能输入什么键了。&lt;/p&gt;
+&lt;img src=&quot;/2018/03/04/vim-basic-2/simple-insert.gif&quot;&gt;
+&lt;p&gt;这一篇结束了… 再见&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="vim" scheme="http://yoursite.com/categories/vim/"/>
+    
+      <category term="vim-basic" scheme="http://yoursite.com/categories/vim/vim-basic/"/>
+    
+    
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
+      <category term="vim-basic" scheme="http://yoursite.com/tags/vim-basic/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vim 基础：简单的文字编辑 (1)</title>
+    <link href="http://yoursite.com/2018/02/20/vim-basic/"/>
+    <id>http://yoursite.com/2018/02/20/vim-basic/</id>
+    <published>2018-02-20T05:00:00.000Z</published>
+    <updated>2018-03-04T23:51:42.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在上一篇留言里，好几个小伙伴都说&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;希望我继续写下去，即使（或虽然）不知道我写的是是啥…&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在大家的鼓励下，我又回来了。而且，经过一个春节的反思和吃喝之后，我打算把以前的推倒重来。因为这样既可以偷懒的一点点写，也可以把很多让人晕头转向的概念分散开，读起来也容易懂。这样一举两得的事情，我竟然之前没有想到，我也是佩服自己。最终目标，是希望这样一篇篇写来&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;从没有任何插件开始，一步步到实现 “vim 插件自由” …&lt;br&gt;（于是，在各种我们要追寻的 “自由” 里，又多了个目标）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;作为一同跨进 21 世纪新好青年，你自然是知道怎么找到和安装 vim 的了。如果你打开 vim，你基本上应该看到的是这样的 (没错，现在 vim 已经都 8.0 了)。&lt;/p&gt;
+&lt;img src=&quot;/2018/02/20/vim-basic/vim-basic-1.png&quot;&gt;
+&lt;p&gt;二话不说，我们直接按下 &lt;code&gt;:&lt;/code&gt; (分号)，输入 &lt;code&gt;set nocompatible&lt;/code&gt;&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;，然后回车。之后，开始真正的 &lt;code&gt;vim&lt;/code&gt;。&lt;/p&gt;
+&lt;img src=&quot;/2018/02/20/vim-basic/vim-basic-1.gif&quot;&gt;
+&lt;h2 id=&quot;奇怪的-vim&quot;&gt;&lt;a href=&quot;#奇怪的-vim&quot; class=&quot;headerlink&quot; title=&quot;奇怪的 vim&quot;&gt;&lt;/a&gt;奇怪的 vim&lt;/h2&gt;&lt;p&gt;在真正开始之前，要先给大家打打气。因为 vim 里很多东西都和平时常用的文字编辑器都不一样，比如&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="vim" scheme="http://yoursite.com/categories/vim/"/>
+    
+      <category term="vim-basic" scheme="http://yoursite.com/categories/vim/vim-basic/"/>
+    
+    
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
+      <category term="vim-basic" scheme="http://yoursite.com/tags/vim-basic/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用 vim 来磨练一下人生意志呗</title>
+    <link href="http://yoursite.com/2018/02/10/yizhi/"/>
+    <id>http://yoursite.com/2018/02/10/yizhi/</id>
+    <published>2018-02-10T20:17:37.000Z</published>
+    <updated>2018-02-19T23:22:20.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;vim 挺难的，真的。&lt;/p&gt;
+&lt;p&gt;但难点多好啊。你不觉得现在很多东西一下都变得简单了反而让人特别不安么，尤其是那些本应该很难或者说需要花时间的那些事。举栗子，&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我身边已经好几个人，用了一两个周末听完了一个课程，据说就已经掌握编程精要了，&lt;br&gt;还有几个，一个月之内已经熟用 python，成为数据分析师了，&lt;br&gt;另几个，好像已经结识行业翘楚，随时等待机会创造双赢了。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;很多东西都是需要花时间才能掌握，并因此获得进步的。学习是这样，工作是这样，就连游戏也是这样。打怪升级要花时间，练习枪法、走位、战术这些不都要花（大量）时间么。所以老话说量变产生质变也不是没有道理。&lt;/p&gt;
+&lt;p&gt;当然，除了时间，还要有正确的方向。我到现在还依稀记得高中物理课上的一个发射火箭遇卫星的例子，如果算错方向，那么永远都遇不上，并总结为 “失之毫厘，谬以千里”。这多年过去了，知识都还给老师了（甚至这个例子我可能都记错了），但这句话倒还是记得。而寻找方向，就要沉下心去搜集资料，仔细分析，甚至去试错。所以，总结起来就是&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;（花时间）寻找方向&lt;/li&gt;
+&lt;li&gt;（花时间）检验方向，评估，甚至去试错&lt;/li&gt;
+&lt;li&gt;（花时间）总结反思。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;Problem-Solving-的思维代码&quot;&gt;&lt;a href=&quot;#Problem-Solving-的思维代码&quot; class=&quot;headerlink&quot; title=&quot;Problem Solving 的思维代码&quot;&gt;&lt;/a&gt;Problem Solving 的思维代码&lt;/h2&gt;&lt;p&gt;如果你喜欢编程，那就干脆把刚才的过程写成这段 “思维代码” &lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;，&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;problem_solving&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(problem)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    optimal_solution = &lt;span class=&quot;keyword&quot;&gt;None&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    possible_solutions = research_and_find_solution(problem)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; solution &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; possible_solutions:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        optimal_solution = better_solution(solution, optimal_solution)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; optimal_solution&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这段思维代码虽然过于简单，但也有很多可展来讨论的部分，也有很多可以拓展的部分（比如，可以把问题分类，或者存下每次的最佳解，称之为 knowledge，等等等等，一瞬间想到好多)，咱们以后慢慢再拓展也不迟。&lt;/p&gt;
+&lt;p&gt;说了这么说，那……这一切和 vim 有毛关系啊……&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="vim" scheme="http://yoursite.com/categories/vim/"/>
+    
+      <category term="neovim" scheme="http://yoursite.com/categories/vim/neovim/"/>
+    
+      <category term="mind-pseudo-code" scheme="http://yoursite.com/categories/vim/neovim/mind-pseudo-code/"/>
+    
+    
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
+      <category term="neovim" scheme="http://yoursite.com/tags/neovim/"/>
+    
+      <category term="mind-pseudo-code" scheme="http://yoursite.com/tags/mind-pseudo-code/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>为什么你需要在意快捷键</title>
+    <link href="http://yoursite.com/2017/04/22/keyboard-shortcuts/"/>
+    <id>http://yoursite.com/2017/04/22/keyboard-shortcuts/</id>
+    <published>2017-04-23T03:06:04.000Z</published>
+    <updated>2017-08-04T01:42:32.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;其实很多东西并不是，也不能是一股脑学成的，比如一个非常重要的东西：&lt;strong&gt;快捷键&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;无论你是否编程，了解并熟知快捷键都是必要的，因为你会在因此节省大把时间。 我总相信这么一个原则：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;键盘在大多数情况下比鼠标要快。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;即使你不编程，也同样适用。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;比如，如果你精通 Excel 的各种快捷键，你的任务处理速度一定是别人的指数倍，对罢？&lt;/li&gt;
+&lt;li&gt;同样，使用 Word 也是如此。我在学会 LaTex 和熟悉 vim 之前，其实是用 Word 在课上记笔记的，速度一样不慢，基本能做到和老师版书同步。原因就是因为所有的公式输入我都不用鼠标，全部都通过键盘完成。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="vim" scheme="http://yoursite.com/categories/vim/"/>
+    
+    
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vim 的 colorscheme</title>
+    <link href="http://yoursite.com/2017/02/12/color-scheme/"/>
+    <id>http://yoursite.com/2017/02/12/color-scheme/</id>
+    <published>2017-02-12T16:40:04.000Z</published>
+    <updated>2017-08-04T01:42:32.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;时隔这么久，终于有时间来写下一篇了！以后咱们尽量 “少量多餐”，多写点篇。如果你都一路看到了这篇，就说明你已经在 “坑” 里了，所以咱们摘掉 “入坑指南” 几个字，开始谈谈 vim 的一些 “表面工程”: &lt;code&gt;colorscheme&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;无论你使用的是什么开发软件，应该都能找到更改 &lt;code&gt;colorscheme&lt;/code&gt; 或者是 “配色方案” 的设置。对于长期对着屏幕码代码的人来说，选择不易造成眼睛疲劳，看着也不错的配色（比如大伙熟知的 monokai 或者是 solarized）是件不小的事儿。其实选择什么样的 &lt;code&gt;colorscheme&lt;/code&gt; 全靠个人喜好，咱们这篇主要是讲去哪里找，以及如何快速更改 &lt;code&gt;colorscheme&lt;/code&gt;。&lt;/p&gt;
+&lt;h2 id=&quot;colorscheme-base16-和-vim-gotham&quot;&gt;&lt;a href=&quot;#colorscheme-base16-和-vim-gotham&quot; class=&quot;headerlink&quot; title=&quot;colorscheme: base16 和 vim-gotham&quot;&gt;&lt;/a&gt;colorscheme: base16 和 vim-gotham&lt;/h2&gt;&lt;p&gt;有了前面咱们提过的插件 &lt;code&gt;vim-plug&lt;/code&gt;，安装任何一个 &lt;code&gt;colorscheme&lt;/code&gt; 都很容易。目前 V 字君使用的是 &lt;code&gt;base16-vim&lt;/code&gt;，安装以及相关设定如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight vim&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&quot; vim-plug 设置&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Plug &lt;span class=&quot;string&quot;&gt;&#39;chriskempson/base16-vim&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&quot; 使用 256 颜色库&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; base16colorspace=&lt;span class=&quot;number&quot;&gt;256&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&quot; 使用 base16 中 base16-oceanicnext&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;colorscheme&lt;/span&gt; base16-oceanicnext&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="vim" scheme="http://yoursite.com/categories/vim/"/>
+    
+      <category term="colorscheme" scheme="http://yoursite.com/categories/vim/colorscheme/"/>
+    
+    
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
+      <category term="vim-intro" scheme="http://yoursite.com/tags/vim-intro/"/>
+    
+      <category term="colorscheme" scheme="http://yoursite.com/tags/colorscheme/"/>
+    
+      <category term="vimrc" scheme="http://yoursite.com/tags/vimrc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vim 入坑指南（六）插件 UltiSnips</title>
+    <link href="http://yoursite.com/2016/10/30/ultisnip/"/>
+    <id>http://yoursite.com/2016/10/30/ultisnip/</id>
+    <published>2016-10-30T15:43:00.000Z</published>
+    <updated>2017-08-04T01:42:32.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;上一篇，我们说到了第一个插件 &lt;code&gt;Vim-Plug&lt;/code&gt;，简而言之，是个管理插件的插件。这一篇，我们说一个提升我们输入效率的一个插件：UltiSnips。&lt;/p&gt;
+&lt;p&gt;很多时候，我们要输入的很多代码都是大体重复的（因为真正重要的部分是怎样把它们放在一起的过程）。那些重复的部分，就是各种 snips。把它们整理出来，想到什么就加什么。一两个星期之后，尝试关掉这个插件，就会明白使用 snips 究竟给你剩下了多少时间。这就是一个 “磨刀不误砍柴工” 的过程，投入的时间越多，回报自然也就越大。就比如我想简单的写这样一段 c++ 代码：&lt;/p&gt;
+&lt;img src=&quot;/2016/10/30/ultisnip/demo1.gif&quot;&gt;
+    
+    </summary>
+    
+      <category term="vim" scheme="http://yoursite.com/categories/vim/"/>
+    
+      <category term="ultisnips" scheme="http://yoursite.com/categories/vim/ultisnips/"/>
+    
+    
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
+      <category term="vim-intro" scheme="http://yoursite.com/tags/vim-intro/"/>
+    
+      <category term="vimrc" scheme="http://yoursite.com/tags/vimrc/"/>
+    
+      <category term="ultisnips" scheme="http://yoursite.com/tags/ultisnips/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vim 入坑指南（五）插件 Vim-Plug</title>
+    <link href="http://yoursite.com/2016/09/21/vim-plug/"/>
+    <id>http://yoursite.com/2016/09/21/vim-plug/</id>
+    <published>2016-09-21T20:42:51.000Z</published>
+    <updated>2016-10-13T03:51:01.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在了解了基本流程之后，我们终于可以说说第一个插件了。不过在开篇之前，我们要跑一个题，谈谈 git，然后谈谈 vimrc 里放什么，最后说一下 vim-plug。&lt;/p&gt;
+&lt;h3 id=&quot;Git&quot;&gt;&lt;a href=&quot;#Git&quot; class=&quot;headerlink&quot; title=&quot;Git&quot;&gt;&lt;/a&gt;Git&lt;/h3&gt;&lt;p&gt;这个应该是一个比较常见的工具了，如果你有所了解，可直接跳过，完全无碍。如果你之前没用过，接下来咱们就说说 Git 是做什么的。只是简单介绍一下，不是教程。&lt;/p&gt;
+&lt;p&gt;简单来说， Git 就是程序员的时光机，或者说存档读取器，有点像 Mac 里的 Time Machine ( Windows 上我不知道是啥诶）。大量的软件开发项目都用了 Git 作为它们的版本控制器，比如 Github 和 Bitbucket 上的众多开源项目。&lt;/p&gt;
+&lt;p&gt;由于我们使用的许多插件都是来自 Github 上的开源项目，为了紧跟项目的开发进度，我们自然也需要安装一下 Git。如果你用的是 Mac，那么又厉害拉，Mac 天生也自带 Git （也可以用 Homebrew 下安装的 Git）。如果你用的是 Windows，那么可以去 Git 官网 (&lt;a href=&quot;https://git-scm.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://git-scm.com&lt;/a&gt;) 下载。&lt;/p&gt;
+&lt;p&gt;在等待部分小伙伴们下 Git 的同时，我们来说一下 vimrc 究竟放什么。&lt;/p&gt;
+&lt;h3 id=&quot;vimrc-里放什么&quot;&gt;&lt;a href=&quot;#vimrc-里放什么&quot; class=&quot;headerlink&quot; title=&quot;vimrc 里放什么&quot;&gt;&lt;/a&gt;vimrc 里放什么&lt;/h3&gt;&lt;p&gt;我们对 vim 的调试和定制基本都会放在 vimrc 里。如果你忘了 vimrc 在哪，它可能会在（没有的话就新建一个）：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;mac/unix: ~/.vimrc&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;windows:  $HOME/_vimrc&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="vim" scheme="http://yoursite.com/categories/vim/"/>
+    
+      <category term="vim-intro" scheme="http://yoursite.com/categories/vim/vim-intro/"/>
+    
+    
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
+      <category term="vim-intro" scheme="http://yoursite.com/tags/vim-intro/"/>
+    
+      <category term="vimrc" scheme="http://yoursite.com/tags/vimrc/"/>
+    
+      <category term="vim-plug" scheme="http://yoursite.com/tags/vim-plug/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vim 入坑指南（四）— 文本处理流程</title>
+    <link href="http://yoursite.com/2016/08/30/vim-workflow/"/>
+    <id>http://yoursite.com/2016/08/30/vim-workflow/</id>
+    <published>2016-08-31T02:00:00.000Z</published>
+    <updated>2017-08-04T01:42:33.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这一篇，我们要补充一些简单操作，然后说说如何在 vim 中做到 DRY (don’t repeat yourself)。首先，我们先介绍一下如何向 vim 寻求 &lt;strong&gt;帮助&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&quot;vim-帮助文档&quot;&gt;&lt;a href=&quot;#vim-帮助文档&quot; class=&quot;headerlink&quot; title=&quot;vim 帮助文档&quot;&gt;&lt;/a&gt;vim 帮助文档&lt;/h3&gt;&lt;p&gt;在命令行中输入 &lt;code&gt;help&lt;/code&gt; 即可进入帮助目录：&lt;/p&gt;
+&lt;img src=&quot;/2016/08/30/vim-workflow/help.gif&quot;&gt;
+&lt;p&gt;如果有 “明确” 的问题，比如某个键的功能是什么，或者想看某个概念的详细说明，也可以直接在命令行里查询相关文档，比如：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;如果忘记了 &lt;code&gt;j&lt;/code&gt; 这个键是干嘛的，可以通过 &lt;code&gt;:help j&lt;/code&gt; 查询&lt;/li&gt;
+&lt;li&gt;如果忘记了 &lt;strong&gt;模式&lt;/strong&gt; 这个概念，可以通过&lt;code&gt;:help vim-modes&lt;/code&gt; 查询&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;我们也可以查询之前提到的 operator 和 motion，还有 text-objects：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;:help operator&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;:help motion&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;:help text-objects&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;另外，我也会在&lt;a href=&quot;/keywords/&quot;&gt;关键词&lt;/a&gt; 里放上相关的 &lt;strong&gt;帮助&lt;/strong&gt; 命令以供查询。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="vim" scheme="http://yoursite.com/categories/vim/"/>
+    
+      <category term="vim-intro" scheme="http://yoursite.com/categories/vim/vim-intro/"/>
+    
+    
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
+      <category term="vim-intro" scheme="http://yoursite.com/tags/vim-intro/"/>
+    
+      <category term="vim-workflow" scheme="http://yoursite.com/tags/vim-workflow/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vim 入坑指南（三）— motion 进阶</title>
+    <link href="http://yoursite.com/2016/08/06/vim-motion/"/>
+    <id>http://yoursite.com/2016/08/06/vim-motion/</id>
+    <published>2016-08-06T14:57:08.000Z</published>
+    <updated>2016-10-13T03:43:57.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;a href=&quot;/2016/07/16/vim-mode/&quot; title=&quot;上一篇&quot;&gt;上一篇&lt;/a&gt;里，我们提到移动光标是其他几个操作（输入、删除、替换）的发起者，文本处理的效率取决于光标移动的速度和准度。之后简单的解释了 motion 和 operator，并且提供了两个公式：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;公式一：[数字] + operator + motion&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;公式二：operator + [数字] + operator (前后均为同一个 operator）&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;不过都太抽象了，这一篇会介绍更多的 motion，提供更多的例子。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="vim" scheme="http://yoursite.com/categories/vim/"/>
+    
+      <category term="vim-intro" scheme="http://yoursite.com/categories/vim/vim-intro/"/>
+    
+    
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
+      <category term="vim-intro" scheme="http://yoursite.com/tags/vim-intro/"/>
+    
+      <category term="vim-motion" scheme="http://yoursite.com/tags/vim-motion/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vim 入坑指南（二）— vim 的模式</title>
+    <link href="http://yoursite.com/2016/07/16/vim-mode/"/>
+    <id>http://yoursite.com/2016/07/16/vim-mode/</id>
+    <published>2016-07-17T03:08:34.000Z</published>
+    <updated>2016-10-13T03:43:57.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;如果你还没有 vim，那么可以先看看&lt;a href=&quot;/2016/07/13/vim-setup/&quot; title=&quot;上一篇&quot;&gt;上一篇&lt;/a&gt;里的相关说明，里面也提到了几个 vimrc 的基本设置。这一篇，咱们说说 vim 之所以高效的原因。 在任何与文本处理相关的任务里，无论是编程，写论文，或是准备 PPT，都会涉及到以下这四个操作：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;移动光标&lt;/li&gt;
+&lt;li&gt;输入&lt;/li&gt;
+&lt;li&gt;删除&lt;/li&gt;
+&lt;li&gt;替换（删除 + 输入）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;而 vim 之所以高效就是因为它通过几个模式，把四个操作都做到了极致。举几个简单的例子，假设，我们有 9 行文字，我可以如下几个简单的操作 (所有的演示我没有做任何处理，也没有用任何插件，vim 的神速可见一斑) ：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="vim" scheme="http://yoursite.com/categories/vim/"/>
+    
+      <category term="vim-intro" scheme="http://yoursite.com/categories/vim/vim-intro/"/>
+    
+    
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
+      <category term="vim-intro" scheme="http://yoursite.com/tags/vim-intro/"/>
+    
+      <category term="vim-mode" scheme="http://yoursite.com/tags/vim-mode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vim 入坑指南（一）— 安装和定位vimrc</title>
+    <link href="http://yoursite.com/2016/07/13/vim-setup/"/>
+    <id>http://yoursite.com/2016/07/13/vim-setup/</id>
+    <published>2016-07-13T04:21:25.000Z</published>
+    <updated>2016-10-13T03:43:57.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;废话不多说，直接说有用的，咱们先解决怎么把 vim 搞到手。&lt;/p&gt;
+&lt;h3 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h3&gt;&lt;p&gt;如果你有 Mac 的话，那么厉害啦，Mac 天生自带 vim。但是一般用&lt;a href=&quot;http://brew.sh&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Homebrew&lt;/a&gt;&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; 下安装的 vim 会比较好。至于为什么， 以后会在介绍与 vim 相关配置时提到。如果没试过 Homebrew 可以试试，不用也无碍，直接跳过这一段就好啦。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;brew install vim&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;Ubuntu 上也同样简单，&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sudo apt-get install vim&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;如果你用的是 Windows，那么可能会有点麻烦（而且许多相关的调试都会变得很麻烦，更重要的是… V 字君没有 Windows…）。嗯，很麻烦… 不过一切都是可能的。比如，著名 vim 插件 &lt;a href=&quot;https://github.com/Valloric/YouCompleteMe#windows&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;YouCompleteMe&lt;/a&gt; 的官方说明里提供了这么一个&lt;a href=&quot;https://bintray.com/micbou/generic/vim&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;链接&lt;/a&gt;。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="vim" scheme="http://yoursite.com/categories/vim/"/>
+    
+      <category term="vim-intro" scheme="http://yoursite.com/categories/vim/vim-intro/"/>
+    
+    
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
+      <category term="vim-intro" scheme="http://yoursite.com/tags/vim-intro/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vim 入坑指南（零）— 序言</title>
+    <link href="http://yoursite.com/2016/07/11/vim-intro/"/>
+    <id>http://yoursite.com/2016/07/11/vim-intro/</id>
+    <published>2016-07-12T03:55:29.000Z</published>
+    <updated>2016-10-13T03:43:57.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;与其像众多 “vim 入门” 文章那样上来就直奔主题，给你看许多截图和代码，这第一篇咱就先提一些“没用的”。说说 vim 是个什么样的文字编辑器，它的逻辑是什么。&lt;/p&gt;
+&lt;h3 id=&quot;一些假设和说明&quot;&gt;&lt;a href=&quot;#一些假设和说明&quot; class=&quot;headerlink&quot; title=&quot;一些假设和说明&quot;&gt;&lt;/a&gt;一些假设和说明&lt;/h3&gt;&lt;p&gt;在准备入坑之前，先容 V字君列几条准备入坑的前提：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;假设你有一点点的编程知识背景&lt;/p&gt;
+&lt;p&gt; 如果你刚刚入门编程，那么 V字君觉得你应该更关注编程本身，而非编辑器。使用 &lt;a href=&quot;http://www.sublimetext.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Sublime Text&lt;/a&gt; 类似的编辑器可能会更适合你。当然，如果你想上手编程的同时，就开始用 vim ，那么不妨试试 V 字君的这个“入坑”系列，希望能帮你省去不少麻烦。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;假设你有一定时间&lt;/p&gt;
+&lt;p&gt; 学习 vim 是需要一定时间的，想要上手便有超高的生产力（productivity）也比较困难。不过磨刀不误砍柴工，vim 如独孤九剑，一旦练成，便知世间除 vim 外再无趁手兵刃（当然是因人而异。对于我，的确如此）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;还有几条说明：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;V 字君一直用的 Mac，所以所有的文章都主要针对 Mac 上 vim 谈的。不过无论你用的是 Ubuntu 还是 Windows，很多内容基本都是通用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;就本文写作时，V 字君使用的 vim 版本是 7.4&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="vim" scheme="http://yoursite.com/categories/vim/"/>
+    
+      <category term="vim-intro" scheme="http://yoursite.com/categories/vim/vim-intro/"/>
+    
+    
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
+      <category term="vim-intro" scheme="http://yoursite.com/tags/vim-intro/"/>
+    
+  </entry>
+  
+</feed>

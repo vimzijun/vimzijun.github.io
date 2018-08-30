@@ -117,6 +117,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="V 字君的 Vimpress" type="application/atom+xml" />
+
 
 
 
@@ -292,6 +294,165 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/21/vim-plug/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="VZJ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="V 字君的 Vimpress">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/21/vim-plug/" itemprop="url">vim 入坑指南（五）插件 Vim-Plug</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-21T16:42:51-04:00">2016-09-21</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vim/vim-intro/" itemprop="url" rel="index"><span itemprop="name">vim-intro</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在了解了基本流程之后，我们终于可以说说第一个插件了。不过在开篇之前，我们要跑一个题，谈谈 git，然后谈谈 vimrc 里放什么，最后说一下 vim-plug。</p>
+<h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>这个应该是一个比较常见的工具了，如果你有所了解，可直接跳过，完全无碍。如果你之前没用过，接下来咱们就说说 Git 是做什么的。只是简单介绍一下，不是教程。</p>
+<p>简单来说， Git 就是程序员的时光机，或者说存档读取器，有点像 Mac 里的 Time Machine ( Windows 上我不知道是啥诶）。大量的软件开发项目都用了 Git 作为它们的版本控制器，比如 Github 和 Bitbucket 上的众多开源项目。</p>
+<p>由于我们使用的许多插件都是来自 Github 上的开源项目，为了紧跟项目的开发进度，我们自然也需要安装一下 Git。如果你用的是 Mac，那么又厉害拉，Mac 天生也自带 Git （也可以用 Homebrew 下安装的 Git）。如果你用的是 Windows，那么可以去 Git 官网 (<a href="https://git-scm.com" target="_blank" rel="noopener">https://git-scm.com</a>) 下载。</p>
+<p>在等待部分小伙伴们下 Git 的同时，我们来说一下 vimrc 究竟放什么。</p>
+<h3 id="vimrc-里放什么"><a href="#vimrc-里放什么" class="headerlink" title="vimrc 里放什么"></a>vimrc 里放什么</h3><p>我们对 vim 的调试和定制基本都会放在 vimrc 里。如果你忘了 vimrc 在哪，它可能会在（没有的话就新建一个）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mac/unix: ~/.vimrc</span><br><span class="line">windows:  $HOME/_vimrc</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/09/21/vim-plug/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/30/vim-workflow/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -395,7 +556,7 @@
 <li>如果忘记了 <strong>模式</strong> 这个概念，可以通过<code>:help vim-modes</code> 查询</li>
 </ol>
 <p>我们也可以查询之前提到的 operator 和 motion，还有 text-objects：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">:help operator</div><div class="line">:help motion</div><div class="line">:help text-objects</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:help operator</span><br><span class="line">:help motion</span><br><span class="line">:help text-objects</span><br></pre></td></tr></table></figure>
 <p>另外，我也会在<a href="/keywords/">关键词</a> 里放上相关的 <strong>帮助</strong> 命令以供查询。</p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -549,7 +710,7 @@
 
       
         
-          <a href="/2016/07/16/vim-mode/" title="上一篇">上一篇</a>里，我们提到移动光标是其他几个操作（输入、删除、替换）的发起者，文本处理的效率取决于光标移动的速度和准度。之后简单的解释了 motion 和 operator，并且提供了两个公式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">公式一：[数字] + operator + motion</div><div class="line">公式二：operator + [数字] + operator (前后均为同一个 operator）</div></pre></td></tr></table></figure>
+          <a href="/2016/07/16/vim-mode/" title="上一篇">上一篇</a>里，我们提到移动光标是其他几个操作（输入、删除、替换）的发起者，文本处理的效率取决于光标移动的速度和准度。之后简单的解释了 motion 和 operator，并且提供了两个公式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">公式一：[数字] + operator + motion</span><br><span class="line">公式二：operator + [数字] + operator (前后均为同一个 operator）</span><br></pre></td></tr></table></figure>
 <p>不过都太抽象了，这一篇会介绍更多的 motion，提供更多的例子。</p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -864,8 +1025,8 @@
       
         
           <p>废话不多说，直接说有用的，咱们先解决怎么把 vim 搞到手。</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>如果你有 Mac 的话，那么厉害啦，Mac 天生自带 vim。但是一般用<a href="http://brew.sh" target="_blank" rel="noopener">Homebrew</a><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> 下安装的 vim 会比较好。至于为什么， 以后会在介绍与 vim 相关配置时提到。如果没试过 Homebrew 可以试试，不用也无碍，直接跳过这一段就好啦。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install vim</div></pre></td></tr></table></figure></p>
-<p>Ubuntu 上也同样简单，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install vim</div></pre></td></tr></table></figure></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>如果你有 Mac 的话，那么厉害啦，Mac 天生自带 vim。但是一般用<a href="http://brew.sh" target="_blank" rel="noopener">Homebrew</a><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> 下安装的 vim 会比较好。至于为什么， 以后会在介绍与 vim 相关配置时提到。如果没试过 Homebrew 可以试试，不用也无碍，直接跳过这一段就好啦。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install vim</span><br></pre></td></tr></table></figure></p>
+<p>Ubuntu 上也同样简单，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install vim</span><br></pre></td></tr></table></figure></p>
 <p>如果你用的是 Windows，那么可能会有点麻烦（而且许多相关的调试都会变得很麻烦，更重要的是… V 字君没有 Windows…）。嗯，很麻烦… 不过一切都是可能的。比如，著名 vim 插件 <a href="https://github.com/Valloric/YouCompleteMe#windows" target="_blank" rel="noopener">YouCompleteMe</a> 的官方说明里提供了这么一个<a href="https://bintray.com/micbou/generic/vim" target="_blank" rel="noopener">链接</a>。</p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -1130,7 +1291,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1210,6 +1371,13 @@
             </nav>
           
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           

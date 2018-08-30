@@ -138,6 +138,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="V 字君的 Vimpress" type="application/atom+xml" />
+
 
 
 
@@ -431,7 +433,7 @@
 <h3 id="vim-的几个模式"><a href="#vim-的几个模式" class="headerlink" title="vim 的几个模式"></a>vim 的几个模式</h3><ul>
 <li><p><strong>普通模式 (Normal Mode)</strong></p>
 <p>不出意外的话，我们使用 vim 时大部分时间都会停留在普通模式下。移动光标和对文本处理（并进入相关模式）都是从普通模式发起的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">按 i 键 --&gt; 进入输入模式</div><div class="line">按 v 键 --&gt; 进入可视模式</div><div class="line">按 : 键 --&gt; 进入命令行</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">按 i 键 --&gt; 进入输入模式</span><br><span class="line">按 v 键 --&gt; 进入可视模式</span><br><span class="line">按 : 键 --&gt; 进入命令行</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>输入模式 (Insert Mode)</strong></p>
 <p>在输入模式下，我们直接对文本进行输入，以及简单的删除处理。抽象点说，光标的移动和文字处理都是单向线性的，文本输入的效率取决于你打键盘的速度。当然，如果我们有了插件，两个字：<strong>如飞</strong>。不过先别急，之后慢慢讲。</p>
@@ -449,7 +451,7 @@
 <p>vim 的 <strong>普通模式 (Normal Mode)</strong> 完美解决了这一问题。在这个模式下，我们使用 <code>h j k l</code> （来代替 ← ↓ ↑ → 箭头键），<code>w</code>, <code>b</code> 等键来移动光标。这么做可以保持双手处于的基本键位 (Home Row) 处，从而保证了键盘的高效 “输出”。说句题外话，vim 之所以使用 <code>h j k l</code>的原因是因为当年创建 vi<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> 时所用的电脑的键盘就是这么设计的（原 po <a href="http://www.catonmat.net/blog/why-vim-uses-hjkl-as-arrow-keys/" target="_blank" rel="noopener">链接在此</a>)。另外，可能用 <code>~</code> 代表 <code>HOME</code> 也是同一个原因吧。</p>
 <img src="/2016/07/16/vim-mode/hjkl.jpg">
 <p>说完了影响效率的外在因素，现在说说如何更快速的移动光标，毕竟一字节一个字节的挪是低效的。为了简明，咱们先列一个公式，然后慢慢解释（其中括号代表可加可不加）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[数字] + 移动光标</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[数字] + 移动光标</span><br></pre></td></tr></table></figure>
 <p>我们已经熟知的移动光标的方法有 <code>h j k l</code>，<code>w</code>，<code>b</code>，而数字则代表按同一方法移动光标的次数，这是个单位和数量的关系。举几个例子：</p>
 <ul>
 <li><code>2w</code> 表示向前移动两个词<img src="/2016/07/16/vim-mode/2w.gif"></li>
@@ -457,11 +459,11 @@
 </li>
 </ul>
 <p>我们把这个公式总结为 motion，即</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">motion = [数字] + 移动光标</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">motion = [数字] + 移动光标</span><br></pre></td></tr></table></figure>
 <p>写到这里咱们只介绍了一个操作：移动光标，以后会涉及到更多的快速高效移动光标的内容。有了对 motion 的基本了解， <strong>删除</strong> 和 <strong>替换</strong> 就很容易了。因为它们都和刚才提到的 motion 有更为密切的联系，只需把之前的公式稍作变形即可。</p>
 <h3 id="vim-操作基础：输入"><a href="#vim-操作基础：输入" class="headerlink" title="vim 操作基础：输入"></a>vim 操作基础：输入</h3><p><strong>输入</strong> 其实简单明了，即进入 <strong>输入模式</strong> 后敲键盘就可以了。咱们先假装忽略掉输入模式下的种种高效手段，之后单谈。</p>
 <h3 id="vim-操作基础：如何删除和替换"><a href="#vim-操作基础：如何删除和替换" class="headerlink" title="vim 操作基础：如何删除和替换"></a>vim 操作基础：如何删除和替换</h3><p>删除 (delete) 和 替换 (change) 都是在 <strong>普通模式</strong> 下比较常用的两个操作。在 vim 里，<code>d</code> 代表删除，<code>c</code> 则代表替换（并进入输入模式）。而删除或替换的对象则由之前的 motion 决定。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">删除/替换 + motion</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">删除/替换 + motion</span><br></pre></td></tr></table></figure>
 <p>组合在一起，就很实用啦，比如</p>
 <ul>
 <li><code>c2w</code> 代表更改两词，并进入输入模式。<img src="/2016/07/16/vim-mode/c2w.gif"></li>
@@ -476,10 +478,10 @@
 <li><code>gu</code> 变换为小写</li>
 <li><code>gU</code> 变换为大写</li>
 </ul>
-<p>它们统称为 operator，所以我们的公式就变成了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[数字] + operator + motion</div></pre></td></tr></table></figure></p>
+<p>它们统称为 operator，所以我们的公式就变成了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[数字] + operator + motion</span><br></pre></td></tr></table></figure></p>
 <p>在这里，数字依旧代表重复的次数。如果我们考虑以下这两个操作： <code>d2w</code> 和 <code>2dw</code>。 它们所达成的效果是一样的，但是实质原理略有不同。前者是 “删除两词”，后者是 “删一词重复两遍”。 如果你真的理解了，那么 <code>2d2w</code> 和什么一致的呢?  （答案见注解<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>）</p>
 <p>这里出现了一个问题：没有以 “行” 为单位的 motion。如果我想删除 <code>d</code> 两行文字的话，按下 <code>d2j</code> 是做不到的，我们只能删除光标在 <code>2j</code> 位移之间的文字。这情况下，公式有个小小的变形。</p>
-<h3 id="以-“行”-为单位的-operator-操作"><a href="#以-“行”-为单位的-operator-操作" class="headerlink" title="以 “行” 为单位的 operator 操作"></a>以 “行” 为单位的 operator 操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">operator + [数字] + operator (前后均为同一个 operator）</div></pre></td></tr></table></figure>
+<h3 id="以-“行”-为单位的-operator-操作"><a href="#以-“行”-为单位的-operator-操作" class="headerlink" title="以 “行” 为单位的 operator 操作"></a>以 “行” 为单位的 operator 操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">operator + [数字] + operator (前后均为同一个 operator）</span><br></pre></td></tr></table></figure>
 <p>举几个例子：</p>
 <ul>
 <li><p><code>dd</code> 删除光标所在行</p>
@@ -669,7 +671,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -749,6 +751,13 @@
             </nav>
           
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           

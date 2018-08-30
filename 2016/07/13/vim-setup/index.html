@@ -128,6 +128,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="V 字君的 Vimpress" type="application/atom+xml" />
+
 
 
 
@@ -394,18 +396,18 @@
 
       
         <p>废话不多说，直接说有用的，咱们先解决怎么把 vim 搞到手。</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>如果你有 Mac 的话，那么厉害啦，Mac 天生自带 vim。但是一般用<a href="http://brew.sh" target="_blank" rel="noopener">Homebrew</a><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> 下安装的 vim 会比较好。至于为什么， 以后会在介绍与 vim 相关配置时提到。如果没试过 Homebrew 可以试试，不用也无碍，直接跳过这一段就好啦。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install vim</div></pre></td></tr></table></figure></p>
-<p>Ubuntu 上也同样简单，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install vim</div></pre></td></tr></table></figure></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>如果你有 Mac 的话，那么厉害啦，Mac 天生自带 vim。但是一般用<a href="http://brew.sh" target="_blank" rel="noopener">Homebrew</a><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> 下安装的 vim 会比较好。至于为什么， 以后会在介绍与 vim 相关配置时提到。如果没试过 Homebrew 可以试试，不用也无碍，直接跳过这一段就好啦。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install vim</span><br></pre></td></tr></table></figure></p>
+<p>Ubuntu 上也同样简单，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install vim</span><br></pre></td></tr></table></figure></p>
 <p>如果你用的是 Windows，那么可能会有点麻烦（而且许多相关的调试都会变得很麻烦，更重要的是… V 字君没有 Windows…）。嗯，很麻烦… 不过一切都是可能的。比如，著名 vim 插件 <a href="https://github.com/Valloric/YouCompleteMe#windows" target="_blank" rel="noopener">YouCompleteMe</a> 的官方说明里提供了这么一个<a href="https://bintray.com/micbou/generic/vim" target="_blank" rel="noopener">链接</a>。</p>
 <a id="more"></a>
 <h3 id="可能是-vim-最好的入门材料：vimtutor"><a href="#可能是-vim-最好的入门材料：vimtutor" class="headerlink" title="可能是 vim 最好的入门材料：vimtutor"></a>可能是 vim 最好的入门材料：vimtutor</h3><img src="/2016/07/13/vim-setup/vimtutor.png">
 <p>vim 还是提供了一个简易的入门材料的。尽管 V 字君之前提到 vim 的官方材料可能有的太简单了，但是对于学习和熟悉 vim 来说则是最好的材料。如果你有（并且知道）terminal 的话，直接敲入（如果你用的是 windows，那么你应该能在 vim 的安装目录中找到）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vimtutor</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vimtutor</span><br></pre></td></tr></table></figure>
 <p>这样就能看到官方的入门手册了，从头看/试/玩到尾也花不了多长时间。通了这一关，vim 就算是上手了。一开始肯定会很不习惯的，因为就像我<a href="/2016/07/11/vim-intro/" title="在上一篇提到">在上一篇提到</a>的那样，vim 和其他文本编辑器的逻辑就不一样。刚上手的感觉甚至就像重新学打字一样。不过要知道，这个入门材料是上手的唯一一道坎儿，过了这个坎儿，一马平川。</p>
 <h3 id="上手时需要关注什么"><a href="#上手时需要关注什么" class="headerlink" title="上手时需要关注什么"></a>上手时需要关注什么</h3><p>vimtutor 讲解了很多基本操作，每个小节都有给读者实际操作的例子，通俗易懂。在这期间，只需要多关注这几个点就好了：</p>
 <ol>
 <li><p>如何在几种模式之间切换：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">normal mode ----- 按 i   -----&gt; insert mode</div><div class="line">normal mode ----- 按 v   -----&gt; visual mode</div><div class="line">insert mode ----- 按 esc -----&gt; normal mode</div><div class="line">visual mode ----- 按 esc -----&gt; normal mode</div><div class="line">normal mode ----- 按 :   -----&gt; 进入命令行</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">normal mode ----- 按 i   -----&gt; insert mode</span><br><span class="line">normal mode ----- 按 v   -----&gt; visual mode</span><br><span class="line">insert mode ----- 按 esc -----&gt; normal mode</span><br><span class="line">visual mode ----- 按 esc -----&gt; normal mode</span><br><span class="line">normal mode ----- 按 :   -----&gt; 进入命令行</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>如何退出 vim （不知道为什么有个“有人关机是因为不知怎么退出 vim 的笑话”）</p>
 <ul>
@@ -425,30 +427,30 @@
 </ol>
 <h3 id="怎么把-vim-变得（更）好看-顺手点儿"><a href="#怎么把-vim-变得（更）好看-顺手点儿" class="headerlink" title="怎么把 vim 变得（更）好看/顺手点儿"></a>怎么把 vim 变得（更）好看/顺手点儿</h3><p>有了一定了解之后，咱们再来说说怎么把 vim 变得好看点，变得更顺手。这就要提到个东西：vimrc， 准确的来说是 .vimrc (Windows 上是_vimrc)。我们所有对 vim 的调试和定制基本都会放在这个文件里。在这，咱们要讲两件事：怎么找到 vimrc 和怎么对 vim 做最基本的界面设置。</p>
 <h4 id="vimrc-在哪"><a href="#vimrc-在哪" class="headerlink" title="vimrc 在哪"></a>vimrc 在哪</h4><p>一般来说, vimrc 会在这个地方（没有的话就新建一个）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mac/unix: ~/.vimrc</div><div class="line">windows:  $HOME/_vimrc</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mac/unix: ~/.vimrc</span><br><span class="line">windows:  $HOME/_vimrc</span><br></pre></td></tr></table></figure>
 <h4 id="一些基本设置"><a href="#一些基本设置" class="headerlink" title="一些基本设置"></a>一些基本设置</h4><p>就很基本的来说，咱们可以先作如下几个设置，看看都有什么效果：</p>
 <ol>
 <li><p>显示行数</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> <span class="keyword">number</span></div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">number</span></span><br></pre></td></tr></table></figure>
 <img src="/2016/07/13/vim-setup/set_nu.gif"></li>
 <li><p>启用语法高亮</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></span><br></pre></td></tr></table></figure>
 <img src="/2016/07/13/vim-setup/syntax_on.gif">
 </li>
 <li><p>启用相对行号</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> relativenumber</div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> relativenumber</span><br></pre></td></tr></table></figure>
 <img src="/2016/07/13/vim-setup/set_rnu.gif">
 </li>
 <li><p>设置不兼容 vi<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> nocompatible</div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> nocompatible</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>为了不重复，咱们就把以上这四个设置都放进 vimrc 里，这样 vim 会在启动时自动执行其中的命令。</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> nocompatible</div><div class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></div><div class="line"><span class="keyword">set</span> <span class="keyword">number</span></div><div class="line"><span class="keyword">set</span> relativenumber</div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> nocompatible</span><br><span class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">number</span></span><br><span class="line"><span class="keyword">set</span> relativenumber</span><br></pre></td></tr></table></figure>
 <p>一步步来，最终 vim 可以变成这个样子：</p>
 <img src="/2016/07/13/vim-setup/vimtex_showcase.gif" title="vim + LaTex">
 <p>如果你感兴趣，还有这么几个设置你可试试：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> wrap</div><div class="line"><span class="keyword">set</span> ruler</div><div class="line"><span class="keyword">set</span> incsearch</div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> wrap</span><br><span class="line"><span class="keyword">set</span> ruler</span><br><span class="line"><span class="keyword">set</span> incsearch</span><br></pre></td></tr></table></figure>
 <p>好啦，这篇就先写这么多，在列举更多 vimrc 的设置之前，咱们还要先细说下 vim 的几个模式。</p>
 <h3 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h3><ol>
 <li>vimtutor</li>
@@ -587,7 +589,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -667,6 +669,13 @@
             </nav>
           
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           
