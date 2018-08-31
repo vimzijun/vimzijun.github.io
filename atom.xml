@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-31T02:13:27.210Z</updated>
+  <updated>2018-08-31T02:16:54.625Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,19 +21,19 @@
     <link href="http://yoursite.com/2018/08/30/vim-example-1/"/>
     <id>http://yoursite.com/2018/08/30/vim-example-1/</id>
     <published>2018-08-30T04:00:00.000Z</published>
-    <updated>2018-08-31T02:13:27.210Z</updated>
+    <updated>2018-08-31T02:16:54.625Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;今儿开始，又一个新坑：vim 实栗。这个系列主要目的是围绕特定的主题，在 vim 实际操作一下。如果你有好的建议，或者有更好的办法，一定要分享一下。&lt;/p&gt;
+      &lt;p&gt;今儿开始，又一个新坑：vim 实栗。这个系列主要目的是围绕特定的主题，在 vim 实际操作一下。如果你有好的建议，或者有更好的办法，一定要分享一下。&lt;/p&gt;
 &lt;p&gt;这一篇咱们就来说一下怎么&lt;strong&gt;替换重复文本&lt;/strong&gt;&lt;/p&gt;
-&lt;h1
-        
-      
+&lt;h1 id=&quot;visual-block-替换&quot;&gt;&lt;a href=&quot;#visual-block-替换&quot; class=&quot;headerlink&quot; title=&quot;visual-block 替换&quot;&gt;&lt;/a&gt;visual-block 替换&lt;/h1&gt;&lt;p&gt;如果我们要替换的文本都 “互相挨着”，能用一个长方形框住的话，那我们就可以直接用 &lt;code&gt;visual-block&lt;/code&gt; 模式来解决了。比如下图里，我们想把所有的 &lt;code&gt;print(a + b + c)&lt;/code&gt; 变成 &lt;code&gt;assert&lt;/code&gt; （这里主要是为了说明怎么替换，代码究竟能不能跑这里就先忽略了）&lt;/p&gt;
+&lt;img src=&quot;/2018/08/30/vim-example-1/example-1.png&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;按下 &lt;code&gt;&amp;lt;c-e&amp;gt;&lt;/code&gt; (ctrl + e) 进入 &lt;code&gt;visual-block mode&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;然后 &lt;code&gt;6j&lt;/code&gt; 和 &lt;code&gt;e&lt;/code&gt; 选中文本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&quot;/2018/08/30/vim-example-1/example-1-1.gif&quot;&gt;
     
     </summary>
     
