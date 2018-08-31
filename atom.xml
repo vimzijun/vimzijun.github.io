@@ -354,9 +354,9 @@
     
       <category term="vim-intro" scheme="http://yoursite.com/tags/vim-intro/"/>
     
-      <category term="vimrc" scheme="http://yoursite.com/tags/vimrc/"/>
-    
       <category term="colorscheme" scheme="http://yoursite.com/tags/colorscheme/"/>
+    
+      <category term="vimrc" scheme="http://yoursite.com/tags/vimrc/"/>
     
   </entry>
   
@@ -418,9 +418,9 @@
     
       <category term="vim-intro" scheme="http://yoursite.com/tags/vim-intro/"/>
     
-      <category term="vim-plug" scheme="http://yoursite.com/tags/vim-plug/"/>
-    
       <category term="vimrc" scheme="http://yoursite.com/tags/vimrc/"/>
+    
+      <category term="vim-plug" scheme="http://yoursite.com/tags/vim-plug/"/>
     
   </entry>
   
