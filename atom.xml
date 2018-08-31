@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-30T03:02:50.720Z</updated>
+  <updated>2018-08-31T02:13:27.210Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vim 实栗 (1) ：替换重复文本</title>
+    <link href="http://yoursite.com/2018/08/30/vim-example-1/"/>
+    <id>http://yoursite.com/2018/08/30/vim-example-1/</id>
+    <published>2018-08-30T04:00:00.000Z</published>
+    <updated>2018-08-31T02:13:27.210Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;今儿开始，又一个新坑：vim 实栗。这个系列主要目的是围绕特定的主题，在 vim 实际操作一下。如果你有好的建议，或者有更好的办法，一定要分享一下。&lt;/p&gt;
+&lt;p&gt;这一篇咱们就来说一下怎么&lt;strong&gt;替换重复文本&lt;/strong&gt;&lt;/p&gt;
+&lt;h1
+        
+      
+    
+    </summary>
+    
+      <category term="vim" scheme="http://yoursite.com/categories/vim/"/>
+    
+      <category term="vim-example" scheme="http://yoursite.com/categories/vim/vim-example/"/>
+    
+      <category term="replace-text" scheme="http://yoursite.com/categories/vim/vim-example/replace-text/"/>
+    
+      <category term="plugin" scheme="http://yoursite.com/categories/vim/vim-example/replace-text/plugin/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>vim 基础：简单的文字编辑 (4)</title>
@@ -322,9 +354,9 @@
     
       <category term="vim-intro" scheme="http://yoursite.com/tags/vim-intro/"/>
     
-      <category term="colorscheme" scheme="http://yoursite.com/tags/colorscheme/"/>
-    
       <category term="vimrc" scheme="http://yoursite.com/tags/vimrc/"/>
+    
+      <category term="colorscheme" scheme="http://yoursite.com/tags/colorscheme/"/>
     
   </entry>
   
@@ -386,9 +418,9 @@
     
       <category term="vim-intro" scheme="http://yoursite.com/tags/vim-intro/"/>
     
-      <category term="vimrc" scheme="http://yoursite.com/tags/vimrc/"/>
-    
       <category term="vim-plug" scheme="http://yoursite.com/tags/vim-plug/"/>
+    
+      <category term="vimrc" scheme="http://yoursite.com/tags/vimrc/"/>
     
   </entry>
   
